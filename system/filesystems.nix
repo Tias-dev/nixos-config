@@ -43,6 +43,15 @@
       "nofail"
     ];
   };
+  fileSystems."/mnt/wingames" = {
+    device = "/dev/disk/by-uuid/B05E100B5E0FC954";
+    fsType = "ntfs";
+    options = [
+      "defaults"
+      "noatime"
+      "nofail"
+    ];
+  };
 
   # swap
   swapDevices = [

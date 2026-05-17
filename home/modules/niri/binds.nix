@@ -9,11 +9,7 @@
       title =
         if (vars.terminal == "alacritty") then "Open a Terminal: Alacritty" else "Open a Terminal: Kitty";
     };
-    action =
-      if (vars.terminal == "alacritty") then
-        { spawn = "alacritty"; }
-      else
-        { spawn-sh = "kitty --hold sh -c 'tmux attach || tmux new -s default'"; };
+    action = if (vars.terminal == "alacritty") then { spawn = "alacritty"; } else { spawn = "kitty"; };
   };
   "Mod+D" = {
     hotkey-overlay = {

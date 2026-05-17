@@ -1,5 +1,6 @@
 {
   imports = [
+    ./nix.nix
     ./niri.nix
     ./garbage-collector.nix
     ./boot.nix
@@ -13,6 +14,8 @@
     ./docker.nix
     ./filesystems.nix
     ./bluetooth.nix
-		./nfs.nix
+    ./nfs.nix
+    ./flash.nix
+    ./polkit.nix
   ];
 }

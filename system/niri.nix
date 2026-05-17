@@ -1,4 +1,7 @@
 {
+  programs.niri = {
+    enable = true;
+  };
   # prebuild binary setup
   # it required via the building niri from sources
   # is very long and invokes file descriptors overflow on my setup

@@ -15,4 +15,20 @@
       y = 0;
     };
   };
+  "HDMI-A-2" = {
+    # off = true;
+
+    mode = {
+      width = 1680;
+      height = 1050;
+      refresh = 60.0;
+    };
+    scale = 1;
+
+    focus-at-startup = false;
+    position = {
+      x = 0;
+      y = 0;
+    };
+  };
 }

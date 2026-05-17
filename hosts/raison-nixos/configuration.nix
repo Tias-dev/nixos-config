@@ -3,26 +3,19 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   pkgs,
+	pkgs-unstable,
+	username,
   ...
 }:
 {
-  # enable flakes
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    auto-optimise-store = true; # collapse identical files in store in one
-  };
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
     ../../system
   ];
 
+	nix.settings.trusted-users = ["root" username ];
+
   programs.firefox.enable = true;
-  programs.niri = {
-    enable = true;
-  };
   services.displayManager.ly.enable = true;
   services.xserver.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -30,13 +23,13 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+		pkgs-unstable.zapret2
     efivar
     cargo
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     cachix
     wget
     curl
-    niri
     ly
     python313
     (python313.withPackages (

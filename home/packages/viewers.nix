@@ -2,5 +2,5 @@
 with pkgs;
 [
   kdePackages.okular
-  zathura
+  kdePackages.dolphin
 ]

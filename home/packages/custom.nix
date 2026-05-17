@@ -5,5 +5,4 @@ with pkgs;
   cowsay
   fortune
   asciiquarium
-  python313Packages.jupytext
 ]

@@ -7,5 +7,7 @@
 		./dms.nix
 		./niri
 		./neovim
+		./zathura.nix
+		./environment.nix
   ];
 }

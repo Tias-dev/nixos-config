@@ -9,4 +9,5 @@ with pkgs;
   superfile
   ripgrep
 	fd
+	xkb-switch
 ]

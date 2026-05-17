@@ -28,6 +28,11 @@
       bold_italic_font = "auto";
     };
 
+		extraConfig = ''
+startup_session launch.conf
+		'';
+
     themeFile = "tokyo_night_moon";
   };
+	xdg.configFile."kitty/launch.conf".text="launch sh -c 'tmux attach || tmux new -s default'";
 }

@@ -43,7 +43,6 @@
       }
     ];
     open-maximized = false;
-    open-focused = false;
   }
 
   {

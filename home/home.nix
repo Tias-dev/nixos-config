@@ -17,6 +17,8 @@
     ./modules
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
+		inputs.dms-plugin-registry.modules.default
     inputs.niri.homeModules.niri
+		inputs.nixvim.homeModules.nixvim
   ];
 }
