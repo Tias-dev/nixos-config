@@ -1,10 +1,7 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   pkgs,
-	pkgs-unstable,
-	username,
+  username,
+  inputs,
   ...
 }:
 {
@@ -13,20 +10,25 @@
     ../../system
   ];
 
-	nix.settings.trusted-users = ["root" username ];
+  nix = {
+    settings.trusted-users = [
+      "root"
+      username
+    ];
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}"];
+  };
 
   programs.firefox.enable = true;
   services.displayManager.ly.enable = true;
   services.xserver.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-		pkgs-unstable.zapret2
+    nix-output-monitor
+    openssl_4_0
     efivar
     cargo
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim 
     cachix
     wget
     curl

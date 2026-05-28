@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -10,6 +9,10 @@
       {
         name = "tide";
         src = pkgs.fishPlugins.tide.src;
+      }
+      {
+        name = "fzf-fish";
+        src = pkgs.fishPlugins.fzf-fish.src;
       }
     ];
     shellAliases = {
@@ -39,21 +42,21 @@
       htop = "btop";
       cd = "z";
 
-			d = "docker";
-			db = "docker build";
-			de = "docker exec";
-			dr = "docker run";
-			dp = "docker pull";
-			dl = "docker logs";
-			di = "docker image";
+      d = "docker";
+      db = "docker build";
+      de = "docker exec";
+      dr = "docker run";
+      dp = "docker pull";
+      dl = "docker logs";
+      di = "docker image";
 
-			dc = "docker compose";
-			dcb = "docker compose build";
-			dce = "docker compose exec";
-			dcr = "docker compose run";
-			dcl = "docker compose logs";
-			dcu = "docker compose up";
-			dcd = "docker compose down";
+      dc = "docker compose";
+      dcb = "docker compose build";
+      dce = "docker compose exec";
+      dcr = "docker compose run";
+      dcl = "docker compose logs";
+      dcu = "docker compose up";
+      dcd = "docker compose down";
     };
   };
 }

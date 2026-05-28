@@ -5,7 +5,7 @@
     settings = {
       scrollback_lines = 4000;
       scrollbar = "never";
-			confirm_os_window_close=0;
+      confirm_os_window_close = 0;
 
       enable_audio_bell = false;
       bell_on_tab = "🔔 ";
@@ -28,11 +28,11 @@
       bold_italic_font = "auto";
     };
 
-		extraConfig = ''
-startup_session launch.conf
-		'';
+    extraConfig = ''
+      startup_session launch.conf
+      		'';
 
     themeFile = "tokyo_night_moon";
   };
-	xdg.configFile."kitty/launch.conf".text="launch sh -c 'tmux attach || tmux new -s default'";
+  xdg.configFile."kitty/launch.conf".text = "launch sh -c 'tmux attach || tmux new -s default'";
 }

@@ -1,9 +1,9 @@
-{lib, pkgs, ...}:{
+{pkgs, ...}:{
   services.udiskie = {
     enable = true;
     settings = {
       program_options = {
-        file_manager = lib.getExe pkgs.kdePackages.dolphin;
+        file_manager = "${pkgs.kdePackages.dolphin}/bin/dolphin";
       };
     };
   };

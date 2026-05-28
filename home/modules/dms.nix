@@ -5,10 +5,9 @@
     enableSystemMonitoring = true;
     enableDynamicTheming = false;
     dgop.package = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
-		systemd = {
-			enable = true;
-			restartIfChanged = true;
-		};
+    niri = {
+      enableSpawn = true;
+    };
     plugins = {
       dankBatteryAlerts.enable = true;
       dockerManager.enable = true;

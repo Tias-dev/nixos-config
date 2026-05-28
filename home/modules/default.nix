@@ -1,13 +1,13 @@
 {
   imports = [
-		./terminal
+    ./terminal
     ./fish.nix
     ./tmux.nix
-		./xdg.nix
-		./dms.nix
-		./niri
-		./neovim
-		./zathura.nix
-		./environment.nix
+    ./xdg.nix
+    ./flash.nix
+    ./dms.nix
+    ./niri
+    ./zathura.nix
+    ./environment.nix
   ];
 }
