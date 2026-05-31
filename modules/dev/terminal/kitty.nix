@@ -1,9 +1,9 @@
-{...}: {
-  flake.modules.homeModules.kitty = {
-    config.terminal = {
-      name = "Kitty";
-      path = "kitty";
-    };
+{
+  flake.modules.homeManager.kitty = {
+#    config.terminal = {
+#      name = "Kitty";
+#      path = "kitty";
+#    };
     xdg.configFile."kitty/launch.conf".text = "launch sh -c 'tmux attach || tmux new -s default'";
 
     programs.kitty = {

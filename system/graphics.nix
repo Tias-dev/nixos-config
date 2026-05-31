@@ -1,5 +1,5 @@
-{nixpkgs, ...}: {
-	hardware.nvidia-container-toolkit.enable = true;
+{
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -17,8 +17,8 @@
     modesetting.enable = true; # for wayland support
     prime = {
       offload = {
-        enable = true;
-        enableOffloadCmd = true;
+	enable = true;
+	enableOffloadCmd = true;
       };
 
       intelBusId = "PCI:0@0:2:0";
