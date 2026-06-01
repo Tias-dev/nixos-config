@@ -3,7 +3,7 @@
     spawn-at-startup = [
       {argv = ["firefox"];}
       {
-	argv = ["kitty"];# [config.terminal.path];
+        argv = ["kitty"]; # [config.terminal.path];
       }
     ];
   };

@@ -1,5 +1,9 @@
-{ config, hostname, username, ... }:
 {
+  config,
+  hostname,
+  username,
+  ...
+}: {
   networking = {
     hostName = "${hostname}"; # Define your hostname.
     proxy.default = "socks5://localhost:10800";
@@ -30,5 +34,5 @@
     enable = true;
     settingsFile = config.sops.secrets.xrayConfig.path;
   };
-  systemd.services.xray.environment = { XRAY_LOCATION_ASSSET = "/home/${username}/.config/xray_assets/"; };
+  systemd.services.xray.environment = {XRAY_LOCATION_ASSSET = "/home/${username}/.config/xray_assets/";};
 }

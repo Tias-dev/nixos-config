@@ -3,4 +3,3 @@
     home.packages = [pkgs.lsd];
   };
 }
-

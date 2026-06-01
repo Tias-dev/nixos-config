@@ -30,7 +30,7 @@
 
     extraConfig = ''
       startup_session launch.conf
-      		'';
+    '';
 
     themeFile = "tokyo_night_moon";
   };

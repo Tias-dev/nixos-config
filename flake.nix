@@ -1,6 +1,6 @@
 {
   description = "Tias/Raison/Timur-ux/my nixos config";
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -38,5 +38,6 @@
       url = "github:hercules-ci/flake-parts";
     };
     import-tree.url = "github:vic/import-tree";
+    systems.url = "github:nix-systems/default-linux";
   };
 }

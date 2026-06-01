@@ -2,77 +2,77 @@
   flake.modules.homeModules.niri = {config, ...}: {
     binds = {
       "Mod+T" = {
-	# hotkey-overlay.title = "Open a Terminal: ${config.terminal.name}";
-	action.spawn = "kitty"; #config.terminal.path;
+        # hotkey-overlay.title = "Open a Terminal: ${config.terminal.name}";
+        action.spawn = "kitty"; #config.terminal.path;
       };
       "Mod+Shift+Slash".action.show-hotkey-overlay = [];
 
       "Alt+Tab".action.focus-monitor-previous = [];
       "Mod+D" = {
-	hotkey-overlay = {
-	  title = "Run an Application: dms launcher";
-	};
-	action.spawn-sh = "dms ipc call launcher open";
+        hotkey-overlay = {
+          title = "Run an Application: dms launcher";
+        };
+        action.spawn-sh = "dms ipc call launcher open";
       };
       "Super+Shift+L" = {
-	hotkey-overlay = {
-	  title = "Lock the Screen: dms lock";
-	};
-	action.spawn-sh = "dms ipc call lock lock";
+        hotkey-overlay = {
+          title = "Lock the Screen: dms lock";
+        };
+        action.spawn-sh = "dms ipc call lock lock";
       };
       "Mod+Shift+P" = {
-	hotkey-overlay = {
-	  title = "Open power menu";
-	};
-	action.spawn-sh = "dms ipc call powermenu toggle";
+        hotkey-overlay = {
+          title = "Open power menu";
+        };
+        action.spawn-sh = "dms ipc call powermenu toggle";
       };
 
       "XF86AudioRaiseVolume" = {
-	allow-when-locked = true;
-	action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+        allow-when-locked = true;
+        action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
       };
       "XF86AudioLowerVolume" = {
-	allow-when-locked = true;
-	action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+        allow-when-locked = true;
+        action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
       };
       "XF86AudioMute" = {
-	allow-when-locked = true;
-	action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        allow-when-locked = true;
+        action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
       "XF86AudioMicMute" = {
-	allow-when-locked = true;
-	action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+        allow-when-locked = true;
+        action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
       };
 
       "XF86AudioPlay" = {
-	allow-when-locked = true;
-	action.spawn-sh = "playerctl play-pause";
+        allow-when-locked = true;
+        action.spawn-sh = "playerctl play-pause";
       };
       "XF86AudioStop" = {
-	allow-when-locked = true;
-	action.spawn-sh = "playerctl stop";
+        allow-when-locked = true;
+        action.spawn-sh = "playerctl stop";
       };
       "XF86AudioPrev" = {
-	allow-when-locked = true;
-	action.spawn-sh = "playerctl previous";
+        allow-when-locked = true;
+        action.spawn-sh = "playerctl previous";
       };
       "XF86AudioNext" = {
-	allow-when-locked = true;
-	action.spawn-sh = "playerctl next";
+        allow-when-locked = true;
+        action.spawn-sh = "playerctl next";
       };
       "XF86MonBrightnessUp" = {
-	allow-when-locked = true;
-	action.spawn-sh = "brightnessctl --class=backlight set +10%";
+        allow-when-locked = true;
+        action.spawn-sh = "brightnessctl --class=backlight set +10%";
       };
 
       "XF86MonBrightnessDown" = {
-	allow-when-locked = true;
-	action.spawn-sh = "brightnessctl --class=backlight set 10%-";
+        allow-when-locked = true;
+        action.spawn-sh = "brightnessctl --class=backlight set 10%-";
       };
 
       "Mod+O" = {
-	repeat = false;
-	action.toggle-overview = [];
+        repeat = false;
+        action.toggle-overview = [];
       };
 
       "Mod+Q".action.close-window = [];
@@ -132,20 +132,20 @@
       "Mod+Shift+I".action.move-workspace-up = [];
 
       "Mod+WheelScrollDown" = {
-	cooldown-ms = 150;
-	action.focus-workspace-down = [];
+        cooldown-ms = 150;
+        action.focus-workspace-down = [];
       };
       "Mod+WheelScrollUp" = {
-	cooldown-ms = 150;
-	action.focus-workspace-up = [];
+        cooldown-ms = 150;
+        action.focus-workspace-up = [];
       };
       "Mod+Ctrl+WheelScrollDown" = {
-	cooldown-ms = 150;
-	action.move-column-to-workspace-down = [];
+        cooldown-ms = 150;
+        action.move-column-to-workspace-down = [];
       };
       "Mod+Ctrl+WheelScrollUp" = {
-	cooldown-ms = 150;
-	action.move-column-to-workspace-up = [];
+        cooldown-ms = 150;
+        action.move-column-to-workspace-up = [];
       };
 
       "Mod+WheelScrollRight".action.focus-column-right = [];
@@ -216,37 +216,37 @@
       "Alt+Print".action.screenshot-window = [];
 
       "Mod+Escape" = {
-	allow-inhibiting = false;
-	action.toggle-keyboard-shortcuts-inhibit = [];
+        allow-inhibiting = false;
+        action.toggle-keyboard-shortcuts-inhibit = [];
       };
 
       "Mod+Shift+E".action.quit = [];
       "Ctrl+Alt+Delete".action.quit = [];
 
       "Mod+Alt+M" = {
-	repeat = false;
-	action.spawn-sh = "wl-mirror $(niri msg --json focused-output | jq -r .name)";
+        repeat = false;
+        action.spawn-sh = "wl-mirror $(niri msg --json focused-output | jq -r .name)";
       };
       "Mod+Ctrl+C" = {
-	hotkey-overlay = {
-	  title = "Clear; screencast target";
-	};
-	repeat = false;
-	action.spawn-sh = "niri msg action clear-dynamic-cast-target";
+        hotkey-overlay = {
+          title = "Clear; screencast target";
+        };
+        repeat = false;
+        action.spawn-sh = "niri msg action clear-dynamic-cast-target";
       };
       "Mod+Ctrl+P" = {
-	hotkey-overlay = {
-	  title = "Pick; screencast = target";
-	};
-	repeat = false;
-	action.spawn-sh = "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)";
+        hotkey-overlay = {
+          title = "Pick; screencast = target";
+        };
+        repeat = false;
+        action.spawn-sh = "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)";
       };
       "Mod+Ctrl+M" = {
-	hotkey-overlay = {
-	  title = "Turn off monitors before any move";
-	};
-	repeat = false;
-	action.power-off-monitors = [];
+        hotkey-overlay = {
+          title = "Turn off monitors before any move";
+        };
+        repeat = false;
+        action.power-off-monitors = [];
       };
     };
   };

@@ -3,9 +3,9 @@
     enable = true;
     createMountPoints = true;
     exports = ''
-      			/export					10.42.0.1(rw,fsid=0,no_subtree_check) 10.42.0.2(rw,fsid=0,no_subtree_check)
-      			/export/raison	10.42.0.1(rw,nohide,insecure,no_subtree_check) 10.42.0.2(rw,nohide,insecure,no_subtree_check)
-      		'';
+      /export					10.42.0.1(rw,fsid=0,no_subtree_check) 10.42.0.2(rw,fsid=0,no_subtree_check)
+      /export/raison	10.42.0.1(rw,nohide,insecure,no_subtree_check) 10.42.0.2(rw,nohide,insecure,no_subtree_check)
+    '';
   };
 
   networking.firewall = {

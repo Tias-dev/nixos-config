@@ -3,8 +3,7 @@
   username,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
     ../../system
@@ -15,7 +14,7 @@
       "root"
       username
     ];
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}"];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
   programs.firefox.enable = true;
@@ -28,17 +27,18 @@
     openssl_4_0
     efivar
     cargo
-    vim 
+    vim
     cachix
     wget
     curl
     ly
     python313
     (python313.withPackages (
-      ps: with ps; [
-        virtualenv
-        pip
-      ]
+      ps:
+        with ps; [
+          virtualenv
+          pip
+        ]
     ))
     nodejs_24
     zip

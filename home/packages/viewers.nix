@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-with pkgs;
-[
+{pkgs, ...}:
+with pkgs; [
   kdePackages.okular
   kdePackages.dolphin
 ]

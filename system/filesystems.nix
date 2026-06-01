@@ -63,6 +63,6 @@
   # shared folder
   fileSystems."/export/raison" = {
     device = "/mnt/raison";
-    options = [ "bind" ];
+    options = ["bind"];
   };
 }

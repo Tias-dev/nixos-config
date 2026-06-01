@@ -4,9 +4,9 @@
       # Configure network connections interactively with nmcli or nmtui.
       networkmanager.enable = true;
       nameservers = [
-	"77.88.8.8"
-	"77.88.8.1"
-	"8.8.8.8"
+        "77.88.8.8"
+        "77.88.8.1"
+        "8.8.8.8"
       ];
       nftables.enable = true;
     };

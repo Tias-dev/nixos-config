@@ -19,7 +19,7 @@ in {
     nixosConfigurations.laptop-raison = config.flake.lib.mkSystems.linux "laptop-raison";
     modules.nixos."hosts/laptop-raison" = {
       imports =
-	(config.flake.lib.collectModules config modules);
+        config.flake.lib.collectModules config modules;
     };
   };
 }

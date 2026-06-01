@@ -6,13 +6,13 @@
       enableDynamicTheming = true;
       dgop.package = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
       niri = {
-	enableSpawn = true;
+        enableSpawn = true;
       };
       plugins = {
-	dankBatteryAlerts.enable = true;
-	dankPomodoroTimer.enable = true;
-	dockerManager.enable = true;
-	emojiLauncher.enable = true;
+        dankBatteryAlerts.enable = true;
+        dankPomodoroTimer.enable = true;
+        dockerManager.enable = true;
+        emojiLauncher.enable = true;
       };
     };
   };

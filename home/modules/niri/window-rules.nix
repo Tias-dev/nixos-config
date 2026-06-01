@@ -12,27 +12,27 @@
   }
   {
     matches = [
-      { app-id = "firefox"; }
+      {app-id = "firefox";}
     ];
     open-on-workspace = "browser";
   }
   {
     matches = [
-      { app-id = "Alacritty"; }
-      { app-id = "kitty"; }
+      {app-id = "Alacritty";}
+      {app-id = "kitty";}
     ];
     open-on-workspace = "terminal";
   }
   {
     matches = [
-      { app-id = "zathura"; }
-      { app-id = "okular"; }
+      {app-id = "zathura";}
+      {app-id = "okular";}
     ];
     open-on-workspace = "doc-viewer";
   }
   {
     matches = [
-      { app-id = "keepassxc"; }
+      {app-id = "keepassxc";}
     ];
     block-out-from = "screen-capture";
   }
@@ -47,7 +47,7 @@
 
   {
     matches = [
-      { is-window-cast-target = true; }
+      {is-window-cast-target = true;}
     ];
     focus-ring = {
       active = {

@@ -1,7 +1,6 @@
-{ vars, ... }:
-[
-  { argv = [ "firefox" ]; }
+{vars, ...}: [
+  {argv = ["firefox"];}
   {
-    argv = [ vars.terminal ];
+    argv = [vars.terminal];
   }
 ]

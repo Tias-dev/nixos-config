@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-with pkgs;
-[
+{pkgs, ...}:
+with pkgs; [
   zoxide
   lsd
   bat
@@ -8,6 +7,6 @@ with pkgs;
   fzf
   superfile
   ripgrep
-	fd
-	xkb-switch
+  fd
+  xkb-switch
 ]

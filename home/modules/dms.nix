@@ -1,5 +1,8 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.dank-material-shell = {
     enable = true;
     enableSystemMonitoring = true;
@@ -14,5 +17,4 @@
       emojiLauncher.enable = true;
     };
   };
-
 }
