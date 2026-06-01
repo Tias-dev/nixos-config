@@ -1,5 +1,8 @@
 {
-  flake.modules.homeManager.homeManager = {pkgs, ...}: {
-    home.packages = [pkgs.zoxide];
+  flake.modules.homeManager.homeManager = {
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 }

@@ -1,15 +1,18 @@
 {config, ...}: let
   modules = [
     "efiBoot"
+    "ownProxy"
     "desktop"
     "niri"
-    "kitty"
-    "terminal"
-    "ownProxy"
-    "tmux"
+    "bluetooth"
+
     "develop"
-    "browser"
+    "zsh"
+    "kitty"
+    "tmux"
     "docker"
+
+    "browser"
     "recording"
     "torrent"
     "documents"

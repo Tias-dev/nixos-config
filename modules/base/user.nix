@@ -1,10 +1,8 @@
 {
-  flake.modules.nixos.nixos = {pkgs, ...}: {
+  flake.modules.nixos.nixos = {
     users.users.raison = {
       isNormalUser = true;
       extraGroups = ["wheel" "networkmanager" "docker"];
-      shell = pkgs.fish;
     };
-    programs.fish.enable = true;
   };
 }

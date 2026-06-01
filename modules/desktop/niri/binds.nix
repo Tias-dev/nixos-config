@@ -1,9 +1,11 @@
-{
-  flake.modules.homeModules.niri = {config, ...}: {
+{config, ...}: {
+  flake.modules.homeModules.niri = let
+    inherit (config.flake.meta) terminal;
+  in {
     binds = {
       "Mod+T" = {
-        # hotkey-overlay.title = "Open a Terminal: ${config.terminal.name}";
-        action.spawn = "kitty"; #config.terminal.path;
+        hotkey-overlay.title = "Open a Terminal: ${terminal.name}";
+        action.spawn = terminal.path;
       };
       "Mod+Shift+Slash".action.show-hotkey-overlay = [];
 

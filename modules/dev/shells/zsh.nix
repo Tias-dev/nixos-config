@@ -1,21 +1,16 @@
 {
-  flake.modules.homeManager.fish = {pkgs, ...}: {
-    programs.fish = {
+  flake.modules.homeManager.zsh = {
+    programs.zsh = {
       enable = true;
-      interactiveShellInit = ''
-        set fish_greeting # Disable greeting
-        zoxide init fish | source
-      '';
-      plugins = [
-        {
-          name = "tide";
-          src = pkgs.fishPlugins.tide.src;
-        }
-        {
-          name = "fzf-fish";
-          src = pkgs.fishPlugins.fzf-fish.src;
-        }
-      ];
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+        ];
+        theme = "robbyrussell";
+      };
+      history.append = true;
       shellAliases = {
         nxs = "sudo nixos-rebuild switch --flake ~/nix/";
         hms = "home-manager switch --flake ~/nix/";
@@ -60,10 +55,12 @@
         dcd = "docker compose down";
       };
     };
-    home.shell.enableFishIntegration = true;
+    home.shell.enableZshIntegration = true;
   };
-  flake.modules.nixos.fish = {pkgs, ...}: {
-    users.users.raison.shell = pkgs.fish;
-    programs.fish.enable = true;
+
+  flake.modules.nixos.zsh = {pkgs, ...}: {
+    environment.pathsToLink = ["/share/zsh"];
+    users.users.raison.shell = pkgs.zsh;
+    programs.zsh.enable = true;
   };
 }
