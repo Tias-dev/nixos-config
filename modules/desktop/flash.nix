@@ -11,4 +11,7 @@ in {
       };
     };
   };
+  flake.modules.nixos.desktop = {
+    services.udisks2.enable = true;
+  };
 }
