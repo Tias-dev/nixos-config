@@ -62,8 +62,12 @@
     };
     home.shell.enableFishIntegration = true;
   };
-  flake.modules.nixos.fish = {pkgs, ...}: {
-    users.users.raison.shell = pkgs.fish;
+
+  flake.modules.nixos.fish = {pkgs, config, ...}:
+  let
+    username = config.flake.modules.homeManager.home.username;
+  in {
+    users.users.${username}.shell = pkgs.fish;
     programs.fish.enable = true;
   };
 }

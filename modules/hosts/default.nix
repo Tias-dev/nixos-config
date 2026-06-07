@@ -4,14 +4,14 @@
   inputs,
   ...
 }: let
-  mkNixos = system: cls: name:
+  mkNixos = system: cls: name: username:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
         config.flake.modules.nixos.${cls}
         config.flake.modules.nixos."hosts/${name}"
         {
-          home-manager.users.raison.imports = [
+          home-manager.users.${username}.imports = [
             config.flake.modules.homeManager.homeManager
             (config.flake.modules.homeManager."hosts/${name}" or {})
           ];
@@ -38,12 +38,15 @@ in {
 
     collectModules = config: modules:
       assert builtins.isAttrs config;
-      assert builtins.isList modules; (
+      assert builtins.isList modules;
+      let
+      user = config.flake.modules.homeManager.home.username;
+      in (
         (map (module: config.flake.modules.nixos.${module} or {}) modules)
         ++ [
           {
             imports = [inputs.home-manager.nixosModules.home-manager];
-            home-manager.users.raison.imports =
+            home-manager.users.${username}.imports =
               map (
                 module: config.flake.modules.homeManager.${module} or {}
               )

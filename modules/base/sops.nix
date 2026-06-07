@@ -1,10 +1,13 @@
 {inputs, ...}: {
-  flake.modules.nixos.nixos = {
+  flake.modules.nixos.nixos = {config, ...}: 
+  let
+    username = config.flake.modules.homeManager.home.username;
+  in {
     imports = [
       inputs.sops-nix.nixosModules.sops
     ];
     sops = {
-      age.keyFile = "/home/raison/.config/sops/age/keys.txt";
+      age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
       secrets.xrayConfig = {
         format = "json";
         sopsFile = ../../secrets/xray.json;

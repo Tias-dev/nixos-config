@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.homeManager = {
+  flake.modules.homeManager.raison = {
     home = {
       username = "raison";
       homeDirectory = "/home/raison";

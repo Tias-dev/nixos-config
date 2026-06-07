@@ -1,8 +1,7 @@
 {config, ...}: let
   modules = [
     "efiBoot"
-    "raison"
-    "ownProxy"
+    "tabuchkin"
     "desktop"
     "niri"
     "bluetooth"
@@ -15,15 +14,15 @@
 
     "browser"
     "recording"
-    "torrent"
     "documents"
   ];
 in {
   flake = {
-    nixosConfigurations.laptop-raison = config.flake.lib.mkSystems.linux "laptop-raison" "raison";
-    modules.nixos."hosts/laptop-raison" = {
+    nixosConfigurations.tabuchkin = config.flake.lib.mkSystems.linux "tabuchkin-nix" "tabuchkin";
+    modules.nixos."hosts/tabuchkin-nix" = {
       imports =
         config.flake.lib.collectModules config modules;
     };
   };
 }
+
