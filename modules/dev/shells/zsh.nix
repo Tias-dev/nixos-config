@@ -12,8 +12,8 @@
       };
       history.append = true;
       shellAliases = {
-        nxs = "sudo nixos-rebuild switch --flake ~/nix/";
-        hms = "home-manager switch --flake ~/nix/";
+        nxs = "sudo nixos-rebuild switch --flake ~/nix/#$(hostname)";
+        hms = "home-manager switch --flake ~/nix/#$(hostname)";
 
         vi = "nvim";
         v = "nvim";
