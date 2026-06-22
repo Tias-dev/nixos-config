@@ -10,11 +10,6 @@
       keyMode = "vi";
       terminal = "screen-256color";
       extraConfig = ''
-        set -as terminal-features ",alacritty*:RGB"
-        bind -n M-r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
-        bind M-p previous-window
-        bind M-n next-window
-
         bind -n M-1 select-window -t 1
         bind -n M-2 select-window -t 2
         bind -n M-3 select-window -t 3
@@ -25,18 +20,15 @@
         bind -n M-8 select-window -t 8
         bind -n M-9 select-window -t 9
 
-        bind -n M-h select-pane -L
-        bind -n M-l select-pane -R
-        bind -n M-k select-pane -U
-        bind -n M-j select-pane -D
+        bind M-h select-pane -L
+        bind M-l select-pane -R
+        bind M-k select-pane -U
+        bind M-j select-pane -D
 
         bind -n M-S-h resize-pane -L 5
         bind -n M-S-l resize-pane -R 5
         bind -n M-S-k resize-pane -U 3
         bind -n M-S-j resize-pane -D 3
-
-        bind -n M-s split-window -v
-        bind -n M-v split-window -h
 
         bind -n M-t new-window
         bind -n M-c kill-pane
