@@ -11,10 +11,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-		system-manager = {
-			url = "github:numtide/system-manager";
+    system-manager = {
+      url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-		};
+    };
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +37,9 @@
     };
     tias-nixvim = {
       url = "github:Tias-dev/nixvim-config/master";
+    };
+    tias-nixvim-no-clangd-indexing = {
+      url = "github:Tias-dev/nixvim-config/clangd-indexing-disabled";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

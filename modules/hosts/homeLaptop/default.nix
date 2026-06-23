@@ -7,6 +7,7 @@
     "bluetooth"
 
     "develop"
+    "neovim"
     "zsh"
     "kitty"
     "tmux"

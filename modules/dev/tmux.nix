@@ -38,6 +38,8 @@
         set -gq allow-passthrough on
         set -g visual-activity off
         set-option -g focus-events on
+
+	set -s copy-command 'wl-copy'
       '';
       plugins = with pkgs.tmuxPlugins; [
         tokyo-night-tmux

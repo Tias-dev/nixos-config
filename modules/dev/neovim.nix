@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.modules.homeManager.develop = {pkgs, ...}: let
+  flake.modules.homeManager.neovim = {pkgs, ...}: let
     neovim = inputs.tias-nixvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
   in {
     home.packages = [neovim];

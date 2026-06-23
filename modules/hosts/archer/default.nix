@@ -6,6 +6,7 @@
     "bluetooth"
 
     "develop"
+    "neovim"
     "zsh"
     "alacritty"
     "tmux"

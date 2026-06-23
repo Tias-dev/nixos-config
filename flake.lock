@@ -179,6 +179,67 @@
         "type": "github"
       }
     },
+    "flake-parts_6": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "tias-nixvim-no-clangd-indexing",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_7": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "tias-nixvim-no-clangd-indexing",
+          "nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_8": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_3"
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -239,6 +300,21 @@
       }
     },
     "import-tree_2": {
+      "locked": {
+        "lastModified": 1778781969,
+        "narHash": "sha256-Jjuz5CmSkur8KvLDoGa+vylEp+RkQtv4mt/qcMznpH0=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "d321337efd0f23a9eb14a42adb7b2c29313ab274",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
+    "import-tree_3": {
       "locked": {
         "lastModified": 1778781969,
         "narHash": "sha256-Jjuz5CmSkur8KvLDoGa+vylEp+RkQtv4mt/qcMznpH0=",
@@ -357,6 +433,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_3": {
+      "locked": {
+        "lastModified": 1777168982,
+        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1779796641,
@@ -405,6 +496,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1781074563,
+        "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixvim": {
       "inputs": {
         "flake-parts": "flake-parts_4",
@@ -413,6 +520,29 @@
           "nixpkgs"
         ],
         "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1781388258,
+        "narHash": "sha256-Kx1zxra9sZ215H3OiWUfkulu8N2v3iu19wqlzpD/Ac0=",
+        "owner": "nix-community",
+        "repo": "nixvim",
+        "rev": "e3c908fdf6dff268b04ffb6758bcfc7c018489b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixvim",
+        "type": "github"
+      }
+    },
+    "nixvim_2": {
+      "inputs": {
+        "flake-parts": "flake-parts_7",
+        "nixpkgs": [
+          "tias-nixvim-no-clangd-indexing",
+          "nixpkgs"
+        ],
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1781388258,
@@ -492,7 +622,8 @@
         "sops-nix": "sops-nix",
         "system-manager": "system-manager",
         "systems": "systems_2",
-        "tias-nixvim": "tias-nixvim"
+        "tias-nixvim": "tias-nixvim",
+        "tias-nixvim-no-clangd-indexing": "tias-nixvim-no-clangd-indexing"
       }
     },
     "sops-nix": {
@@ -583,11 +714,49 @@
         "type": "github"
       }
     },
+    "systems_4": {
+      "locked": {
+        "lastModified": 1774449309,
+        "narHash": "sha256-brhZ8DmuGtzkCYHJg4HEd602amKm89Y9ytsFZ5uWD1w=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "c29398b59d2048c4ab79345812849c9bd15e9150",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "ref": "future-26.11",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "tias-nixpkgs": {
       "inputs": {
         "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "tias-nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780052334,
+        "narHash": "sha256-Ycgp8BlbIyXheJgqEkn3l7GZ80VqYHibyEItRjYV6nk=",
+        "owner": "Tias-dev",
+        "repo": "tias-nixpkgs",
+        "rev": "e80e689a6343d6559c793f38cb02597f1fa0f367",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Tias-dev",
+        "repo": "tias-nixpkgs",
+        "type": "github"
+      }
+    },
+    "tias-nixpkgs_2": {
+      "inputs": {
+        "flake-parts": "flake-parts_8",
+        "nixpkgs": [
+          "tias-nixvim-no-clangd-indexing",
           "nixpkgs"
         ]
       },
@@ -624,6 +793,29 @@
       "original": {
         "owner": "Tias-dev",
         "ref": "master",
+        "repo": "nixvim-config",
+        "type": "github"
+      }
+    },
+    "tias-nixvim-no-clangd-indexing": {
+      "inputs": {
+        "flake-parts": "flake-parts_6",
+        "import-tree": "import-tree_3",
+        "nixpkgs": "nixpkgs_3",
+        "nixvim": "nixvim_2",
+        "tias-nixpkgs": "tias-nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1782219172,
+        "narHash": "sha256-5vEUvCNz/OR83SIcN7aoM+H2bg8WAQQplZXpo5odKwY=",
+        "owner": "Tias-dev",
+        "repo": "nixvim-config",
+        "rev": "ebf71db3c4dadd64d529f21114e3cc5880385b0b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Tias-dev",
+        "ref": "clangd-indexing-disabled",
         "repo": "nixvim-config",
         "type": "github"
       }
