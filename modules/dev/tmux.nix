@@ -54,6 +54,7 @@
           '';
         }
         dotbar
+	extrakto
         {
           plugin = pkgs.tmuxPlugins.resurrect;
           extraConfig = "set -g @resurrect-strategy-nvim 'session'";
