@@ -1,7 +1,7 @@
 {config, ...}: {
   flake.modules.homeModules.niri = let
     inherit (config.flake.meta) terminal;
-  in {
+  in  {
     binds = {
       "Mod+T" = {
         hotkey-overlay.title = "Open a Terminal: ${terminal.name}";
