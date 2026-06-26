@@ -1,5 +1,5 @@
 {
-  flake.modules.homeModules.niri.input = {
+  flake.modules.generic.niri.settings.input = {
     keyboard = {
       xkb = {
         layout = "us,ru";

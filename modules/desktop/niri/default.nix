@@ -3,10 +3,25 @@
   config,
   ...
 }: {
-  flake.modules.homeManager.niri = {
+  flake.modules.homeManager.niri = {pkgs, ...}: let
+    niri-settings =
+      (pkgs.lib.evalModules {
+        modules = [
+          config.flake.modules.generic.niri
+          {
+            options.settings = with pkgs.lib;
+              mkOption {
+                type = types.lazyAttrsOf types.raw;
+                default = {};
+              };
+          }
+        ];
+        specialArgs = {inherit pkgs;};
+      }).config.settings;
+  in {
     programs.niri = {
       enable = true;
-      settings = config.flake.modules.homeModules.niri;
+      settings = niri-settings;
     };
     imports = [
       inputs.dms.homeModules.dank-material-shell

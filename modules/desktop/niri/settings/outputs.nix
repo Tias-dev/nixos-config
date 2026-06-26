@@ -1,5 +1,5 @@
 {
-  flake.modules.homeModules.niri.outputs = {
+  flake.modules.generic.niri.settings.outputs = {
     "eDP-1" = {
       mode = {
         width = 1920;

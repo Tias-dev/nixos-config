@@ -1,5 +1,5 @@
 {
-  flake.modules.homeModules.niri.window-rules = [
+  flake.modules.generic.niri.settings.window-rules = [
     {
       geometry-corner-radius = {
         bottom-left = 12.0;
