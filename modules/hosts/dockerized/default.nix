@@ -7,10 +7,9 @@
   ];
 in {
   flake = {
-    nixosConfigurations.dockerized = config.flake.lib.mkSystems.linux "laptop-raison" "raison";
-    modules.nixos."hosts/dockerized" = {
-      imports =
-        config.flake.lib.collectModules config modules "raison";
+    homeConfigurations.tabuchkin = config.flake.lib.mkSystems.linuxHMOnly "tabuchkin-nix" {username = "tabuchkin";};
+    modules.homeManager."hosts/tabuchkin-nix" = {
+      imports = config.flake.lib.collectHomeModules config modules;
     };
   };
 }
