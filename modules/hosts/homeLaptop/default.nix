@@ -20,10 +20,10 @@
   ];
 in {
   flake = {
-    nixosConfigurations.laptop-raison = config.flake.lib.mkSystems.linux "laptop-raison";
+    nixosConfigurations.laptop-raison = config.flake.lib.mkSystems.linux "laptop-raison" "raison";
     modules.nixos."hosts/laptop-raison" = {
       imports =
-        config.flake.lib.collectModules config modules;
+        config.flake.lib.collectModules config modules "raison";
     };
   };
 }

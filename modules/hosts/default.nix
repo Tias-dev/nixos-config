@@ -4,15 +4,16 @@
   inputs,
   ...
 }: let
-	# plain NixOS + Home manager setup
-  mkNixos = system: cls: hostname:
+  # plain NixOS + Home manager setup
+  mkNixos = system: cls: hostname: username:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
+      specialArgs = {inherit username;};
       modules = [
         config.flake.modules.nixos.${cls}
         config.flake.modules.nixos."hosts/${hostname}"
         {
-          home-manager.users.raison.imports = [
+          home-manager.users.${username}.imports = [
             config.flake.modules.homeManager.homeManager
             (config.flake.modules.homeManager."hosts/${hostname}" or {})
           ];
@@ -30,54 +31,52 @@
       ];
     };
 
-	# Home manager only
-	mkHomeManager = system: hostname: specialArgs:
-		inputs.home-manager.lib.homeManagerConfiguration {
-				pkgs = inputs.nixpkgs.legacyPackages.${system};
-				modules = [
-					config.flake.modules.homeManager.homeManager
-					(config.flake.modules.homeManager."hosts/${hostname}" or {})
-				];
-				extraSpecialArgs = specialArgs;
-			};
+  # Home manager only
+  mkHomeManager = system: hostname: specialArgs:
+    inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      modules = [
+        config.flake.modules.homeManager.homeManager
+        (config.flake.modules.homeManager."hosts/${hostname}" or {})
+      ];
+      extraSpecialArgs = specialArgs;
+    };
 
-	# Manage system for not NixOS distro
-	mkSystemManager = system: hostname:
-		inputs.system-manager.lib.makeSystemConfig {
-			modules = [
-			{ config = config.flake.modules.systemManager.systemManager.config; }
-			{config = config.flake.modules.systemManager."hosts/${hostname}".config;}
-				];
-		};
+  # Manage system for not NixOS distro
+  mkSystemManager = system: hostname:
+    inputs.system-manager.lib.makeSystemConfig {
+      modules = [
+        {config = config.flake.modules.systemManager.systemManager.config;}
+        {config = config.flake.modules.systemManager."hosts/${hostname}".config;}
+      ];
+    };
 
   linux = mkNixos "x86_64-linux" "nixos";
-	linuxHMOnly = mkHomeManager "x86_64-linux";
-	linuxSMOnly = mkSystemManager "x86_64-linux";
+  linuxHMOnly = mkHomeManager "x86_64-linux";
+  linuxSMOnly = mkSystemManager "x86_64-linux";
 
-	collectTypedModules = type: config: modules: 
-      assert builtins.isAttrs config;
-      assert builtins.isList modules; 
-        (map (module: config.flake.modules.${type}.${module} or {}) modules);
+  collectTypedModules = type: config: modules:
+    assert builtins.isAttrs config;
+    assert builtins.isList modules; (map (module: config.flake.modules.${type}.${module} or {}) modules);
 in {
-    flake.lib = rec {
-      mkSystems = {
-	inherit linux linuxHMOnly linuxSMOnly;
-      };
-
-
-		  collectNixosModules = collectTypedModules "nixos";
-		  collectHomeModules = collectTypedModules "homeManager";
-
-      collectModules = config: modules:
-	assert builtins.isAttrs config;
-	assert builtins.isList modules; (
-				  (collectNixosModules config modules)
-	  ++ [
-	    {
-	      imports = [inputs.home-manager.nixosModules.home-manager];
-	      home-manager.users.raison.imports = (collectHomeModules config modules);
-	    }
-	  ]
-	);
+  flake.lib = rec {
+    mkSystems = {
+      inherit linux linuxHMOnly linuxSMOnly;
     };
+
+    collectNixosModules = collectTypedModules "nixos";
+    collectHomeModules = collectTypedModules "homeManager";
+
+    collectModules = config: modules: username:
+      assert builtins.isAttrs config;
+      assert builtins.isList modules; (
+        (collectNixosModules config modules)
+        ++ [
+          {
+            imports = [inputs.home-manager.nixosModules.home-manager];
+            home-manager.users.${username}.imports = collectHomeModules config modules;
+          }
+        ]
+      );
+  };
 }
