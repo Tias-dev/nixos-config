@@ -5,14 +5,15 @@
   ...
 }: let
   # plain NixOS + Home manager setup
-  mkNixos = system: cls: hostname:
+  mkNixos = system: cls: hostname: username:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
+      specialArgs = {inherit username;};
       modules = [
         config.flake.modules.nixos.${cls}
         config.flake.modules.nixos."hosts/${hostname}"
         {
-          home-manager.users.raison.imports = [
+          home-manager.users.${username}.imports = [
             config.flake.modules.homeManager.homeManager
             (config.flake.modules.homeManager."hosts/${hostname}" or {})
           ];
@@ -66,14 +67,14 @@ in {
     collectNixosModules = collectTypedModules "nixos";
     collectHomeModules = collectTypedModules "homeManager";
 
-    collectModules = config: modules:
+    collectModules = config: modules: username:
       assert builtins.isAttrs config;
       assert builtins.isList modules; (
         (collectNixosModules config modules)
         ++ [
           {
             imports = [inputs.home-manager.nixosModules.home-manager];
-            home-manager.users.raison.imports = collectHomeModules config modules;
+            home-manager.users.${username}.imports = collectHomeModules config modules;
           }
         ]
       );
