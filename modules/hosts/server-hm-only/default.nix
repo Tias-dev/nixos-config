@@ -7,8 +7,8 @@
   ];
 in {
   flake = {
-    homeConfigurations.tabuchkin = config.flake.lib.mkSystems.linuxHMOnly "tabuchkin-nix" {username = "tabuchkin";};
-    modules.homeManager."hosts/tabuchkin-nix" = {
+    homeConfigurations.server-hm-only = config.flake.lib.mkSystems.linuxHMOnly "sdg-robot-bl-vla" {username = "tabuchkin";};
+    modules.homeManager."hosts/server-hm-only" = {
       imports = config.flake.lib.collectHomeModules config modules;
     };
   };
