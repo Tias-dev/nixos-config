@@ -18,7 +18,7 @@ in {
   flake = {
     homeConfigurations.raison = config.flake.lib.mkSystems.linuxHMOnly "archer";
     modules.homeManager."hosts/archer" = {
-      imports = (config.flake.lib.collectHomeModules config modules);
+      imports = config.flake.lib.collectHomeModules config modules;
     };
 
     systemConfigs.default = config.flake.lib.mkSystems.linuxSMOnly "archer";

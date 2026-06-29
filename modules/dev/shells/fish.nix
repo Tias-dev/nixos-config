@@ -7,7 +7,7 @@
         zoxide init fish | source
       '';
       plugins = [
-       {
+        {
           name = "tide";
           src = pkgs.fishPlugins.tide.src;
         }

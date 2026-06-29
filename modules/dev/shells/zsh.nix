@@ -11,10 +11,10 @@
           "aliases"
           "alias-finder"
           "colorize"
-	  "docker"
-	  "docker-compose"
-	  "kitty"
-	  "tmux"
+          "docker"
+          "docker-compose"
+          "kitty"
+          "tmux"
         ];
         theme = "robbyrussell";
         extraConfig = ''
