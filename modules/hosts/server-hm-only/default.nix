@@ -6,8 +6,8 @@
   ];
 in {
   flake = {
-    homeConfigurations.sdg-robot-bl-vla = config.flake.lib.mkSystems.linuxHMOnly "sdg-robot-bl-vla" {username = "tabuchkin";};
-    modules.homeManager."hosts/sdg-robot-bl-vla" = {
+    homeConfigurations.sdg-robot-bl-vla.vla.yp-c.yandex.net = config.flake.lib.mkSystems.linuxHMOnly "sdg-robot-bl-vla.vla.yp-c.yandex.net" {username = "tabuchkin";};
+    modules.homeManager."hosts/sdg-robot-bl-vla.vla.yp-c.yandex.net" = {
       imports = config.flake.lib.collectHomeModules config modules;
     };
   };
