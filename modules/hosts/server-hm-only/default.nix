@@ -1,7 +1,6 @@
 {config, ...}: let
   modules = [
     "develop"
-    "neovim-no-clangd-index"
     "zsh"
     "tmux"
   ];
