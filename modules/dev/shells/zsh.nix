@@ -7,8 +7,22 @@
       oh-my-zsh = {
         enable = true;
         plugins = [
+          "git"
+          "aliases"
+          "alias-finder"
+          "colorize"
+	  "docker"
+	  "docker-compose"
+	  "kitty"
+	  "tmux"
         ];
         theme = "robbyrussell";
+        extraConfig = ''
+          zstyle ':omz:plugins:alias-finder' autoload yes # disabled by default
+          zstyle ':omz:plugins:alias-finder' longer yes # disabled by default
+          zstyle ':omz:plugins:alias-finder' exact yes # disabled by default
+          zstyle ':omz:plugins:alias-finder' cheaper yes # disabled by default
+        '';
       };
       history.append = true;
       shellAliases = {
@@ -18,13 +32,6 @@
         vi = "nvim";
         v = "nvim";
 
-        gs = "git status";
-        ga = "git add";
-        gc = "git commit";
-        gp = "git push";
-        gd = "git diff";
-        gb = "git branch";
-
         ls = "lsd";
         ll = "lsd -l";
         la = "lsd -a";
@@ -33,26 +40,11 @@
         spf = "superfile";
 
         cat = "bat";
+        less = "cless";
 
         top = "btop";
         htop = "btop";
         cd = "z";
-
-        d = "docker";
-        db = "docker build";
-        de = "docker exec";
-        dr = "docker run";
-        dp = "docker pull";
-        dl = "docker logs";
-        di = "docker image";
-
-        dc = "docker compose";
-        dcb = "docker compose build";
-        dce = "docker compose exec";
-        dcr = "docker compose run";
-        dcl = "docker compose logs";
-        dcu = "docker compose up";
-        dcd = "docker compose down";
       };
     };
     home.shell.enableZshIntegration = true;
