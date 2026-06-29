@@ -766,11 +766,11 @@
         "tias-nixpkgs": "tias-nixpkgs"
       },
       "locked": {
-        "lastModified": 1782392234,
-        "narHash": "sha256-9wR12LdBBsAMYQhvlsgHBS8dp3bG5bxwIkirJhtkdo4=",
+        "lastModified": 1782754392,
+        "narHash": "sha256-BqYdn+0nAOIrEiLqCimuWhcIVcACe+G1WNtty6/mQLc=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "934f5d51e8185eb49ddc8d4cda92fc5f0fc00526",
+        "rev": "9f422e093af951c1a88acbae5ebff904ccb252fc",
         "type": "github"
       },
       "original": {
@@ -789,11 +789,11 @@
         "tias-nixpkgs": "tias-nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1782392307,
-        "narHash": "sha256-nf23E15TtiFJ4u6Z8Fs9exvS1kQ/pepUSK75rmadGsQ=",
+        "lastModified": 1782754438,
+        "narHash": "sha256-tYOZwZYCZ1oKtC/g7bzohyI/7x943w7G++7jRwu5fvQ=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "328a497d6af7654993f33e11de6a63b025b963e9",
+        "rev": "3e65e17d38019a54cd773611732657b3d8d996b1",
         "type": "github"
       },
       "original": {
