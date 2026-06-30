@@ -38,6 +38,7 @@
       modules = [
         config.flake.modules.homeManager.homeManager
         (config.flake.modules.homeManager."hosts/${hostname}" or {})
+	{programs.home-manager.enable = true;}
       ];
       extraSpecialArgs = specialArgs;
     };

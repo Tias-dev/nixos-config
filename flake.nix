@@ -35,9 +35,6 @@
     tias-nixvim = {
       url = "github:Tias-dev/nixvim-config/master";
     };
-    tias-nixvim-no-clangd-indexing = {
-      url = "github:Tias-dev/nixvim-config/clangd-indexing-disabled";
-    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };

@@ -6,6 +6,7 @@
 
     "develop"
     "zsh"
+    "neovim"
     "kitty"
     "tmux"
     "docker"

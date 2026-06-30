@@ -1,6 +1,7 @@
 {config, ...}: let
   modules = [
     "develop"
+    "neovim"
     "zsh"
     "tmux"
   ];
