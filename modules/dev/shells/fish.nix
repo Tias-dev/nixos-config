@@ -38,6 +38,7 @@
         spf = "superfile";
 
         cat = "bat";
+        less = "bat";
 
         top = "btop";
         htop = "btop";

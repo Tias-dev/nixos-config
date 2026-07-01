@@ -10,7 +10,6 @@
           "git"
           "aliases"
           "alias-finder"
-          "colorize"
           "docker"
           "docker-compose"
           "kitty"
@@ -40,7 +39,7 @@
         spf = "superfile";
 
         cat = "bat";
-        less = "cless";
+        less = "bat";
 
         top = "btop";
         htop = "btop";
