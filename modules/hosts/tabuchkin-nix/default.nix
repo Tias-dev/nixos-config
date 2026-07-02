@@ -12,6 +12,8 @@
     "docker"
 
     "browser"
+
+    "geojson"
   ];
 in {
   flake = {
