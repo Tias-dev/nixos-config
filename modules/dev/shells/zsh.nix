@@ -13,7 +13,6 @@
           "docker"
           "docker-compose"
           "kitty"
-          "tmux"
         ];
         theme = "robbyrussell";
         extraConfig = ''
