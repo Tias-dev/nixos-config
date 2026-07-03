@@ -22,7 +22,6 @@
         tab_bar_edge = "bottom";
 
         tab_bar_style = "powerline";
-        background_opacity = 1.0;
         hide_window_decorations = true;
 
         font_family = "family='JetBrainsMono Nerd Font' postscript_name=JetBrainsMonoNF-Regular";
