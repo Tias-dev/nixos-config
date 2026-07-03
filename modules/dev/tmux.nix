@@ -6,7 +6,7 @@
       else
           zoxide_most_often=$(${pkgs.zoxide}/bin/zoxide query -ls | head -n 20 | awk '{print $2}')
           entries=$(find ~/git ~/Projects ~/ ~/work -mindepth 1 -maxdepth 1 -type d)
-          selected=$(echo "$zoxide_most_often\n$entries\n$HOME" | fzf)
+          selected=$(echo -e "$HOME\n$zoxide_most_often\n$entries" | fzf)
       fi
 
       if [[ -z $selected ]]; then
