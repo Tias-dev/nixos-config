@@ -30,7 +30,7 @@
           };
           "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
             installation_mode = "force_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium/latest.xpi";
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4717567/vimium_ff-2.4.2.xpi";
           };
         };
       };
