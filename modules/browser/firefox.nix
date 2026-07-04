@@ -1,9 +1,5 @@
 {
   flake.modules.homeManager.browser = {
-    config,
-    username,
-    ...
-  }: {
     programs.firefox = {
       enable = true;
       languagePacks = ["ru" "en-US"];

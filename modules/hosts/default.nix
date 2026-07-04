@@ -8,12 +8,13 @@
   mkNixos = system: cls: hostname: username:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit username;};
       modules = [
+        {config._module.args = {inherit username;};}
         config.flake.modules.nixos.${cls}
         config.flake.modules.nixos."hosts/${hostname}"
         {
           home-manager.users.${username}.imports = [
+            {config._module.args = {inherit username;};}
             config.flake.modules.homeManager.homeManager
             (config.flake.modules.homeManager."hosts/${hostname}" or {})
           ];
@@ -38,9 +39,9 @@
       modules = [
         config.flake.modules.homeManager.homeManager
         (config.flake.modules.homeManager."hosts/${hostname}" or {})
-	{programs.home-manager.enable = true;}
+        {programs.home-manager.enable = true;}
+	{config._module.args = specialArgs;}
       ];
-      extraSpecialArgs = specialArgs;
     };
 
   # Manage system for not NixOS distro

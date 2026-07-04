@@ -52,12 +52,6 @@
           "nofail"
         ];
       };
-
-      # shared folder
-      "/export/raison" = {
-        device = "/mnt/raison";
-        options = ["bind"];
-      };
     };
     # swap
     swapDevices = [
