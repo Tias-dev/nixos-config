@@ -48,8 +48,8 @@
   mkSystemManager = system: hostname:
     inputs.system-manager.lib.makeSystemConfig {
       modules = [
-        {config = config.flake.modules.systemManager.systemManager.config;}
-        {config = config.flake.modules.systemManager."hosts/${hostname}".config;}
+        {config = config.flake.modules.systemManager.systemManager.config or {};}
+        {config = config.flake.modules.systemManager."hosts/${hostname}".config or {};}
       ];
     };
 
