@@ -41,5 +41,9 @@
     };
     import-tree.url = "github:vic/import-tree";
     systems.url = "github:nix-systems/default-linux";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

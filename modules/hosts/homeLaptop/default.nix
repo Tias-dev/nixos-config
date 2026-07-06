@@ -25,5 +25,8 @@ in {
       imports =
         config.flake.lib.collectModules config modules "raison";
     };
+    ssh-keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJC7ayh2luEr8pPQ/TZGAu52lPQimTyTJLnn2X08W0m raison@laptop-raison"
+    ];
   };
 }
