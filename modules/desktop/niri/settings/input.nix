@@ -3,7 +3,7 @@
     keyboard = {
       xkb = {
         layout = "us,ru";
-        options = "caps:super";
+        options = "caps:swapescape";
       };
       numlock = true;
     };
