@@ -4,6 +4,7 @@
     neovim = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
       clangd.disable-indexing = true;
       langChanger.enable = false;
+      format.on_save.enable = false;
     };
   in {
     config = {inherit neovim;};
