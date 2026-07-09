@@ -40,7 +40,7 @@
         config.flake.modules.homeManager.homeManager
         (config.flake.modules.homeManager."hosts/${hostname}" or {})
         {programs.home-manager.enable = true;}
-	{config._module.args = specialArgs;}
+        {config._module.args = specialArgs;}
       ];
     };
 

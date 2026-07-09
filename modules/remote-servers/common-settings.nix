@@ -22,6 +22,6 @@
     ];
 
     users.users.root.openssh.authorizedKeys.keys =
-        config.flake.ssh-keys;
+      config.flake.ssh-keys;
   };
 }

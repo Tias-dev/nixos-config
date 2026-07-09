@@ -1,5 +1,9 @@
 {
-  flake.modules.nixos.ownProxy = {config, username, ...}: {
+  flake.modules.nixos.ownProxy = {
+    config,
+    username,
+    ...
+  }: {
     services.xray = {
       enable = true;
       settingsFile = config.sops.secrets.xrayConfig.path;

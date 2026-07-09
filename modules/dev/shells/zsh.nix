@@ -48,7 +48,11 @@
     home.shell.enableZshIntegration = true;
   };
 
-  flake.modules.nixos.zsh = {pkgs, username, ...}: {
+  flake.modules.nixos.zsh = {
+    pkgs,
+    username,
+    ...
+  }: {
     environment.pathsToLink = ["/share/zsh"];
     users.users.${username}.shell = pkgs.zsh;
     programs.zsh.enable = true;
