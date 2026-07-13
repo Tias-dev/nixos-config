@@ -4,6 +4,7 @@
     "neovim"
     "zsh"
     "tmux"
+    "arc"
   ];
 in {
   flake = {

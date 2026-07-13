@@ -10,6 +10,7 @@
     "kitty"
     "tmux"
     "docker"
+    "arc"
 
     "browser"
 
