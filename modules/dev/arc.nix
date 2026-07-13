@@ -10,6 +10,8 @@ let
       aapush = "arc push";
       arb = "arc rebase";
       arbc = "arc rebase --continue";
+      ad = "arc diff";
+      ads = "arc diff --staged";
     };
 in {
   config.flake.modules.homeManager.arc = {
