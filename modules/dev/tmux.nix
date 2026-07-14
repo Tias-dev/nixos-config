@@ -92,9 +92,9 @@
           vim-tmux-navigator
           {
             plugin = extrakto;
-            extraConfig = (lib.optionalString (!config.tmux.server-copy-command.enable) ''
+            extraConfig = lib.optionalString (!config.tmux.server-copy-command.enable) ''
               set -g @extrakto_clip_tool 'wl-copy'
-            '');
+            '';
           }
           {
             plugin = pkgs.tmuxPlugins.resurrect;

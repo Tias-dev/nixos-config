@@ -1,18 +1,18 @@
 let
   arcAliases = {
-      ast = "arc status";
-      aa = "arc add";
-      ab = "arc branch";
-      ac = "arc commit";
-      acam = "arc commit --all --message";
-      ack = "arc checkout";
-      aapull = "arc pull";
-      aapush = "arc push";
-      arb = "arc rebase";
-      arbc = "arc rebase --continue";
-      ad = "arc diff";
-      ads = "arc diff --staged";
-    };
+    ast = "arc status";
+    aa = "arc add";
+    ab = "arc branch";
+    ac = "arc commit";
+    acam = "arc commit --all --message";
+    ack = "arc checkout";
+    aapull = "arc pull";
+    aapush = "arc push";
+    arb = "arc rebase";
+    arbc = "arc rebase --continue";
+    ad = "arc diff";
+    ads = "arc diff --staged";
+  };
 in {
   config.flake.modules.homeManager.arc = {
     config,
