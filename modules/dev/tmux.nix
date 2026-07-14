@@ -98,8 +98,8 @@
             plugin = extrakto;
             extraConfig = (
               if config.tmux.server-copy-command.enable
-              then "set -g @extrakto_clip_tool 'wl-copy'"
-              else "set -g @extrakto_clip_tool_run 'tmux_osc52'"
+              then "set -g @extrakto_clip_tool_run 'tmux_osc52'"
+              else "set -g @extrakto_clip_tool 'wl-copy'"
             );
           }
           {
