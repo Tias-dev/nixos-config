@@ -75,7 +75,11 @@
 
             bind-key -r f run-shell "tmux neww ${tmux-sessionizer}"
           ''
-          + (lib.optionalString (!config.tmux.server-copy-command.enable) "set -s copy-command 'wl-copy'");
+          + (
+            if config.tmux.server-copy-command.enable
+            then "set -s set-clipboard on"
+            else "set -s copy-command 'wl-copy'"
+          );
         plugins = with pkgs.tmuxPlugins; [
           tokyo-night-tmux
           {
@@ -92,9 +96,11 @@
           vim-tmux-navigator
           {
             plugin = extrakto;
-            extraConfig = lib.optionalString (!config.tmux.server-copy-command.enable) ''
-              set -g @extrakto_clip_tool 'wl-copy'
-            '';
+            extraConfig = (
+              if config.tmux.server-copy-command.enable
+              then "set -g @extrakto_clip_tool 'wl-copy'"
+              else "set -g @extrakto_clip_tool_run 'tmux_osc52'"
+            );
           }
           {
             plugin = pkgs.tmuxPlugins.resurrect;
