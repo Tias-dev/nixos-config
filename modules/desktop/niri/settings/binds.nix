@@ -3,13 +3,13 @@
   inputs,
   ...
 }: {
-  flake.modules.generic.niri = let
+  config.flake.modules.homeManager.niri = let
     inherit (config.flake.meta) terminal;
   in
     {pkgs, ...}: let
       dms-bin = "${inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.dms-shell}/bin/dms";
     in {
-      settings = {
+      niri-settings = {
         binds = {
           "Mod+T" = {
             hotkey-overlay.title = "Open a Terminal: ${terminal.name}";

@@ -1,7 +1,7 @@
 {config, ...}: let
   inherit (config.flake.meta) terminal;
 in {
-  flake.modules.generic.niri.settings = {
+  config.flake.modules.homeManager.niri.niri-settings = {
     spawn-at-startup = [
       {argv = ["firefox"];}
       {

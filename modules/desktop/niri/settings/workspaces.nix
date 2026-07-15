@@ -1,5 +1,5 @@
 {
-  flake.modules.generic.niri.settings.workspaces = {
+  config.flake.modules.homeManager.niri.niri-settings.workspaces = {
     "01-browser" = {
       open-on-output = "HDMI-A-2";
       name = "browser";
