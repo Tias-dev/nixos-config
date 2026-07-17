@@ -8,6 +8,7 @@
     "zsh"
     "neovim"
     "kitty"
+    "alacritty"
     "tmux"
     "docker"
     "arc"

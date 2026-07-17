@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.kitty = {
+  config.flake.modules.homeManager.kitty = {
     xdg.configFile."kitty/launch.conf".text = "launch sh -c 'tmux attach || tmux new -s default'";
 
     programs.kitty = {
