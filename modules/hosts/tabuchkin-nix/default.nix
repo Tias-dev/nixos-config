@@ -16,6 +16,7 @@
     "browser"
 
     "geojson"
+    "telegram"
   ];
 in {
   flake = {
