@@ -1,5 +1,5 @@
 {
-  flake.modules.generic.niri.settings.window-rules = [
+  config.flake.modules.homeManager.niri.niri-settings.window-rules = [
     {
       geometry-corner-radius = {
         bottom-left = 12.0;
@@ -10,6 +10,7 @@
       clip-to-geometry = true;
       open-maximized = true;
       open-focused = true;
+      tiled-state = true;
     }
     {
       matches = [
