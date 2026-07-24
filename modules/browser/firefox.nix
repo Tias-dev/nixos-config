@@ -1,12 +1,13 @@
 {
-  options = {lib, ...}: let
-    bookmark-type =
-      lib.types.submodule {
-        options
-      };
-  in {
-    extra-bookmarks = lib.mkOption bookmark-type;
-  };
+  # options = {lib, ...}: 
+  #   let
+  #   bookmark-type =
+  #     lib.types.submodule {
+  #       options
+  #     };
+  # in {
+  #   extra-bookmarks = lib.mkOption bookmark-type;
+  # };
 
   config = {
     flake.modules.homeManager.browser = {
