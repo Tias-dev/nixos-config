@@ -26,5 +26,8 @@ in {
     };
 
     systemConfigs.default = config.flake.lib.mkSystems.linuxSMOnly "tabuchkin-nix";
+    ssh-keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJU27SYcgWNwp0HaUIQzYCWOZx/tD9pp5vGizldB6LoE tabuchkin@tabuchkin-nix"
+    ];
   };
 }
