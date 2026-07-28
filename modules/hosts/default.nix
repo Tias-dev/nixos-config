@@ -40,7 +40,7 @@
         config.flake.modules.homeManager.homeManager
         (config.flake.modules.homeManager."hosts/${hostname}" or {})
         {programs.home-manager.enable = true;}
-        {config._module.args = specialArgs;}
+        {config._module.args = specialArgs // {inherit system;};}
       ];
     };
 
@@ -48,8 +48,9 @@
   mkSystemManager = system: hostname:
     inputs.system-manager.lib.makeSystemConfig {
       modules = [
-        {config = config.flake.modules.systemManager.systemManager.config or {};}
-        {config = config.flake.modules.systemManager."hosts/${hostname}".config or {};}
+        (config.flake.modules.systemManager.systemManager or {})
+        (config.flake.modules.systemManager."hosts/${hostname}" or {})
+        {config._module.args = {inherit system;};}
       ];
     };
 
@@ -68,6 +69,7 @@ in {
 
     collectNixosModules = collectTypedModules "nixos";
     collectHomeModules = collectTypedModules "homeManager";
+    collectSMModules = collectTypedModules "systemManager";
 
     collectModules = config: modules: username:
       assert builtins.isAttrs config;
