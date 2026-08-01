@@ -31,4 +31,7 @@
       enable = true;
     };
   };
+  config.flake.modules.systemManager.niri = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [niri];
+  };
 }
