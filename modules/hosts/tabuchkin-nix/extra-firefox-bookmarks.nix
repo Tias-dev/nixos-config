@@ -57,6 +57,16 @@
           }
         ];
       }
+      "separator"
+      {
+        name = "Team resources";
+        bookmarks = [
+          {
+            name = "All map locations";
+            url = "https://yc.yandex-team.ru/folders/foop8ggv57c8ou95rqep/storage/buckets/sdc-lanes-map?key=commit-tar%2Fmaps%2F&versionsDisplay=false";
+          }
+        ];
+      }
     ];
   };
 }

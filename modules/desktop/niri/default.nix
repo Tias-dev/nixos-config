@@ -2,6 +2,7 @@
   config.flake.modules.homeManager.niri = {
     config,
     lib,
+    pkgs,
     ...
   }: {
     options = {
@@ -14,6 +15,7 @@
     config = {
       programs.niri = {
         enable = true;
+        package = pkgs.niri;
         settings = config.niri-settings;
       };
     };
@@ -31,6 +33,7 @@
       enable = true;
     };
   };
+
   config.flake.modules.systemManager.niri = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [niri];
   };

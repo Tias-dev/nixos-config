@@ -17,6 +17,7 @@
 
     "geojson"
     "telegram"
+    "recording"
   ];
 in {
   flake = {
