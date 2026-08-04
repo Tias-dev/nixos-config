@@ -5,7 +5,11 @@
       type = lib.types.lazyAttrsOf lib.types.raw;
     };
   };
-  config.flake.modules.systemManager.systemManager = {lib, system, ...}: {
+  config.flake.modules.systemManager.systemManager = {
+    lib,
+    system,
+    ...
+  }: {
     config = {
       nixpkgs.hostPlatform = system;
     };

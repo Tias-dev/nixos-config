@@ -8,7 +8,11 @@
     home.packages = with pkgs; [xwayland-satellite];
   };
 
-  flake.modules.systemManager.desktop = {pkgs, system, ...}: {
+  flake.modules.systemManager.desktop = {
+    pkgs,
+    system,
+    ...
+  }: {
     environment.systemPackages = with pkgs; [xwayland-satellite];
   };
 }

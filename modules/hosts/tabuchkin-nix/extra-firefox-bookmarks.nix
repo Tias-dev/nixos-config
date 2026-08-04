@@ -24,12 +24,12 @@
       {
         name = "Wiki";
         url = "https://wiki.yandex-team.ru/";
-        tags = [ "docs" ];
+        tags = ["docs"];
       }
       {
         name = "Docs";
         url = "https://docs.yandex-team.ru/";
-        tags = [ "docs" ];
+        tags = ["docs"];
       }
       "separator"
       {

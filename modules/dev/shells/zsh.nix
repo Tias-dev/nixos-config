@@ -1,6 +1,17 @@
 {
   flake.modules.homeManager.zsh = {
-    programs.zsh = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    programs.zsh = let
+      zsh-fzf-search = pkgs.fetchFromGitHub {
+        owner = "joshskidmore";
+        repo = "zsh-fzf-history-search";
+        rev = "35df458f7d9478fa88c74af762dcd296cdfd485d";
+        hash = "sha256-6UWmfFQ9JVyg653bPQCB5M4jJAJO+V85rU7zP4cs1VI";
+      };
+    in {
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
@@ -44,6 +55,12 @@
         htop = "btop";
         cd = "z";
       };
+
+      # extra plugins source
+      # aka add to the end of .zshrc
+      initContent = lib.mkAfter ''
+        source ${zsh-fzf-search}/zsh-fzf-history-search.plugin.zsh
+      '';
     };
     home.shell.enableZshIntegration = true;
   };
