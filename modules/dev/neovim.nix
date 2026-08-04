@@ -1,11 +1,15 @@
 {inputs, ...}: {
   flake.modules.homeManager.neovim = {
-    pkgs,
     lib,
     config,
+    system,
     ...
   }: let
-    neovim = inputs.tias-nixvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    neovim = inputs.tias-nixvim.lib.neovimWithOverrides system [
+      {
+        all-langs.enable = true;
+      }
+    ];
   in {
     options.neovim = lib.mkOption {
       type = lib.types.package;

@@ -3,6 +3,7 @@
     system = pkgs.stdenv.hostPlatform.system;
     neovim = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
       clangd.disable-indexing = true;
+      yaml.enable = true;
     };
   in {
     inherit neovim;

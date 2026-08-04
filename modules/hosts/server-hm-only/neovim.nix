@@ -6,11 +6,8 @@
         clangd.disable-indexing = true;
         langChanger.enable = false;
         format.on_save.enable = false;
-      }
-      {
-        plugins.lsp.servers.clangd.settings = {
-          root_markers = ["compile-commands.json"];
-        };
+
+        yaml.enable = true;
       }
     ];
   in {
