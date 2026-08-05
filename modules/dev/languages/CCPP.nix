@@ -7,5 +7,10 @@
       gnumake
       bear
     ];
+    home.file.".gdbinit".text = ''
+      set print pretty on
+      set print demangle on
+      tui enable
+    '';
   };
 }
