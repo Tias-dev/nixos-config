@@ -9,12 +9,12 @@
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-        {config._module.args = {inherit username;};}
+        {config._module.args = {inherit username system;};}
         config.flake.modules.nixos.${cls}
         config.flake.modules.nixos."hosts/${hostname}"
         {
           home-manager.users.${username}.imports = [
-            {config._module.args = {inherit username;};}
+            {config._module.args = {inherit username system;};}
             config.flake.modules.homeManager.homeManager
             (config.flake.modules.homeManager."hosts/${hostname}" or {})
           ];

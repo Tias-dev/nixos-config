@@ -4,10 +4,10 @@
 # that handles PAM itself and in home-manager module only toggle per user config options
 {
   config.flake.modules.homeManager.swaylock = {
-      desktop.custom-lock-cmd = "swaylock"; # change lock cmd for niri keybinds
-      programs.swaylock = {
-        enable = true;
-        package = null; # no package from nix as it is provided by built in package manager
-      };
+    desktop.custom-lock-cmd = "swaylock"; # change lock cmd for niri keybinds
+    programs.swaylock = {
+      enable = true;
+      package = null; # no package from nix as it is provided by built in package manager
+    };
   };
 }

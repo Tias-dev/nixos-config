@@ -6,7 +6,11 @@
   config.flake.modules.homeManager.niri = let
     inherit (config.flake.meta) terminal;
   in
-    {pkgs, config, ...}: let
+    {
+      pkgs,
+      config,
+      ...
+    }: let
       dms-bin = "${inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.dms-shell}/bin/dms";
       lock-cmd = config.desktop.custom-lock-cmd;
     in {
@@ -27,9 +31,18 @@
           };
           "Super+Shift+L" = {
             hotkey-overlay = {
-              title = "Lock the Screen: " + ( if lock-cmd == null then "dms lock" else "custom lock" );
+              title =
+                "Lock the Screen: "
+                + (
+                  if lock-cmd == null
+                  then "dms lock"
+                  else "custom lock"
+                );
             };
-            action.spawn-sh = if lock-cmd == null then "${dms-bin} ipc call lock lock" else lock-cmd;
+            action.spawn-sh =
+              if lock-cmd == null
+              then "${dms-bin} ipc call lock lock"
+              else lock-cmd;
           };
           "Mod+Shift+P" = {
             hotkey-overlay = {
@@ -203,7 +216,7 @@
           "Mod+Shift+F".action.fullscreen-window = [];
 
           "Mod+Ctrl+Shift+F".action.toggle-windowed-fullscreen = [];
-          "Mod+Alt+F"= {
+          "Mod+Alt+F" = {
             action.spawn-sh = "niri msg action maximize-window-to-edges";
             hotkey-overlay.title = "Maximize window to edges";
           };
