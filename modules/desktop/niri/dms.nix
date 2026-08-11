@@ -5,9 +5,8 @@
       enableSystemMonitoring = true;
       enableDynamicTheming = true;
       dgop.package = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      niri = {
-        enableSpawn = true;
-      };
+      # systemd.enable = true;
+      niri.enableSpawn = true;
       settings = {
         barConfigs = [
           {

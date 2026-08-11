@@ -5,7 +5,6 @@
     ...
   }: {
     config = {
-      environment.systemPackages = [inputs.nixgl.packages.${system}.nixGLDefault];
     };
   };
 }
