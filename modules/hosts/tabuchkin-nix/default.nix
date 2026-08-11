@@ -2,6 +2,7 @@
   modules = [
     "desktop"
     "niri"
+    "swaylock"
     "bluetooth"
 
     "develop"
@@ -24,11 +25,6 @@ in {
     homeConfigurations.tabuchkin-nix = config.flake.lib.mkSystems.linuxHMOnly "tabuchkin-nix" {username = "tabuchkin";};
     modules.homeManager."hosts/tabuchkin-nix" = {
       imports = config.flake.lib.collectHomeModules config modules;
-      desktop.custom-lock-cmd = "swaylock";
-      programs.swaylock = {
-        enable = true;
-        package = null;
-      };
     };
     debug = true;
 
