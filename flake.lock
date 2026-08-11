@@ -986,11 +986,11 @@
         "tias-nixpkgs": "tias-nixpkgs"
       },
       "locked": {
-        "lastModified": 1785854723,
-        "narHash": "sha256-UxNUC5h7rEOvldo84+aH0NFiPLAoBz0yV+W4fMWqwUs=",
+        "lastModified": 1786444821,
+        "narHash": "sha256-RUYfDMXxSyWhw8uwDCMORYQnsz0XFkxShZb1q9lMXO4=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "b840268a2eab789a745487d9a23166a8ced96ee0",
+        "rev": "4c5eb9baa593b4a68130a3e3e1b158dd8cf721d7",
         "type": "github"
       },
       "original": {
