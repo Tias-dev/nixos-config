@@ -11,6 +11,7 @@
       set print pretty on
       set print demangle on
       tui enable
+      set history save on
     '';
   };
 }

@@ -12,6 +12,9 @@ in {
     modules.homeManager."hosts/sdg-robot-bl-vla.vla.yp-c.yandex.net" = {
       imports = config.flake.lib.collectHomeModules config modules;
       tmux.server-copy-command.enable = true;
+      home.file.".gdbinit".text = ''
+        set substitute-path /-S /home/tabuchkin/arcadia
+      '';
     };
   };
 }
