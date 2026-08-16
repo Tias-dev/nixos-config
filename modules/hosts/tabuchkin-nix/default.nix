@@ -6,6 +6,8 @@
     "bluetooth"
 
     "develop"
+    "arc"
+    "ai"
     "zsh"
     "neovim"
     "kitty"
@@ -26,7 +28,6 @@ in {
     modules.homeManager."hosts/tabuchkin-nix" = {
       imports = config.flake.lib.collectHomeModules config modules;
     };
-    debug = true;
 
     systemConfigs."tabuchkin-nix" = config.flake.lib.mkSystems.linuxSMOnly "tabuchkin-nix";
     modules.systemManager."hosts/tabuchkin-nix" = {
