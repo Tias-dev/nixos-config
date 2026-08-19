@@ -80,7 +80,51 @@
             print(json.dumps(geojson, indent=2))
       ''
     );
+    lonLatToGeojson = (
+      pkgs.writers.writePython3Bin
+      "lonLatToGeojson"
+      {flakeIgnore = ["E111"];} ''
+        import argparse
+        import json
+        import re
+        import sys
+
+        parser = argparse.ArgumentParser(
+            description="Convert any lanes with 2 numbers(lon, lat) to geojson points"
+        )
+        parser.add_argument(
+            "-r", "--reverse", action="store_true", help="Reverse lon, lat -> lat, lon"
+        )
+
+        args = parser.parse_args()
+
+        lon, lat = 0, 1
+        if args.reverse:
+            lon, lat = lat, lon
+
+        points = []
+        for line in sys.stdin:
+            coords = list(map(float, re.findall(r"\d+\.\d+|\d+", line)))
+            if len(coords) == 2:
+                points.append(coords)
+            else:
+                print(f"Skip line [{line[:-1]}]. Not found 2 coords", file=sys.stderr)
+        geojson = {
+            "type": "FeatureCollection",
+            "features": list(
+                map(
+                    lambda x: {
+                        "type": "Feature",
+                        "geometry": {"type": "Point", "coordinates": [x[lon], x[lat]]},
+                    },
+                    points,
+                )
+            ),
+        }
+        print(json.dumps(geojson, indent=2))
+      ''
+    );
   in {
-    home.packages = [brunoToGeojson];
+    home.packages = [brunoToGeojson lonLatToGeojson];
   };
 }

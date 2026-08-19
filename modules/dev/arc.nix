@@ -70,6 +70,7 @@ in
         arc mount --allow-other -m "$wtPath"/"$1"
         cd "$wtPath"/"$1"
         arc branch $1
+        arc checkout $1
       '';
       arc-wt-remove-branch-impl = writePython3Bin "arc-wt-remove-branch-impl" pyOpts ''
         import json
