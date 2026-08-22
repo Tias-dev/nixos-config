@@ -35,7 +35,7 @@ in
         fi
         wtFolders=$(cat "$configFile" | ${pkgs.jq}/bin/jq -r '.[] | .branch + "/" + .baseDir')
       '';
-      arc-branches = writeBashBin "arc-branches" ''
+      arc-branches = writeBash "arc-branches" ''
         source "${arc-wt-common}"
         for folder in $(echo "$wtFolders"); do
           echo "$wtPath/$folder"
