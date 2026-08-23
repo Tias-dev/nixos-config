@@ -19,6 +19,7 @@
     "browser"
 
     "geojson"
+    "coords"
     "telegram"
     "recording"
   ];
