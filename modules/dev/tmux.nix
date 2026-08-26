@@ -85,6 +85,7 @@ in {
               set-option -g focus-events on
 
               bind-key -r f run-shell "tmux neww ${tmux-sessionizer}"
+              bind-key l send-keys "clear" \; send-keys "Enter"
             ''
             + (
               if config.tmux.server-copy-command.enable
