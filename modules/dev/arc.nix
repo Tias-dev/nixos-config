@@ -14,6 +14,10 @@ let
     ads = "arc diff --staged";
     awtab = "arc-wt-add-branch";
     awtrb = "arc-wt-remove-branch";
+
+    aml = "arc mount -l";
+    amm = "arc mount -m";
+    aum = "arc umount";
   };
 in
   {config, ...}: let
