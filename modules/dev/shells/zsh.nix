@@ -33,7 +33,10 @@
           zstyle ':omz:plugins:alias-finder' cheaper yes # disabled by default
         '';
       };
-      history.append = true;
+      history = {
+          append = true;
+          saveNoDups = true;
+      };
       shellAliases = {
         nxs = "sudo nixos-rebuild switch --flake ~/nix/#$(hostname)";
         hms = "home-manager switch --flake ~/nix/#$(hostname)";

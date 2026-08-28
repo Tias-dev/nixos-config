@@ -9,6 +9,7 @@
         format.on_save.enable = false;
 
         yaml.enable = true;
+        cpp.indent-namespace = true;
       }
     ];
   in {
