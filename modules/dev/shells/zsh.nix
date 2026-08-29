@@ -63,6 +63,7 @@
       # aka add to the end of .zshrc
       initContent = lib.mkAfter ''
         source ${zsh-fzf-search}/zsh-fzf-history-search.plugin.zsh
+        autoload -U select-word-style && select-word-style bash
       '';
     };
     home.shell.enableZshIntegration = true;
