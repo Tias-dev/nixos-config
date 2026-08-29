@@ -12,4 +12,11 @@
     };
     systemd.services.NetworkManager-wait-online.enable = false; # improve boot time by disabling waiting for network
   };
+  flake.modules.nixos.remote-servers = {
+    networking = {
+      nameservers = [
+        "8.8.8.8"
+      ];
+    };
+  };
 }

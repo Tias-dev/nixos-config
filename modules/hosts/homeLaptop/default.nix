@@ -10,6 +10,7 @@
     "neovim"
     "zsh"
     "kitty"
+    "alacritty"
     "tmux"
     "docker"
 

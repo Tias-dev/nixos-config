@@ -16,11 +16,12 @@
     };
     services.openssh.enable = true;
 
-    environment.systemPackages = map lib.lowPrio [
-      pkgs.curl
-      pkgs.gitMinimal
-      pkgs.vim
-    ];
+    environment.systemPackages = map lib.lowPrio (with pkgs; [ 
+      curl
+      gitMinimal
+      vim
+      tmux
+    ]);
 
     users.users.root = {
       openssh.authorizedKeys.keys =
