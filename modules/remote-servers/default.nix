@@ -12,7 +12,12 @@
         inherit system;
         modules = [
           inputs.disko.nixosModules.disko
-          {config._module.args = {inherit hostname system;};}
+          {
+            config._module.args = {
+              inherit hostname system;
+              username = "default";
+            };
+          }
           config.flake.modules.nixos.remote-servers
           (config.flake.modules.nixos."hosts/${hostname}" or {})
           {

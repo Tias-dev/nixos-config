@@ -6,7 +6,7 @@
     };
   };
 
-  config.flake.modules.nixos.nixos = {
+  config.flake.modules.nixos.homeManager = {config, ...}: {
     home-manager.backupFileExtension = ".bak";
   };
 

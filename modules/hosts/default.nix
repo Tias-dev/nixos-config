@@ -11,6 +11,7 @@
       modules = [
         {config._module.args = {inherit username system;};}
         config.flake.modules.nixos.${cls}
+        config.flake.modules.nixos.homeManager
         config.flake.modules.nixos."hosts/${hostname}"
         {
           home-manager.users.${username}.imports = [

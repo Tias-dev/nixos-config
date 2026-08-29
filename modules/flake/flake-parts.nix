@@ -3,6 +3,7 @@
   inputs,
   ...
 }: {
+  config = {debug = true;};
   imports = [
     inputs.flake-parts.flakeModules.modules
   ];
