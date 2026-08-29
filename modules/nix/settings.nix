@@ -1,5 +1,4 @@
-{
-  flake.modules.nixos.nixos = {
+let module = {
     nix.settings = {
       experimental-features = [
         "nix-command"
@@ -8,4 +7,7 @@
       auto-optimise-store = true;
     };
   };
+in {
+  flake.modules.nixos.nixos = module;
+  flake.modules.nixos.remote-servers = module;
 }

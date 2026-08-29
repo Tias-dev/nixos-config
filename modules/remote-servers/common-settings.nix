@@ -19,6 +19,7 @@
     environment.systemPackages = map lib.lowPrio [
       pkgs.curl
       pkgs.gitMinimal
+      pkgs.vim
     ];
 
     users.users.root = {
