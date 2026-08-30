@@ -1,7 +1,8 @@
 {config, ...}: let
   modules = [
     "efiBoot"
-    "ownProxy"
+    "sops"
+    "xray-client"
     "desktop"
     "niri"
     "bluetooth"
