@@ -3,7 +3,11 @@
 in {
   flake = {
     lib = {
-      mkTmuxSessionizerPkg = foldersToSearchScript: {writers}:
+      mkDefaultTmuxSessionizerSessionNameSelector = pkgs: pkgs.writers.writeBash "defaultSessionNameSelector" /*bash*/ '' 
+        selectedEntry="$1"
+        basename "$selectedEntry"
+      '';
+      mkTmuxSessionizerPkg = foldersToSearchScript: sessionNameSelector: {writers}:
         writers.writeBash ''tmux-sessionizer'' ''
           if [[ $# -eq 1 ]]; then
               selected=$1
@@ -16,7 +20,7 @@ in {
               exit 0
           fi
 
-          selected_name=$(basename "$selected" | tr . _)
+          selected_name=$(${sessionNameSelector} "$selected" | tr . _)
           tmux_running=$(pgrep tmux)
 
           if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
