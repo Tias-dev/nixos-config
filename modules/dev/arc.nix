@@ -45,9 +45,14 @@ in
           echo "$wtPath/$folder"
         done
       '';
-      arc-session-name-selector = writeBash "arc-session-name-selector" /*bash*/ ''
-        echo "$1"
-      '';
+      arc-session-name-selector =
+        writeBash "arc-session-name-selector"
+        /*
+        bash
+        */
+        ''
+          echo "$1"
+        '';
       arc-wt-sessionizer = pkgs.callPackage (mkTmuxSessionizerPkg arc-branches arc-session-name-selector) {};
       pyOpts = {flakeIgnore = ["E111"];};
       arc-wt-add-branch-impl = writePython3Bin "arc-wt-add-branch-impl" pyOpts ''

@@ -1,4 +1,5 @@
-let module = {
+let
+  module = {
     nix.settings = {
       experimental-features = [
         "nix-command"
