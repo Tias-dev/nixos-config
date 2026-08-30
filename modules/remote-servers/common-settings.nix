@@ -16,7 +16,7 @@
     };
     services.openssh.enable = true;
 
-    environment.systemPackages = map lib.lowPrio (with pkgs; [ 
+    environment.systemPackages = map lib.lowPrio (with pkgs; [
       curl
       gitMinimal
       vim

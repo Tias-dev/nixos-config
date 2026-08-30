@@ -22,6 +22,8 @@
     "coords"
     "telegram"
     "recording"
+
+    "rutranslit"
   ];
 in {
   flake = {

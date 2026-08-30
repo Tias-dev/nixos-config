@@ -34,8 +34,8 @@
         '';
       };
       history = {
-          append = true;
-          saveNoDups = true;
+        append = true;
+        saveNoDups = true;
       };
       shellAliases = {
         nxs = "sudo nixos-rebuild switch --flake ~/nix/#$(hostname)";

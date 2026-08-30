@@ -1,15 +1,21 @@
 {
-  config.flake.modules.nixos.remote-servers = {lib, config, ...}: {
+  config.flake.modules.nixos.remote-servers = {
+    lib,
+    config,
+    ...
+  }: {
     options.swap-size = lib.mkOption {
       type = lib.types.int;
       default = 4 * 1024; # 4 GB
       description = "swap size in MB(by default 4096)";
     };
     config = {
-      swapDevices = [{
-        device = "/swap.img";
-        size = config.swap-size;
-      }];
+      swapDevices = [
+        {
+          device = "/swap.img";
+          size = config.swap-size;
+        }
+      ];
       disko.devices = {
         disk.disk1 = {
           device = lib.mkDefault "/dev/vda";

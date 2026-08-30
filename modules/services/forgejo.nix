@@ -1,5 +1,8 @@
 {
-  config.flake.lib.mkForgejoModule = {domain, enableRegistration ? true }: {
+  config.flake.lib.mkForgejoModule = {
+    domain,
+    enableRegistration ? true,
+  }: {
     lib,
     pkgs,
     config,

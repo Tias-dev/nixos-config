@@ -3,10 +3,15 @@
 in {
   flake = {
     lib = {
-      mkDefaultTmuxSessionizerSessionNameSelector = pkgs: pkgs.writers.writeBash "defaultSessionNameSelector" /*bash*/ '' 
-        selectedEntry="$1"
-        basename "$selectedEntry"
-      '';
+      mkDefaultTmuxSessionizerSessionNameSelector = pkgs:
+        pkgs.writers.writeBash "defaultSessionNameSelector"
+        /*
+        bash
+        */
+        ''
+          selectedEntry="$1"
+          basename "$selectedEntry"
+        '';
       mkTmuxSessionizerPkg = foldersToSearchScript: sessionNameSelector: {writers}:
         writers.writeBash ''tmux-sessionizer'' ''
           if [[ $# -eq 1 ]]; then
