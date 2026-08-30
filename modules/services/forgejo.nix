@@ -25,6 +25,7 @@
       ${adminCmd} create --admin --email "root@localhost" --username ${user} --password "qwerty12Z" || true
     '';
 
+    environment.systemPackages = [config.services.forgejo.package]; # to be able use forgejo-cli locally
     services.forgejo = {
       enable = true;
       database.type = "postgres";
