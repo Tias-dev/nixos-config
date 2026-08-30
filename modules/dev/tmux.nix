@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.flake.lib) mkTmuxSessionizerPkg;
+  inherit (config.flake.lib) mkTmuxSessionizerPkg mkDefaultTmuxSessionizerSessionNameSelector;
 in {
   flake = {
     lib = {
@@ -46,7 +46,8 @@ in {
         entries=$(find ~/git ~/Projects ~/ ~/work -mindepth 1 -maxdepth 1 -type d)
         echo -e "$HOME\n$zoxide_most_often\n$entries"
       '';
-      tmux-sessionizer = pkgs.callPackage (mkTmuxSessionizerPkg tmux-sessionizer-folders) {};
+      tmux-session-name-selector = mkDefaultTmuxSessionizerSessionNameSelector pkgs;
+      tmux-sessionizer = pkgs.callPackage (mkTmuxSessionizerPkg tmux-sessionizer-folders tmux-session-name-selector) {};
     in {
       options = {
         tmux.server-copy-command.enable = lib.mkEnableOption "server only tmux copy buffer";
