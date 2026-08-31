@@ -22,6 +22,7 @@
         format = "json";
         sopsFile = ../../secrets/xray-client.json;
         key = "";
+        restartUnits = ["xray.service"];
       };
     };
 
@@ -54,6 +55,7 @@
         Restart = "on-failure";
         RestartSec = "5m"; # 5 minute delay if no internet connection
         RemainAfterExit = "no";
+        StartLimitIntervalSec = "1h";
         StartLimitBurst = 3;
       };
       environment = {

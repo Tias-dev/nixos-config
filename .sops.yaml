@@ -1,7 +1,9 @@
 keys:
-  - &raison age1m4rcl2y5xafgruq5ecwa67nwjgh3yv7r9795mke3jzyfwf5gv4asafvx2r
+  - &laptop-raison age1m4rcl2y5xafgruq5ecwa67nwjgh3yv7r9795mke3jzyfwf5gv4asafvx2r
+  - &tabuchkin-nix age1f8uphc8qzg9km5lx22s52e50hy2f2w3mxsl7w448yxlg7jzg5fqs7dvz4c
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-        - *raison
+        - *laptop-raison
+        - *tabuchkin-nix # test multiple decription keys

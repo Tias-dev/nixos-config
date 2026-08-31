@@ -4,6 +4,8 @@
     "niri"
     "swaylock"
     "bluetooth"
+    "sops"
+    "mai-wifi-auto-login"
 
     "develop"
     "arc"
@@ -30,6 +32,14 @@ in {
     homeConfigurations.tabuchkin-nix = config.flake.lib.mkSystems.linuxHMOnly "tabuchkin-nix" {username = "tabuchkin";};
     modules.homeManager."hosts/tabuchkin-nix" = {
       imports = config.flake.lib.collectHomeModules config modules;
+      desktop.primary-monitor = {
+        name = "InfoVision Optoelectronics (Kunshan) Co.,Ltd China 0x05AB Unknown";
+        mode = {
+          width = 2560;
+          height = 1600;
+          refresh = 60.0;
+        };
+      };
     };
 
     systemConfigs."tabuchkin-nix" = config.flake.lib.mkSystems.linuxSMOnly "tabuchkin-nix";
