@@ -70,7 +70,7 @@
           Type = "oneshot";
           Restart = "on-failure";
           RestartSec = "20s";
-          RemainAfterExit = "yes";
+          RemainAfterExit = "no";
 
           ExecStart = "${script}";
         };
