@@ -28,7 +28,20 @@
     "rutranslit"
   ];
 in {
-  flake = {
+  config.flake = {
+    desktop.secondary-monitors = [
+      {
+        name = "Lenovo Group Limited T27UD-40 VNACDWHA";
+        mode = {
+          width = 3840;
+          height = 2160;
+          refresh = 60.0;
+        };
+        extraNiriSettings = {
+          scale = 2;
+        };
+      }
+    ];
     homeConfigurations.tabuchkin-nix = config.flake.lib.mkSystems.linuxHMOnly "tabuchkin-nix" {username = "tabuchkin";};
     modules.homeManager."hosts/tabuchkin-nix" = {
       imports = config.flake.lib.collectHomeModules config modules;
@@ -37,7 +50,7 @@ in {
         mode = {
           width = 2560;
           height = 1600;
-          refresh = 60.0;
+          refresh = 90.0;
         };
       };
     };

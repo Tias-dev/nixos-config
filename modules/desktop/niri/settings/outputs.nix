@@ -32,7 +32,7 @@ in {
           config =
             acc.config
             // {
-              "${monitor.name}" = secondary-monitor-config // {inherit (monitor) mode;} // (monitor.extraNiriSettings or {}) // {position.x = acc.width;};
+              "${monitor.name}" = secondary-monitor-config // {inherit (monitor) mode;} // (monitor.extraNiriSettings or {}) // {position= {x = acc.width; y = 0;};};
             };
         })
         {
