@@ -2,27 +2,55 @@
 # mkdir -p ~/.config/sops/age
 # nix shell nixpkgs#age --command age-keygen -o ~/.config/sops/age/keys.txt
 {inputs, ...}: let
-  common-sops-opts = username: {
+  common-sops-opts = username: home-path: {
     sops = {
       # !Imperatively! place your age keys files on host :)
-      age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+      age.keyFile = "${home-path}/${username}/.config/sops/age/keys.txt";
     };
   };
 in {
   config.flake.modules = {
-    nixos.sops = {username, pkgs, ...}: {
+    nixos.sops = {
+      username,
+      pkgs,
+      lib,
+      config,
+      ...
+    }: {
+      options = {
+        sops-home-path = lib.mkOption {
+          type = lib.types.str;
+          default = "/home";
+        };
+      };
       imports = [
         inputs.sops-nix.nixosModules.default
-        (common-sops-opts username)
+        (common-sops-opts username config.sops-home-path)
       ];
-      environment.systemPackages = with pkgs; [sops];
+      config = {
+        environment.systemPackages = with pkgs; [sops];
+      };
     };
-    homeManager.sops = {username, pkgs, ...}: {
+    homeManager.sops = {
+      username,
+      pkgs,
+      lib,
+      config,
+      ...
+    }: {
+      options = {
+        sops-home-path = lib.mkOption {
+          type = lib.types.str;
+          default = "/home";
+        };
+      };
       imports = [
         inputs.sops-nix.homeManagerModules.default
-        (common-sops-opts username)
+        (common-sops-opts username config.sops-home-path)
       ];
-      home.packages = with pkgs; [sops];
+      config = {
+        home.packages = with pkgs; [sops];
+      };
     };
   };
 }

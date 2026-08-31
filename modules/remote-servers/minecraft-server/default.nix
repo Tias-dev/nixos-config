@@ -10,7 +10,7 @@ in {
 
     # second run to just update nixos configuration if need
     # nixos-rebuild switch --flake .#minecraft-server --target-host root@51.250.27.192 --build-host root@51.250.27.192
-    nixosConfigurations.${hostname} = config.flake.lib.mkRemoteServer hostname;
+    nixosConfigurations.${hostname} = config.flake.lib.mkRemoteServer {inherit hostname;};
     modules.nixos."hosts/${hostname}" = {
       imports = config.flake.lib.collectNixosModules config modules;
     };

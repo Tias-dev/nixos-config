@@ -1,7 +1,8 @@
 {
   config.flake.lib.mkForgejoModule = {
     domain,
-    enableRegistration ? true,
+    disableRegistration ? true,
+    addDefaultRunner ? true,
   }: {
     lib,
     pkgs,
@@ -42,7 +43,7 @@
           HTTP_PORT = 3000;
         };
         # You can temporarily allow registration to create an admin user.
-        service.DISABLE_REGISTRATION = !enableRegistration;
+        service.DISABLE_REGISTRATION = disableRegistration;
         # Add support for actions, based on act: https://github.com/nektos/act
         actions = {
           ENABLED = true;
@@ -51,22 +52,43 @@
         # # Sending emails is completely optional
         # # You can send a test email from the web UI at:
         # # Profile Picture > Site Administration > Configuration >  Mailer Configuration
-        # mailer = {
-        #   ENABLED = true;
-        #   SMTP_ADDR = "mail.example.com";
-        #   FROM = "noreply@${srv.DOMAIN}";
-        #   USER = "noreply@${srv.DOMAIN}";
-        # };
+        mailer = {
+          ENABLED = true;
+          SMTP_ADDR = "www.tias.dev@gmail.com";
+          FROM = "noreply@${srv.DOMAIN}";
+          USER = "noreply@${srv.DOMAIN}";
+        };
       };
-      # secrets = {
-      #   mailer.PASSWD = config.age.secrets.forgejo-mailer-password.path;
-      # };
+      secrets = {
+        mailer.PASSWD = config.sops.secrets.forgejo-password.path;
+      };
     };
-
-    # age.secrets.forgejo-mailer-password = {
-    #   file = ../secrets/forgejo-mailer-password.age;
-    #   mode = "400";
-    #   owner = "forgejo";
-    # };
+    sops.secrets = {
+      forgejo-password = {
+        sopsFile = ../../secrets/forgejo/secrets.yaml;
+        format = "yaml";
+        key = "password";
+        owner = "forgejo";
+      };
+      forgejo-token = {
+        sopsFile = ../../secrets/forgejo/secrets.yaml;
+        format = "yaml";
+        key = "token";
+        owner = "forgejo";
+      };
+    };
+    services.gitea-actions-runner = lib.mkIf addDefaultRunner {
+        package = pkgs.forgejo-runner;
+        instances.default = {
+          enable = true;
+          name = "monolith";
+          url = "https://${domain}";
+          tokenFile = config.sops.secrets.forgejo-token.path;
+          labels = [
+            "ubuntu-latest:docker://node:18-bullseye"
+            "native:host"
+          ];
+        };
+    };
   };
 }

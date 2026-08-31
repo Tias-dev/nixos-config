@@ -18,7 +18,7 @@
       ];
       networking.defaultGateway = gateway;
     };
-    mkRemoteServer = hostname: let
+    mkRemoteServer = {hostname, username ? "default"}: let
       system = "x86_64-linux";
     in
       inputs.nixpkgs.lib.nixosSystem rec {
@@ -27,8 +27,7 @@
           inputs.disko.nixosModules.disko
           {
             config._module.args = {
-              inherit hostname system;
-              username = "default";
+              inherit hostname system username;
             };
           }
           config.flake.modules.nixos.remote-servers

@@ -1,9 +1,15 @@
 keys:
   - &laptop-raison age1m4rcl2y5xafgruq5ecwa67nwjgh3yv7r9795mke3jzyfwf5gv4asafvx2r
   - &tabuchkin-nix age1f8uphc8qzg9km5lx22s52e50hy2f2w3mxsl7w448yxlg7jzg5fqs7dvz4c
+  - &tias-dev-tech age1mm4um3f4wp0gx3e5u9zkdhx63n9wzvpnkg4k0azd8wvzg37vt45qpyqxc0
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
         - *laptop-raison
-        - *tabuchkin-nix # test multiple decription keys
+        - *tabuchkin-nix
+  - path_regex: secrets/forgejo/secrets.yaml
+    key_groups:
+      - age:
+          - *laptop-raison
+          - *tias-dev-tech
