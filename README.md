@@ -2,7 +2,9 @@
 
 My nixos config for all of my machines.
 
-Configs for concrete hosts placed at `./modules/hosts/*`
+Configs for concrete hosts placed at `./modules/hosts/`
+
+Configs for my servers placed at `./modules/remote-servers/`
 
 ## How to setup desktop on not NixOS linux
 
