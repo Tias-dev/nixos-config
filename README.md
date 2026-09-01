@@ -60,3 +60,4 @@ DesktopNames=niri
 - [ ] Declare dashboard config for prometheus node exporter
 - [ ] Add xray server service
 - [ ] Add encrypted xray server fallback pages
+- [ ] Consolidate all custom outputs i use under `meta` output

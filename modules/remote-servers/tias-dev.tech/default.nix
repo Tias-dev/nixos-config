@@ -10,14 +10,18 @@
     ;
 
   nixosModules = [
+    "user"
     "sops"
     "docker"
+    "nginx"
+    "postgresql"
   ];
 in {
   flake = {
     nixosConfigurations.${hostname} = config.flake.lib.mkRemoteServer {
       inherit hostname;
-      username = "forgejo";
+      username = "tias-dev";
+      domain = "tias-dev.tech";
     };
     modules.nixos."hosts/${hostname}" = {
       disko.devices.disk.disk1.device = "/dev/sda";
@@ -39,17 +43,12 @@ in {
             adminEmail = "www.tias.dev@gmail.com";
           })
           (mkMatrixServer {
-            domain = "chat.tias-dev.tech";
+            subdomain = "matrix";
           })
         ]
         ++ (collectNixosModules config nixosModules);
-      services.nginx = {
-        enable = true;
-      };
       security.acme.acceptTerms = true;
-      networking.firewall.allowedTCPPorts = [22 80 443];
-
-      sops-home-path = "/var/lib";
+      networking.firewall.allowedTCPPorts = [80 443];
     };
   };
 }

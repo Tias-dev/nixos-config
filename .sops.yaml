@@ -8,17 +8,23 @@ creation_rules:
       - age:
         - *laptop-raison
         - *tabuchkin-nix
-  - path_regex: secrets/forgejo/secrets.yaml
+  - path_regex: secrets/forgejo/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *laptop-raison
           - *tias-dev-tech
-  - path_regex: secrets/grafana/secrets.yaml
+  - path_regex: secrets/grafana/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *laptop-raison
           - *tias-dev-tech
-  - path_regex: secrets/some.html
+  - path_regex: secrets/xray/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *laptop-raison
+          - *tias-dev-tech
+  - path_regex: secrets/matrix/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *laptop-raison
+          - *tias-dev-tech

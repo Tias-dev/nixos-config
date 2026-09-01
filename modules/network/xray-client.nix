@@ -20,7 +20,7 @@
     sops = {
       secrets.xray-client = {
         format = "json";
-        sopsFile = ../../secrets/xray-client.json;
+        sopsFile = ../../secrets/xray/xray-client.json;
         key = "";
         restartUnits = ["xray.service"];
       };

@@ -21,7 +21,7 @@
     mkRemoteServer = {
       hostname,
       username ? "default",
-      domain ? null
+      domain ? null,
     }: let
       system = "x86_64-linux";
     in
@@ -39,6 +39,7 @@
           {
             networking.hostName = hostname;
             networking.domain = domain;
+            networking.firewall.allowedTCPPorts = [22];
             nixpkgs.hostPlatform = system;
             system.stateVersion = "25.11";
           }
