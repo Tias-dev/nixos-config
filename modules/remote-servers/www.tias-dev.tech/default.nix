@@ -21,9 +21,10 @@ in {
             interface = "enp1s0";
           })
           (mkForgejoModule {
-            domain = "www.tias-dev.tech";
+            domain = "git.tias-dev.tech";
             disableRegistration = true;
             addDefaultRunner = true;
+            email = "www.tias.dev@gmail.com";
           })
         ]
         ++ (collectNixosModules config nixosModules);

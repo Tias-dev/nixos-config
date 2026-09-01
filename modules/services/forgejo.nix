@@ -1,8 +1,11 @@
-{
+{config, ...}: let
+  inherit (config.flake) ssh-keys;
+in {
   config.flake.lib.mkForgejoModule = {
     domain,
     disableRegistration ? true,
     addDefaultRunner ? true,
+    email ? "root@localhost"
   }: {
     lib,
     pkgs,
@@ -24,12 +27,11 @@
     };
     systemd.services.forgejo.preStart = let
       adminCmd = "${lib.getExe cfg.package} admin user";
-      user = "joe"; # Note, Forgejo doesn't allow creation of an account named "admin"
+      user = "Tias"; # Note, Forgejo doesn't allow creation of an account named "admin"
     in ''
-      ${adminCmd} create --admin --email "root@localhost" --username ${user} --password "qwerty12Z" || true
+      ${adminCmd} create --admin --email ${email} --username ${user} --password "$(cat ${config.sops.secrets.forgejo-admin-password.path})" || true
     '';
-
-    environment.systemPackages = [config.services.forgejo.package]; # to be able use forgejo-cli locally
+    environment.systemPackages = [cfg.package];
     services.forgejo = {
       enable = true;
       database.type = "postgres";
@@ -49,46 +51,59 @@
           ENABLED = true;
           DEFAULT_ACTIONS_URL = "github";
         };
-        # # Sending emails is completely optional
-        # # You can send a test email from the web UI at:
-        # # Profile Picture > Site Administration > Configuration >  Mailer Configuration
         mailer = {
           ENABLED = true;
-          SMTP_ADDR = "www.tias.dev@gmail.com";
+          NAME = "Forgejo (tias-dev)";
+          SMTP_ADDR = "smtp.gmail.com";
           FROM = "noreply@${srv.DOMAIN}";
-          USER = "noreply@${srv.DOMAIN}";
+          USER = "${email}";
         };
       };
       secrets = {
-        mailer.PASSWD = config.sops.secrets.forgejo-password.path;
+        mailer.PASSWD = config.sops.secrets.forgejo-mail-password.path;
       };
     };
     sops.secrets = {
-      forgejo-password = {
+      forgejo-admin-password = {
         sopsFile = ../../secrets/forgejo/secrets.yaml;
         format = "yaml";
-        key = "password";
+        key = "admin-password";
         owner = "forgejo";
       };
-      forgejo-token = {
+      forgejo-mail-password = {
         sopsFile = ../../secrets/forgejo/secrets.yaml;
         format = "yaml";
-        key = "token";
+        key = "mail-password";
+        owner = "forgejo";
+      };
+      forgejo-runner-token = {
+        sopsFile = ../../secrets/forgejo/secrets.yaml;
+        format = "yaml";
+        key = "runner-token";
         owner = "forgejo";
       };
     };
     services.gitea-actions-runner = lib.mkIf addDefaultRunner {
-        package = pkgs.forgejo-runner;
-        instances.default = {
-          enable = true;
-          name = "monolith";
-          url = "https://${domain}";
-          tokenFile = config.sops.secrets.forgejo-token.path;
-          labels = [
-            "ubuntu-latest:docker://node:18-bullseye"
-            "native:host"
-          ];
-        };
+      package = pkgs.forgejo-runner;
+      instances.default = {
+        enable = true;
+        name = "monolith";
+        url = "https://${domain}";
+        tokenFile = config.sops.secrets.forgejo-runner-token.path;
+        labels = [
+          "ubuntu-latest:docker://node:18-bullseye"
+          "native:host"
+        ];
+      };
+    };
+  };
+
+  config.flake.modules.homeManager.forgejo-client = { pkgs, ... }: {
+    home.packages = with pkgs; [forgejo-cli];
+    sops.secrets.admin-fj-token = {
+      sopsFile = ../../secrets/forgejo/secrets.yaml;
+      format = "yaml";
+      key = "admin-fj-token";
     };
   };
 }

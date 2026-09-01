@@ -15,6 +15,7 @@
     "alacritty"
     "tmux"
     "docker"
+    "forgejo-client"
 
     "browser"
     "recording"

@@ -14,7 +14,12 @@
       efiSupport = true;
       efiInstallAsRemovable = true;
     };
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "prohibit-password";
+      };
+    };
 
     environment.systemPackages = map lib.lowPrio (with pkgs; [
       curl
