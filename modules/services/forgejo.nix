@@ -5,7 +5,7 @@ in {
     domain,
     disableRegistration ? true,
     addDefaultRunner ? true,
-    email ? "root@localhost"
+    email ? "root@localhost",
   }: {
     lib,
     pkgs,
@@ -22,7 +22,10 @@ in {
         extraConfig = ''
           client_max_body_size 512M;
         '';
-        locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
+        locations."/" = {
+          proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
+          recommendedProxySettings = true;
+        };
       };
     };
     systemd.services.forgejo.preStart = let
@@ -98,7 +101,7 @@ in {
     };
   };
 
-  config.flake.modules.homeManager.forgejo-client = { pkgs, ... }: {
+  config.flake.modules.homeManager.forgejo-client = {pkgs, ...}: {
     home.packages = with pkgs; [forgejo-cli];
     sops.secrets.admin-fj-token = {
       sopsFile = ../../secrets/forgejo/secrets.yaml;

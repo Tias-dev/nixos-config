@@ -18,7 +18,10 @@
       ];
       networking.defaultGateway = gateway;
     };
-    mkRemoteServer = {hostname, username ? "default"}: let
+    mkRemoteServer = {
+      hostname,
+      username ? "default",
+    }: let
       system = "x86_64-linux";
     in
       inputs.nixpkgs.lib.nixosSystem rec {
