@@ -18,3 +18,7 @@ creation_rules:
       - age:
           - *laptop-raison
           - *tias-dev-tech
+  - path_regex: secrets/some.html
+    key_groups:
+      - age:
+          - *laptop-raison

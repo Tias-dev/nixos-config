@@ -21,6 +21,7 @@
     mkRemoteServer = {
       hostname,
       username ? "default",
+      domain ? null
     }: let
       system = "x86_64-linux";
     in
@@ -37,6 +38,7 @@
           (config.flake.modules.nixos."hosts/${hostname}" or {})
           {
             networking.hostName = hostname;
+            networking.domain = domain;
             nixpkgs.hostPlatform = system;
             system.stateVersion = "25.11";
           }

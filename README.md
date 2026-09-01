@@ -55,3 +55,8 @@ Type=Application
 DesktopNames=niri
 ```
 
+## TODO
+
+- [ ] Declare dashboard config for prometheus node exporter
+- [ ] Add xray server service
+- [ ] Add encrypted xray server fallback pages

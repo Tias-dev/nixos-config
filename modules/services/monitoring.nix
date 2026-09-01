@@ -18,7 +18,10 @@
       services.prometheus = {
         enable = true;
         port = prometheusPort;
-        globalConfig.scrape_interval = "1m";
+        globalConfig = {
+          scrape_interval = "1m";
+          scrape_timeout = "50s"; # close to scrape interval to preserve dropping
+        };
         scrapeConfigs = [
           {
             job_name = "node";

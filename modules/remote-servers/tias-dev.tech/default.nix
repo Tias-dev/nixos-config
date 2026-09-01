@@ -1,6 +1,14 @@
 {config, ...}: let
   hostname = "tias-dev-tech";
-  inherit (config.flake.lib) mkStaticNetworkAddressModule mkForgejoModule collectNixosModules mkMonitoringModule;
+  inherit
+    (config.flake.lib)
+    mkStaticNetworkAddressModule
+    mkForgejoModule
+    collectNixosModules
+    mkMonitoringModule
+    mkMatrixServer
+    ;
+
   nixosModules = [
     "sops"
     "docker"
@@ -29,6 +37,9 @@ in {
           (mkMonitoringModule {
             domain = "monitoring.tias-dev.tech";
             adminEmail = "www.tias.dev@gmail.com";
+          })
+          (mkMatrixServer {
+            domain = "chat.tias-dev.tech";
           })
         ]
         ++ (collectNixosModules config nixosModules);
