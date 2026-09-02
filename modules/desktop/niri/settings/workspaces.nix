@@ -16,7 +16,7 @@
         #   open-on-output = "HDMI-A-2";
         #   name = "browser";
         # };
-        "03-doc-viewer" = {
+        "s3-doc-viewer" = {
           open-on-output = "HDMI-A-2";
           name = "doc-viewer";
         };
