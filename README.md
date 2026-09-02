@@ -61,3 +61,4 @@ DesktopNames=niri
 - [ ] Add xray server service
 - [ ] Add encrypted xray server fallback pages
 - [ ] Consolidate all custom outputs i use under `meta` output
+- [ ] Add stylix colorscheme to tmux dotbar plugin

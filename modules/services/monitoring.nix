@@ -19,8 +19,8 @@
         enable = true;
         port = prometheusPort;
         globalConfig = {
-          scrape_interval = "1m";
-          scrape_timeout = "50s"; # close to scrape interval to preserve dropping
+          scrape_interval = "15s";
+          scrape_timeout = "12s"; # close to scrape interval to preserve dropping
         };
         scrapeConfigs = [
           {

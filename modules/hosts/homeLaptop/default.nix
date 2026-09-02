@@ -6,7 +6,6 @@
     "desktop"
     "niri"
     "bluetooth"
-    "mai-wifi-auto-login"
 
     "develop"
     "neovim"
