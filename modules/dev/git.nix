@@ -2,10 +2,26 @@
   flake.modules.homeManager.develop = {
     programs.git = {
       enable = true;
-      attributes = [
-        "user.email=timur.buchkin@mail.ru"
-        "user.name=Timur Buchkin"
-        "pull.rebase=true"
+      includes = [
+        {
+          contents = {
+            user = {
+              email = "timur.buchkin@mail.ru";
+              name = "Timur Buchkin";
+            };
+            pull.rebase = true;
+            merge.tool = "nvimdiff";
+            diff.tool = "nvimdiff";
+            mergetool = {
+              prompt = true;
+              nvimdiff.cmd = "nvim -d $LOCAL $REMOTE $MERGED";
+            };
+            difftool = {
+              prompt = false;
+              nvimdiff.cmd = "nvim -d $LOCAL $REMOTE";
+            };
+          };
+        }
       ];
     };
   };

@@ -17,15 +17,13 @@
     "tmux"
     "docker"
     "arc"
-
-    "browser"
-
     "geojson"
     "coords"
-    "telegram"
-    "recording"
 
-    "rutranslit"
+    "browser"
+    "telegram"
+    "matrix-client"
+    "recording"
   ];
 in {
   config.flake = {
