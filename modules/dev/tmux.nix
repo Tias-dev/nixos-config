@@ -114,7 +114,22 @@ in {
                 set -g @sessionx-zoxide-mode 'on'
               '';
             }
-            dotbar
+            {
+              plugin = dotbar;
+              extraConfig = ''
+                set -g @tmux-dotbar-right true
+                set -g @tmux-dotbar-status-right-text " #H "
+                set -g @tmux-dotbar-rounded true
+                set -g @tmux-dotbar-bold-status true
+                set -g @tmux-dotbar-maximized-icon "󰊓"
+
+                set -g @tmux-dotbar-bg "${config.lib.stylix.colors.withHashtag.base00}"
+                set -g @tmux-dotbar-fg "${config.lib.stylix.colors.withHashtag.base02}"
+                set -g @tmux-dotbar-fg-current "${config.lib.stylix.colors.withHashtag.base0C}"
+                set -g @tmux-dotbar-fg-session "${config.lib.stylix.colors.withHashtag.base0C}"
+                set -g @tmux-dotbar-fg-prefix "${config.lib.stylix.colors.withHashtag.base0C}"
+              '';
+            }
             vim-tmux-navigator
             {
               plugin = extrakto;
