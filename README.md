@@ -62,3 +62,4 @@ DesktopNames=niri
 - [ ] Add encrypted xray server fallback pages
 - [ ] Consolidate all custom outputs i use under `meta` output
 - [ ] Add stylix colorscheme to tmux dotbar plugin
+- [ ] Update mai-wifi-auto-login service to check wifi connections
