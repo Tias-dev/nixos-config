@@ -16,7 +16,7 @@ let
     awtrb = "arc-wt-remove-branch";
 
     aml = "arc mount -l";
-    amm = "arc mount -m --allow-other";
+    amm = "arc mount --allow-other -m";
     aum = "arc umount";
   };
 in
