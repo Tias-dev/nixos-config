@@ -45,6 +45,10 @@ in {
           };
           description = "Primary monitor unique per host(for laptop it is laptop monitor)";
         };
+        desktop.secondary-monitor-name = mkOption {
+          type = types.nullOr types.str;
+          description = "Name of the common second monitor used with this host(must be in config.flake.desktop.secondary-monitors)";
+        };
       };
     };
   };

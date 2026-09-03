@@ -20,7 +20,12 @@
     }
     {
       matches = [
-        {app-id = "Alacritty";}
+        {app-id = "alacritty";}
+      ];
+      open-on-workspace = "terminal";
+    }
+    {
+      matches = [
         {app-id = "kitty";}
       ];
       open-on-workspace = "terminal";

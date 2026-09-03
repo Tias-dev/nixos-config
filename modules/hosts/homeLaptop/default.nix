@@ -30,18 +30,31 @@ in {
         config.flake.lib.collectModules config modules "raison";
     };
     modules.homeManager."hosts/laptop-raison" = {
-      desktop.primary-monitor = {
-        name = "AU Optronics 0xE0B2 Unknown";
+      desktop = {
+        primary-monitor = {
+          name = "AU Optronics 0xE0B2 Unknown";
+          mode = {
+            width = 1920;
+            height = 1080;
+            refresh = 165.0;
+          };
+          extraNiriSettings = {
+            scale = 1;
+          };
+        };
+        secondary-monitor-name = "HDMI-A-2";
+      };
+    };
+    desktop.secondary-monitors = [
+      {
+        name = "HDMI-A-2";
         mode = {
           width = 1920;
           height = 1080;
-          refresh = 165.0;
+          refresh = 60.0;
         };
-        extraNiriSettings = {
-          scale = 1;
-        };
-      };
-    };
+      }
+    ];
     ssh-keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJC7ayh2luEr8pPQ/TZGAu52lPQimTyTJLnn2X08W0m raison@laptop-raison"
     ];

@@ -1,25 +1,31 @@
-{
+{config, ...}: let
+  inherit (config.flake.desktop) secondary-monitors;
+in {
   config.flake.modules.homeManager.niri = {
     config,
     lib,
     ...
   }: let
-    primary-monitor-workspaces = {
-      "p1-browser" = {name = "browser";};
-      "p2-terminal" = {name = "terminal";};
+    inherit (config.desktop) secondary-monitor-name;
+
+    # open on second monitor if plugged, fallback to primary monitor
+    common-workspaces = {
+      "01-browser" = {name = "browser";};
+      "02-terminal" = {name = "terminal";};
+      "03-chat" = {name = "chat";};
+      "04-doc-viewer" = {name = "doc-viewer";};
     };
+    # only primary monitor
+    primary-workspaces = {
+    };
+    workspaces-override = monitor-name: (
+      if (monitor-name != null)
+      then (lib.mapAttrs (name: attrs: attrs // {open-on-output = monitor-name;}))
+      else (_: {})
+    );
   in {
-    niri-settings.workspaces =
-      (lib.mapAttrs (name: attrs: attrs // {open-on-output = config.desktop.primary-monitor.name;}) primary-monitor-workspaces)
-      // {
-        # "01-browser" = {
-        #   open-on-output = "HDMI-A-2";
-        #   name = "browser";
-        # };
-        "s3-doc-viewer" = {
-          open-on-output = "HDMI-A-2";
-          name = "doc-viewer";
-        };
-      };
+    niri-settings = {
+      workspaces = (workspaces-override config.desktop.primary-monitor.name primary-workspaces) // (workspaces-override config.desktop.primary-monitor.name common-workspaces);
+    };
   };
 }
