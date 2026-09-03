@@ -43,6 +43,7 @@
             "diskstats"
             "systemd"
             "tcpstat"
+            "processes"
           ]
           ++ extraCollectors;
       };

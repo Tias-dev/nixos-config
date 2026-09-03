@@ -20,6 +20,7 @@
     "recording"
     "torrent"
     "documents"
+    "matrix-client"
   ];
 in {
   flake = {

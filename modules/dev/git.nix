@@ -2,6 +2,10 @@
   flake.modules.homeManager.develop = {
     programs.git = {
       enable = true;
+      lfs = {
+        enable = true;
+        skipSmudge = true;
+      };
       includes = [
         {
           contents = {
