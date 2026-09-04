@@ -139,17 +139,6 @@ in {
                 else "set -g @extrakto_clip_tool 'wl-copy'"
               );
             }
-            {
-              plugin = pkgs.tmuxPlugins.resurrect;
-              extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-            }
-            {
-              plugin = pkgs.tmuxPlugins.continuum;
-              extraConfig = ''
-                set -g @continuum-restore 'on'
-                set -g @continuum-save-interval '15' # minutes
-              '';
-            }
           ];
         };
       };
