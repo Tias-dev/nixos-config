@@ -5,7 +5,7 @@
     ];
   };
 
-  config.flake.modules.homeManager.desktop = {pkgs, ...}: {
+  config.flake.modules.homeManager.homeManager = {pkgs, ...}: {
     imports = [
       inputs.stylix.homeModules.stylix
     ];
