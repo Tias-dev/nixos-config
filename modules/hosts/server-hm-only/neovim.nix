@@ -13,6 +13,6 @@
       }
     ];
   in {
-    config = {inherit neovim;};
+    neovim-package = neovim;
   };
 }
