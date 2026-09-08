@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.meta) xray-assets-path;
+  inherit (config.flake.meta) xray-assets-path;
 in {
   config.flake.modules.nixos.xray-update-blocklists = {
     config,

@@ -1,5 +1,9 @@
 {
-  flake.modules.homeManager.develop = {
+  flake.modules.homeManager.develop = {lib, config, ...}: let
+    gitAliases = {
+      gdtl = "git difftool";
+    };
+  in {
     programs.git = {
       enable = true;
       lfs = {
@@ -18,7 +22,7 @@
             diff.tool = "nvimdiff";
             mergetool = {
               prompt = true;
-              nvimdiff.cmd = "nvim -d $LOCAL $REMOTE $MERGED";
+              nvimdiff.cmd = "nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
             };
             difftool = {
               prompt = false;
@@ -28,5 +32,7 @@
         }
       ];
     };
+    programs.zsh = lib.mkIf config.programs.zsh.enable {shellAliases = gitAliases;};
+    programs.fish = lib.mkIf config.programs.fish.enable {shellAliases = gitAliases;};
   };
 }

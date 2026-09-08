@@ -19,6 +19,9 @@ let
     aml = "arc mount -l";
     amm = "arc mount --allow-other -m";
     aum = "arc umount";
+
+    adtl = "arc difftool --tool='cmd:nvim -d $LOCAL $REMOTE'";
+    amtl = "arc mergetool --tool='cmd:nvim -d $LOCAL $REMOTE $MERGED -c \'$wincmd w\' -c \'wincmd J\''";
   };
 in
   {config, ...}: let
