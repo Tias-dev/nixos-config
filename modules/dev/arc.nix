@@ -39,7 +39,7 @@ in
           echo "[]" > "$configFile"
         fi
         wtFolders=$(cat "$configFile" | ${pkgs.jq}/bin/jq -r '.[] | .branch + "/" + .baseDir')
-        wtFoldersBase=$(cat "$configFile" | ${pkgs.jq}/bin/jq -r '.[] | .branch')
+        wtBranches=$(cat "$configFile" | ${pkgs.jq}/bin/jq -r '.[] | .branch')
       '';
       arc-branches = writeBash "arc-branches" ''
         source "${arc-wt-common}"
@@ -99,21 +99,22 @@ in
       '';
       arc-wt-remove-branch = writeBashBin "arc-wt-remove-branch" ''
         source "${arc-wt-common}"
-        if [[ $# != 1 ]]; then
-          echo "Usage: $0 <branch-name>"
-          exit 1
+        if [[ $# == 1 ]]; then
+          branch="$1"
+        else
+          branch="$(echo "$wtBranches" | fzf --header="Pick branch to remove:")"
         fi
-        configFile="$configFile" ${arc-wt-remove-branch-impl}/bin/arc-wt-remove-branch-impl "$1"
-        arc umount "$wtPath"/"$1"
+        configFile="$configFile" ${arc-wt-remove-branch-impl}/bin/arc-wt-remove-branch-impl "$branch"
+        arc umount "$wtPath"/"$branch"
         if [[ $? == 0 ]]; then
-          rm -r "$wtPath"/"$1"
+          rm -r "$wtPath"/"$branch"
         fi
       '';
       arc-wt-remount-all = writeBashBin "arc-wt-remount-all" ''
         source "${arc-wt-common}"
-        for folder in $(echo "$wtFoldersBase"); do
-          echo "Try to mount: $folder"
-          arc mount --allow-other "$folder"
+        for branch in $(echo "$wtBranches"); do
+          echo "Try to mount: $branch"
+          arc mount --allow-other "$wtPath/$branch"
         done
       '';
     in {
