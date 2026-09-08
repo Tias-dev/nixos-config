@@ -1,7 +1,8 @@
 {inputs, ...}: {
   config.flake.modules.homeManager."hosts/sdg-robot-bl-vla.vla.yp-c.yandex.net" = {pkgs, ...}: let
     system = pkgs.stdenv.hostPlatform.system;
-    neovim = inputs.tias-nixvim.lib.neovimWithOverrides system [
+    neovim =
+      inputs.tias-nixvim.lib.neovimWithChangedOptions system
       {
         clangd.disable-indexing = true;
         clangd.disable-auto-import = true;
@@ -10,8 +11,7 @@
 
         yaml.enable = true;
         cpp.indent-namespace = true;
-      }
-    ];
+      };
   in {
     neovim-package = neovim;
   };
