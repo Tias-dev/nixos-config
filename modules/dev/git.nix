@@ -18,8 +18,8 @@
             diff.tool = "nvimdiff";
             mergetool = {
               prompt = true;
-              nvimdiff.cmd = "nvim -d $LOCAL $REMOTE $MERGED";
-              some
+              nvimdiff.cmd = "nvim -d $LOCAL $REMOTE / $MERGED";
+              # some
             };
             difftool = {
               prompt = false;
