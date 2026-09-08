@@ -14,6 +14,7 @@ let
     ads = "arc diff --staged";
     awtab = "arc-wt-add-branch";
     awtrb = "arc-wt-remove-branch";
+    awtrma = "arc-wt-remount-all";
 
     aml = "arc mount -l";
     amm = "arc mount --allow-other -m";
@@ -107,12 +108,19 @@ in
           rm -r "$wtPath"/"$1"
         fi
       '';
+      arc-wt-remount-all = writeBashBin "arc-wt-remount-all" ''
+        source "${arc-wt-common}"
+        for folder in $(echo "$wtFolders"); do
+          echo "Try to mount: $folder"
+          arc mount --allow-other "$folder"
+        done
+      '';
     in {
       programs.zsh = lib.mkIf config.programs.zsh.enable {shellAliases = arcAliases;};
       programs.fish = lib.mkIf config.programs.fish.enable {shellAliases = arcAliases;};
       programs.tmux.extraConfig = ''
         bind-key -r a run-shell "tmux neww ${arc-wt-sessionizer}"
       '';
-      home.packages = [arc-wt-add-branch arc-wt-remove-branch];
+      home.packages = [arc-wt-add-branch arc-wt-remove-branch arc-wt-remount-all];
     };
   }
