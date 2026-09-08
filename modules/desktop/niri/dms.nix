@@ -4,7 +4,6 @@
       enable = true;
       enableSystemMonitoring = true;
       enableDynamicTheming = true;
-      dgop.package = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
       # systemd.enable = true;
       niri.enableSpawn = true;
       settings = {

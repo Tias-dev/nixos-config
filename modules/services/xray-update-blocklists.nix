@@ -9,8 +9,8 @@ in {
   }: {
     options = {
       xray-update-blocklists = {
-        enable = lib.mkEnableOptions "Auto update blocklists";
-        proxy.enable = lib.mkEnableOptions "Use proxy (from config.netwoking.proxy.default) to download blocklists";
+        enable = lib.mkEnableOption "Auto update blocklists";
+        proxy.enable = lib.mkEnableOption "Use proxy (from config.netwoking.proxy.default) to download blocklists";
       };
     };
 
