@@ -39,6 +39,7 @@ in
           echo "[]" > "$configFile"
         fi
         wtFolders=$(cat "$configFile" | ${pkgs.jq}/bin/jq -r '.[] | .branch + "/" + .baseDir')
+        wtFoldersBase=$(cat "$configFile" | ${pkgs.jq}/bin/jq -r '.[] | .branch')
       '';
       arc-branches = writeBash "arc-branches" ''
         source "${arc-wt-common}"
@@ -110,7 +111,7 @@ in
       '';
       arc-wt-remount-all = writeBashBin "arc-wt-remount-all" ''
         source "${arc-wt-common}"
-        for folder in $(echo "$wtFolders"); do
+        for folder in $(echo "$wtFoldersBase"); do
           echo "Try to mount: $folder"
           arc mount --allow-other "$folder"
         done
