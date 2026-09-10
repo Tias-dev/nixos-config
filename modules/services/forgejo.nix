@@ -97,6 +97,11 @@ in {
           "ubuntu-latest:docker://node:18-bullseye"
           "native:host"
         ];
+        hostPackages = with pkgs; [
+          nix
+          gcc
+          gnumake
+        ];
       };
     };
   };
