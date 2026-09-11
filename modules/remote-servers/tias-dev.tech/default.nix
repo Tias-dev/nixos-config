@@ -1,12 +1,16 @@
 {config, ...}: let
+  config' = config;
   hostname = "tias-dev-tech";
+  email = "www.tias.dev@gmail.com";
   inherit
     (config.flake.lib)
     mkStaticNetworkAddressModule
     mkForgejoModule
     collectNixosModules
     mkMonitoringModule
+    mkGrafanaNtfyForwarder
     mkMatrixServer
+    mkNtfyService
     ;
 
   nixosModules = [
@@ -23,7 +27,7 @@ in {
       username = "tias-dev";
       domain = "tias-dev.tech";
     };
-    modules.nixos."hosts/${hostname}" = {
+    modules.nixos."hosts/${hostname}" = {config, ...}: {
       disko.devices.disk.disk1.device = "/dev/sda";
       imports =
         [
@@ -36,18 +40,24 @@ in {
             domain = "git.tias-dev.tech";
             disableRegistration = true;
             addDefaultRunner = true;
-            email = "www.tias.dev@gmail.com";
-          })
-          (mkMonitoringModule {
-            domain = "monitoring.tias-dev.tech";
-            adminEmail = "www.tias.dev@gmail.com";
+            email = email;
           })
           (mkMatrixServer {
             subdomain = "matrix";
           })
+          (mkMonitoringModule {
+            domain = "monitoring.tias-dev.tech";
+            adminEmail = email;
+          })
+          (mkGrafanaNtfyForwarder {
+            ntfyFqdn = "ntfy.${config.networking.domain}";
+            ntfyTopic = "notify-grafana";
+          })
+          (mkNtfyService {})
         ]
-        ++ (collectNixosModules config nixosModules);
+        ++ (collectNixosModules config' nixosModules);
       security.acme.acceptTerms = true;
+      security.acme.defaults.email = email;
       networking.firewall.allowedTCPPorts = [80 443];
     };
   };

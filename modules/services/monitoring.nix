@@ -111,5 +111,33 @@
         };
       };
     };
+    mkGrafanaNtfyForwarder = {
+      ntfyFqdn,
+      ntfyTopic,
+      port ? 8091,
+    }: {config, ...}: {
+      assertions = [
+          {
+            assertion = config.services.ntfy-sh.enable == true;
+            message = "Expected ntfy service to be enabled but it is not";
+          }
+      ];
+      services.grafana-to-ntfy = {
+        enable = true;
+        settings = {
+          markdown = true;
+          ntfyUrl = "https://${ntfyFqdn}/${ntfyTopic}";
+          ntfyBAuthUser = "notifier";
+          ntfyBAuthPass = config.sops.secrets.grafana-to-ntfy-pass.path;
+          inherit port;
+        };
+      };
+      sops.secrets.grafana-to-ntfy-pass = {
+        sopsFile = ../../secrets/ntfy/secrets.yaml;
+        format = "yaml";
+        key = "notifier-password";
+        owner = "grafana";
+      };
+    };
   };
 }
