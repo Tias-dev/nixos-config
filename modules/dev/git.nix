@@ -1,5 +1,9 @@
 {
-  flake.modules.homeManager.develop = {lib, config, ...}: let
+  flake.modules.homeManager.develop = {
+    lib,
+    config,
+    ...
+  }: let
     gitAliases = {
       gdtl = "git difftool";
     };

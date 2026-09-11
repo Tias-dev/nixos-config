@@ -2,7 +2,11 @@
   inherit (config.flake.meta) xray-assets-path;
   inherit (config.flake.modules.nixos) xray-update-blocklists;
 in {
-  flake.modules.nixos.xray-client = {config, lib, ...}: let
+  flake.modules.nixos.xray-client = {
+    config,
+    lib,
+    ...
+  }: let
     proxy-addr = "socks5://localhost:10800";
   in {
     services.xray = {

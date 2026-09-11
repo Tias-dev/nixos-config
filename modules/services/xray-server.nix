@@ -14,7 +14,7 @@ in {
       };
       sops.secrets = {
         xray-server = {
-            sopsFile = ../../secrets/xray/xray-server.json;
+          sopsFile = ../../secrets/xray/xray-server.json;
         };
       };
       systemd.services.xray.environment = {XRAY_LOCATION_ASSSET = xray-assets-path;};
