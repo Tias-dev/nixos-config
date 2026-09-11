@@ -101,6 +101,10 @@ in {
           nix
           gcc
           gnumake
+          git
+          nodejs
+          bash
+          gawk
         ];
       };
     };

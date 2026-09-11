@@ -20,34 +20,25 @@
       };
     };
 
-    # automatically switch themes
-    systemd.user.services."darkman" = {
-      Unit = {
-        Description = "Framework for dark-mode and light-mode transitions.";
-        Documentation = "man:darkman(1)";
+    # # automatically switch themes
+    services.darkman = {
+      enable = true;
+      settings = {
+        lat = 55;
+        lng = 37;
+        dbusserver = true;
+        portal = true;
       };
-      Service = {
-        Type = "dbus";
-        BusName = "nl.whynothugo.darkman";
-        ExecStart = "${pkgs.darkman}/bin/darkman run";
-        Restart = "on-failure";
-        TimeoutStopSec = 15;
-        Slice = "background.slice";
+      lightModeScripts = {
+        "update-dbus" = ''
+          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+        '';
       };
-      Install = {
-        WantedBy = ["default.target"];
+      darkModeScripts = {
+        "update-dbus" = ''
+          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+        '';
       };
     };
-    home.packages = with pkgs; [darkman];
-    home.file.".config/darkman/config.yaml".text =
-      /*
-      yaml
-      */
-      ''
-        lat: 55
-        lng: 37
-        dbusserver: true
-        portal: true
-      '';
   };
 }
