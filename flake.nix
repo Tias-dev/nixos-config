@@ -36,6 +36,10 @@
     tias-nixvim = {
       url = "github:Tias-dev/nixvim-config/master";
     };
+    tias-nixpkgs = {
+      url = "github:Tias-dev/tias-nixpkgs/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };

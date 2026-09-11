@@ -68,6 +68,21 @@
         "type": "github"
       }
     },
+    "crane": {
+      "locked": {
+        "lastModified": 1788465171,
+        "narHash": "sha256-Y1/TTVXjYXGF068IThQH9fPSZ0SIE74PABlUxnWTUH0=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "eb35abda9f232cc6610b1d1e3200d15c49b7ac54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "dank-qml-common": {
       "flake": false,
       "locked": {
@@ -278,6 +293,24 @@
     },
     "flake-parts_4": {
       "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_5": {
+      "inputs": {
         "nixpkgs-lib": [
           "tias-nixvim",
           "nixpkgs"
@@ -297,9 +330,9 @@
         "type": "github"
       }
     },
-    "flake-parts_5": {
+    "flake-parts_6": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
+        "nixpkgs-lib": "nixpkgs-lib_3"
       },
       "locked": {
         "lastModified": 1782949081,
@@ -315,7 +348,7 @@
         "type": "github"
       }
     },
-    "flake-parts_6": {
+    "flake-parts_7": {
       "inputs": {
         "nixpkgs-lib": [
           "tias-nixvim",
@@ -337,9 +370,9 @@
         "type": "github"
       }
     },
-    "flake-parts_7": {
+    "flake-parts_8": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_3"
+        "nixpkgs-lib": "nixpkgs-lib_4"
       },
       "locked": {
         "lastModified": 1778716662,
@@ -431,7 +464,7 @@
     },
     "harpoon-bufferline": {
       "inputs": {
-        "flake-parts": "flake-parts_5",
+        "flake-parts": "flake-parts_6",
         "nixpkgs": [
           "tias-nixvim",
           "nixpkgs"
@@ -627,6 +660,21 @@
     },
     "nixpkgs-lib_2": {
       "locked": {
+        "lastModified": 1777168982,
+        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib_3": {
+      "locked": {
         "lastModified": 1782614948,
         "narHash": "sha256-ePjCwr1sNm9NYUqywL7QfK3JnlS015msC+eBu2zKlp8=",
         "owner": "nix-community",
@@ -640,7 +688,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_3": {
+    "nixpkgs-lib_4": {
       "locked": {
         "lastModified": 1777168982,
         "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
@@ -721,7 +769,7 @@
     },
     "nixvim": {
       "inputs": {
-        "flake-parts": "flake-parts_6",
+        "flake-parts": "flake-parts_7",
         "nixpkgs": [
           "tias-nixvim",
           "nixpkgs"
@@ -811,6 +859,7 @@
         "stylix": "stylix",
         "system-manager": "system-manager",
         "systems": "systems_4",
+        "tias-nixpkgs": "tias-nixpkgs",
         "tias-nixvim": "tias-nixvim"
       }
     },
@@ -967,7 +1016,30 @@
     },
     "tias-nixpkgs": {
       "inputs": {
-        "flake-parts": "flake-parts_7",
+        "crane": "crane",
+        "flake-parts": "flake-parts_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789170727,
+        "narHash": "sha256-RpyGUQFA2avTsDncAcU2TZcDlkQbhZ6hEgFnEwhNNkY=",
+        "owner": "Tias-dev",
+        "repo": "tias-nixpkgs",
+        "rev": "858c06a8bc0b6db5df2f50853340ec1846533334",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Tias-dev",
+        "ref": "master",
+        "repo": "tias-nixpkgs",
+        "type": "github"
+      }
+    },
+    "tias-nixpkgs_2": {
+      "inputs": {
+        "flake-parts": "flake-parts_8",
         "new-nixpkgs": "new-nixpkgs",
         "nixpkgs": [
           "tias-nixvim",
@@ -990,12 +1062,12 @@
     },
     "tias-nixvim": {
       "inputs": {
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_5",
         "harpoon-bufferline": "harpoon-bufferline",
         "import-tree": "import-tree_2",
         "nixpkgs": "nixpkgs_4",
         "nixvim": "nixvim",
-        "tias-nixpkgs": "tias-nixpkgs"
+        "tias-nixpkgs": "tias-nixpkgs_2"
       },
       "locked": {
         "lastModified": 1788883321,
