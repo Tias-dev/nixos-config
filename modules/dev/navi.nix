@@ -11,7 +11,7 @@
       settings = {
         cheats = {
           paths = [
-            (toString ../../docs/cheats)
+            "$HOME/nix/docs/cheats"
             "$HOME/.local/share/navi/cheats"
           ];
         };
