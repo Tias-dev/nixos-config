@@ -24,6 +24,7 @@
     "telegram"
     "matrix-client"
     "recording"
+    "rutranslit"
   ];
 in {
   config.flake = {
