@@ -43,3 +43,33 @@ EOF
 addStudToGroup() {
     https_proxy= http_proxy= all_proxy= fj -H git.tias-dev.tech org team member add OpenCode Students $1
 }
+
+# Register student to matrix
+registerStudentsMatrix() {
+    group="$1"
+    cat "$group" | while read line; do
+        name=$(echo $line | cut -d',' -f 2)
+        email=$(echo $line | cut -d',' -f 3)
+        pass=$(echo $line | cut -d',' -f 4)
+        register_new_matrix_user -k "$(cat /run/secrets/matrix-shared-secret)" -u $name -p $pass --exists-ok --no-admin
+    done
+}
+
+# Register student to forgejo(under forgejo user)
+registerStudentsForgejo() {
+    group="$1"
+    cat "$group" | while read line; do 
+        name=$(echo $line | cut -d',' -f 2)
+        email=$(echo $line | cut -d',' -f 3)
+        pass=$(echo $line | cut -d',' -f 4)
+        forgejo -c ./custom/conf/app.ini admin user create --username $name --password $pass --email $email
+ done
+}
+
+# Convert FamilyIO to eng translit
+translitFio() {
+    family="$1"
+    name="$2"
+    father="$3"
+    echo "$(rutranslit text $(echo $family))$(rutranslit text $(echo $name) | cut -c-1)$(rutranslit text $(echo $father) | cut -c-1)"
+}
