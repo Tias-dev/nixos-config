@@ -1,6 +1,6 @@
 {
   config.flake.modules.homeManager."hosts/tabuchkin-nix" = {
-    firefox.extra-bookmarks = [
+    browser.extra-bookmarks = [
       {
         name = "Messanger";
         tags = ["messanger" "personal"];

@@ -1,8 +1,10 @@
-{
+{inputs, ...}: {
   config = {
     flake.modules.homeManager.browser = {
       lib,
       config,
+      pkgs,
+      system,
       ...
     }: let
       bookmark-type = with lib;
@@ -52,10 +54,13 @@
       ];
     in {
       options = {
-        firefox.extra-bookmarks = lib.mkOption {
-          # just lib.types.listOf node-type dont work but it must be lib.types.listOf node-type!
-          type = lib.types.listOf lib.types.raw;
-          default = [];
+        browser = {
+          extra-bookmarks = lib.mkOption {
+            # just lib.types.listOf node-type dont work but it must be lib.types.listOf node-type!
+            type = lib.types.listOf lib.types.raw;
+            default = [];
+          };
+          use-zen-browser = lib.mkEnableOption "Zen browser instead of firefox";
         };
       };
       config = let
@@ -76,41 +81,50 @@
             ];
           }
         ];
-      in {
-        programs.firefox = {
-          enable = true;
-          languagePacks = ["ru" "en-US"];
-          policies = {
-            DisableTelemetry = true;
-            DisableFirefoxStudies = true;
-            EnableTrackingProtection = {
-              Value = true;
-              Locked = true;
-              Cryptomining = true;
-              Fingerprinting = true;
-            };
-            DisableFirefoxAccounts = true;
-            DisableAccounts = true;
-            DisableFirefoxScreenshots = true;
-            OverrideFirstRunPage = "";
-            OverridePostUpdatePage = "";
-            DontCheckDefaultBrowser = true;
-            DisplayBookmarksToolbar = "always"; # alternatives: "always" or "newtab"
-            DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
-            SearchBar = "unified"; # alternative: "separate"
-
-            ExtensionSettings = {
-              "*".installation_mode = "blocked";
-              "uBlock0@raymondhill.net" = {
-                installation_mode = "force_installed";
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+        package =
+          pkgs.wrapFirefox (
+            if config.browser.use-zen-browser
+            then inputs.zen-browser.packages.${system}.zen-browser-unwrapped
+            else pkgs.firefox
+          ) {
+            extraPolicies = {
+              DisableTelemetry = true;
+              DisableFirefoxStudies = true;
+              EnableTrackingProtection = {
+                Value = true;
+                Locked = true;
+                Cryptomining = true;
+                Fingerprinting = true;
               };
-              "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
-                installation_mode = "force_installed";
-                install_url = "https://addons.mozilla.org/firefox/downloads/file/4717567/vimium_ff-2.4.2.xpi";
+              DisableFirefoxAccounts = true;
+              DisableAccounts = true;
+              DisableFirefoxScreenshots = true;
+              OverrideFirstRunPage = "";
+              OverridePostUpdatePage = "";
+              DontCheckDefaultBrowser = true;
+              DisplayBookmarksToolbar = "always"; # alternatives: "always" or "newtab"
+              DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
+              SearchBar = "unified"; # alternative: "separate"
+
+              ExtensionSettings = {
+                "*".installation_mode = "blocked";
+                "uBlock0@raymondhill.net" = {
+                  installation_mode = "force_installed";
+                  install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+                };
+                "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+                  installation_mode = "force_installed";
+                  install_url = "https://addons.mozilla.org/firefox/downloads/file/4717567/vimium_ff-2.4.2.xpi";
+                };
               };
             };
           };
+      in {
+        browser.use-zen-browser = lib.mkDefault true;
+        programs.firefox = {
+          enable = true;
+          languagePacks = ["ru" "en-US"];
+          inherit package;
 
           profiles = {
             tias-dev = {
@@ -123,7 +137,7 @@
                     toolbar = true;
                     bookmarks =
                       default-bookmarks
-                      ++ (lib.optionals (config.firefox.extra-bookmarks != []) ["separator"] ++ config.firefox.extra-bookmarks);
+                      ++ (lib.optionals (config.browser.extra-bookmarks != []) ["separator"] ++ config.browser.extra-bookmarks);
                   }
                 ];
                 force = true;

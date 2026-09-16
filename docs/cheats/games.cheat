@@ -1,0 +1,4 @@
+% games
+
+# Run lutris with system packages
+PATH=/usr/bin/:$PATH lutris
