@@ -98,6 +98,7 @@ in {
           "native:host"
         ];
         hostPackages = with pkgs; [
+          busybox
           nix
           gcc
           gnumake
