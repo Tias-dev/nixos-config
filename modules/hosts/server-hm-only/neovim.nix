@@ -11,16 +11,16 @@
     };
     neovim =
       inputs.tias-nixvim.lib.neovimWithChangedOptions system
-      {
-        clangd.disable-indexing = true;
-      }
-      // neovim-common-opts;
+      ({
+          clangd.disable-indexing = true;
+        }
+        // neovim-common-opts);
     indexing-neovim =
       inputs.tias-nixvim.lib.neovimWithChangedOptions system
-      {
-        clangd.disable-indexing = false;
-      }
-      // neovim-common-opts;
+      ({
+          clangd.disable-indexing = false;
+        }
+        // neovim-common-opts);
   in {
     neovim-package = neovim;
     home.packages = with pkgs; [
