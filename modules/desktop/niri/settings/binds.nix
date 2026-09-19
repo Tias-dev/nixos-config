@@ -9,6 +9,7 @@
     {
       pkgs,
       config,
+      lib,
       ...
     }: let
       dms-bin = "${inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.dms-shell}/bin/dms";
@@ -19,6 +20,10 @@
           "Mod+T" = {
             hotkey-overlay.title = "Open a Terminal: ${terminal.name}";
             action.spawn = terminal.path;
+          };
+          "Mod+B" = {
+            hotkey-overlay.title = "Open a Browser: ${config.browser.package-name}";
+            action.spawn = "${lib.getExe config.browser.package}";
           };
           "Mod+Shift+Slash".action.show-hotkey-overlay = [];
 

@@ -21,6 +21,7 @@
     "torrent"
     "documents"
     "matrix-client"
+    "rutranslit"
   ];
 in {
   flake = {
@@ -28,6 +29,10 @@ in {
     modules.nixos."hosts/laptop-raison" = {
       imports =
         config.flake.lib.collectModules config modules "raison";
+      networking = {
+        wireless.enable = true;
+        supplicant."wlp63s0".extraCmdArgs = "-C /var/run/wpa_supplicant";
+      };
     };
     modules.homeManager."hosts/laptop-raison" = {
       desktop = {

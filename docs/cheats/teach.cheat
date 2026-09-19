@@ -48,9 +48,9 @@ addStudToGroup() {
 registerStudentsMatrix() {
     group="$1"
     cat "$group" | while read line; do
-        name=$(echo $line | cut -d',' -f 2)
-        email=$(echo $line | cut -d',' -f 3)
-        pass=$(echo $line | cut -d',' -f 4)
+        name=$(echo $line | cut -d',' -f 1)
+        email=$(echo $line | cut -d',' -f 2)
+        pass=$(echo $line | cut -d',' -f 3)
         register_new_matrix_user -k "$(cat /run/secrets/matrix-shared-secret)" -u $name -p $pass --exists-ok --no-admin
     done
 }
@@ -59,9 +59,9 @@ registerStudentsMatrix() {
 registerStudentsForgejo() {
     group="$1"
     cat "$group" | while read line; do 
-        name=$(echo $line | cut -d',' -f 2)
-        email=$(echo $line | cut -d',' -f 3)
-        pass=$(echo $line | cut -d',' -f 4)
+        name=$(echo $line | cut -d',' -f 1)
+        email=$(echo $line | cut -d',' -f 2)
+        pass=$(echo $line | cut -d',' -f 3)
         forgejo -c ./custom/conf/app.ini admin user create --username $name --password $pass --email $email
  done
 }

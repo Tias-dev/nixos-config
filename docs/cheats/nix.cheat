@@ -1,0 +1,7 @@
+% nix, repl
+
+# Import pkgs
+pkgs = import <pkgs> {system = builtins.currentSystem;}
+
+$ pkgs: echo -n "<"; echo -n nixpkgs; echo -n ">"
+
