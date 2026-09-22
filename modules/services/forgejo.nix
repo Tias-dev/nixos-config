@@ -106,6 +106,7 @@ in {
           nodejs
           bash
           gawk
+          jq
         ];
       };
     };

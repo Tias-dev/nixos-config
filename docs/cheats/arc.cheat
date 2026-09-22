@@ -1,0 +1,6 @@
+% arc
+
+# Mount arc wt
+arc mount --allow-other $HOME/arc-wt/<branch>
+
+$ branch: cat $HOME/arc-wt/config.json | jq -r '.[].branch'
