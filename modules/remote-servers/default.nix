@@ -21,9 +21,10 @@
     mkRemoteServer = {
       hostname,
       username ? "default",
-      domain,
+      domain ? null,
     }: let
       system = "x86_64-linux";
+      server-name = (if domain != null then domain else hostname);
     in
       inputs.nixpkgs.lib.nixosSystem rec {
         inherit system;
@@ -35,7 +36,7 @@
             };
           }
           config.flake.modules.nixos.remote-servers
-          (config.flake.modules.nixos."hosts/${domain}" or {})
+          (config.flake.modules.nixos."hosts/${server-name}" or {})
           {
             networking.hostName = hostname;
             networking.domain = domain;
