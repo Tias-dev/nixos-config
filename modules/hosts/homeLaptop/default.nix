@@ -15,6 +15,7 @@
     "tmux"
     "docker"
     "forgejo-client"
+    "deploy"
 
     "browser"
     "recording"

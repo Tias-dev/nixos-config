@@ -1,6 +1,7 @@
 {config, ...}: let
   config' = config;
   hostname = "tias-dev-tech";
+  domain = "tias-dev.tech";
   email = "www.tias.dev@gmail.com";
   inherit
     (config.flake.lib)
@@ -22,12 +23,11 @@
   ];
 in {
   flake = {
-    nixosConfigurations.${hostname} = config.flake.lib.mkRemoteServer {
-      inherit hostname;
+    nixosConfigurations.${domain} = config.flake.lib.mkRemoteServer {
+      inherit hostname domain;
       username = "tias-dev";
-      domain = "tias-dev.tech";
     };
-    modules.nixos."hosts/${hostname}" = {config, ...}: {
+    modules.nixos."hosts/${domain}" = {config, ...}: {
       disko.devices.disk.disk1.device = "/dev/sda";
       imports =
         [

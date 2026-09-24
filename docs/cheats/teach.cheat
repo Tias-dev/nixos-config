@@ -3,8 +3,8 @@
 
 # Send credentials to student
 sendStudPass() {
-email="$1"
-login="$2"
+login="$1"
+email="$2"
 pass="$3"
 message=$(cat <<EOF
 From: www.tias.dev@gmail.com
@@ -36,7 +36,7 @@ P.S.S.S.S. Мессенджер по умолчанию хочет войти ч
 Отправил через скрипт Бучкин Тимур Артемович, твой преподаватель по ФИ
 
 EOF
-) && echo "$message" | msmtp $1
+) && echo "$message" | msmtp $email
 }
 
 # Add student to forgejo team
