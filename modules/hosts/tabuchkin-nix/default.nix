@@ -19,6 +19,7 @@
     "arc"
     "geojson"
     "coords"
+    "deploy"
 
     "browser"
     "telegram"
