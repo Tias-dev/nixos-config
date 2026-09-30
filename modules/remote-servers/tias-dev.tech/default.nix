@@ -12,6 +12,7 @@
     mkGrafanaNtfyForwarder
     mkMatrixServer
     mkNtfyService
+    mkPostgRESTModule
     ;
 
   nixosModules = [
@@ -54,6 +55,7 @@ in {
             ntfyTopic = "notify-grafana";
           })
           (mkNtfyService {})
+          (mkPostgRESTModule {port = 3007;})
         ]
         ++ (collectNixosModules config' nixosModules);
       security.acme.acceptTerms = true;
