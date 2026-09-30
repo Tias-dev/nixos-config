@@ -55,7 +55,7 @@ in {
             ntfyTopic = "notify-grafana";
           })
           (mkNtfyService {})
-          (mkPostgRESTModule {port = 3007;})
+          (mkPostgRESTModule {port = 3007; extraSqlInitScriptPath = ./postgresql-init-script.sql;})
         ]
         ++ (collectNixosModules config' nixosModules);
       security.acme.acceptTerms = true;

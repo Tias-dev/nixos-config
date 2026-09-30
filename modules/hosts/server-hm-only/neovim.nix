@@ -6,8 +6,9 @@
       langChanger.enable = false;
       format.on_save.enable = false;
 
-      yaml.enable = true;
       cpp.indent-namespace = true;
+
+      all-langs.enable = true;
     };
     neovim =
       inputs.tias-nixvim.lib.neovimWithChangedOptions system
