@@ -117,10 +117,10 @@
       port ? 8091,
     }: {config, ...}: {
       assertions = [
-          {
-            assertion = config.services.ntfy-sh.enable == true;
-            message = "Expected ntfy service to be enabled but it is not";
-          }
+        {
+          assertion = config.services.ntfy-sh.enable == true;
+          message = "Expected ntfy service to be enabled but it is not";
+        }
       ];
       services.grafana-to-ntfy = {
         enable = true;

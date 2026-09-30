@@ -24,7 +24,10 @@
       domain ? null,
     }: let
       system = "x86_64-linux";
-      server-name = (if domain != null then domain else hostname);
+      server-name =
+        if domain != null
+        then domain
+        else hostname;
     in
       inputs.nixpkgs.lib.nixosSystem rec {
         inherit system;

@@ -6,7 +6,7 @@ in {
       (mkSendMailProgram {
         userEmail = "www.tias.dev@gmail.com";
         passwordPath = config.sops.secrets.tias-dev-email-pass.path;
-        })
+      })
     ];
     sops.secrets.tias-dev-email-pass = {
       sopsFile = ../../../secrets/forgejo/secrets.yaml;
