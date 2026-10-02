@@ -5,11 +5,7 @@
     system,
     ...
   }: let
-    neovim = inputs.tias-nixvim.lib.neovimWithOverrides system [
-      {
-        all-langs.enable = true;
-      }
-    ];
+    neovim = inputs.tias-nixvim.packages.${system}.default;
   in {
     options.neovim-package = lib.mkOption {
       type = lib.types.package;

@@ -29,6 +29,7 @@
       tmux
     ]);
 
+    security.sudo.wheelNeedsPassword = false;
     users.users = let
       ssh-config = {
         openssh.authorizedKeys.keys =
