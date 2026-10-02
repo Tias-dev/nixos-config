@@ -10,7 +10,7 @@ in {
         */
         ''
           selectedEntry="$1"
-          basename "$selectedEntry"
+          echo "$selectedEntry"
         '';
       mkTmuxSessionizerPkg = foldersToSearchScript: sessionNameSelector: {writers}:
         writers.writeBash ''tmux-sessionizer'' ''
