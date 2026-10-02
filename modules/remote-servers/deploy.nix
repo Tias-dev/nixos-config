@@ -19,11 +19,6 @@ in {
               sshUser = "root";
               path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
             };
-            home-manager = {
-              user = "tias-dev";
-              sshUser = "tias-dev";
-              path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."server-hm-only-minimal";
-            };
           };
         };
       };

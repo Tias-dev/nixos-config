@@ -33,14 +33,22 @@
         inherit system;
         modules = [
           inputs.disko.nixosModules.disko
+          inputs.home-manager.nixosModules.home-manager
           {
-            config._module.args = {
-              inherit hostname system username;
+            config = {
+              _module.args = {
+                inherit hostname system username;
+              };
+              home-manager.users.${username}.imports = [
+                {config._module.args = {inherit username system;};}
+                (config.flake.modules.homeManager."hosts/${hostname}" or {})
+              ];
             };
           }
           config.flake.modules.nixos.remote-servers
           (config.flake.modules.nixos."hosts/${server-name}" or {})
           {
+            nixpkgs.config.allowUnfree = true;
             networking.hostName = hostname;
             networking.domain = domain;
             networking.firewall.allowedTCPPorts = [22];

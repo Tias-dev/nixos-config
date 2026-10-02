@@ -7,7 +7,7 @@
     (config.flake.lib)
     mkStaticNetworkAddressModule
     mkForgejoModule
-    collectNixosModules
+    collectModules
     mkMonitoringModule
     mkGrafanaNtfyForwarder
     mkMatrixServer
@@ -21,6 +21,10 @@
     "docker"
     "nginx"
     "postgresql"
+
+    "neovim"
+    "zsh"
+    "tmux"
   ];
 in {
   flake = {
@@ -28,8 +32,13 @@ in {
       inherit hostname domain;
       username = "tias-dev";
     };
-    modules.nixos."hosts/${domain}" = {config, ...}: {
+    modules.nixos."hosts/${domain}" = {
+      config,
+      username,
+      ...
+    }: {
       disko.devices.disk.disk1.device = "/dev/sda";
+      home-manager.backupFileExtension = ".bak";
       imports =
         [
           (mkStaticNetworkAddressModule {
@@ -55,9 +64,12 @@ in {
             ntfyTopic = "notify-grafana";
           })
           (mkNtfyService {})
-          (mkPostgRESTModule {port = 3007; extraSqlInitScriptPath = ./postgresql-init-script.sql;})
+          (mkPostgRESTModule {
+            port = 3007;
+            extraSqlInitScriptPath = ./postgresql-init-script.sql;
+          })
         ]
-        ++ (collectNixosModules config' nixosModules);
+        ++ (collectModules config' nixosModules username);
       security.acme.acceptTerms = true;
       security.acme.defaults.email = email;
       networking.firewall.allowedTCPPorts = [80 443];

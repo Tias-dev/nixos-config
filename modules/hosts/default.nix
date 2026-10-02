@@ -9,6 +9,7 @@
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
+        inputs.home-manager.nixosModules.home-manager
         {config._module.args = {inherit username system;};}
         config.flake.modules.nixos.${cls}
         config.flake.modules.nixos.homeManager
@@ -16,7 +17,6 @@
         {
           home-manager.users.${username}.imports = [
             {config._module.args = {inherit username system;};}
-            config.flake.modules.homeManager.homeManager
             (config.flake.modules.homeManager."hosts/${hostname}" or {})
           ];
 
@@ -60,8 +60,11 @@
   linuxSMOnly = mkSystemManager "x86_64-linux";
 
   collectTypedModules = type: config: modules:
+    let
+      mapModule = module: config.flake.modules.${type}.${module} or {};
+    in
     assert builtins.isAttrs config;
-    assert builtins.isList modules; (map (module: config.flake.modules.${type}.${module} or {}) modules);
+    assert builtins.isList modules; (map mapModule modules) ++ [config.flake.modules.${type}.${type} or {}];
 in {
   flake.lib = rec {
     mkSystems = {
@@ -74,11 +77,10 @@ in {
 
     collectModules = config: modules: username:
       assert builtins.isAttrs config;
-      assert builtins.isList modules; (
+      assert builtins.isList modules; builtins.addErrorContext "Collect all modules" (
         (collectNixosModules config modules)
         ++ [
           {
-            imports = [inputs.home-manager.nixosModules.home-manager];
             home-manager.users.${username}.imports = collectHomeModules config modules;
           }
         ]

@@ -38,12 +38,14 @@
       };
     in {
       root = ssh-config;
-      ${username} =
-        {
+      ${username} = lib.mkIf (username != "root") ({
           isNormalUser = true;
           extraGroups = ["wheel" "networkmanager" "docker"];
         }
-        // ssh-config;
+        // ssh-config);
     };
+
+    # for home-manager under root
+    programs.dconf.enable = true;
   };
 }

@@ -1,10 +1,8 @@
 {config, ...}: let
   modules = [
-    "develop"
     "neovim"
     "zsh"
     "tmux"
-    "arc"
   ];
 in {
   flake = {
