@@ -31,13 +31,15 @@ in {
         environment.systemPackages = with pkgs; [sops];
       };
     };
+
     homeManager.sops = {
       username,
       pkgs,
       lib,
       config,
+      home-manager-standalone,
       ...
-    }: {
+    }: lib.mkIf home-manager-standalone {
       options = {
         sops-home-path = lib.mkOption {
           type = lib.types.str;

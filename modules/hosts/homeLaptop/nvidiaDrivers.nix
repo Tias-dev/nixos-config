@@ -1,5 +1,7 @@
-{
-  flake.modules.nixos."hosts/laptop-raison" = {
+{config, ...}:
+config.flake.lib.personalNixosModule {
+  hostname = "laptop-raison";
+  module = {
     # nvidia prime graphics
     hardware.nvidia-container-toolkit.enable = true;
     hardware.graphics.enable = true;

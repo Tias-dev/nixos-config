@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   modules = [
     "ownProxy"
     "desktop"
@@ -15,12 +19,18 @@
     "browser"
   ];
 in {
-  flake = {
-    homeConfigurations.raison = config.flake.lib.mkSystems.linuxHMOnly "archer";
-    modules.homeManager."hosts/archer" = {
-      imports = config.flake.lib.collectHomeModules config modules;
-    };
-
-    systemConfigs.default = config.flake.lib.mkSystems.linuxSMOnly "archer";
-  };
+  config = lib.mkMerge [
+    (config.flake.lib.mkSystems.linuxHomeManager
+      {
+        username = "raison";
+        hostname = "archer";
+        inherit modules;
+      })
+    (config.flake.lib.mkSystems.linuxSystemManager
+      {
+        username = "raison";
+        hostname = "archer";
+        inherit modules;
+      })
+  ];
 }

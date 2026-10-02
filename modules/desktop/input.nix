@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.nixos = {
+  flake.modules.nixos.desktop = {
     services.libinput.enable = true;
   };
 }
