@@ -1,6 +1,15 @@
-{inputs, ...}: {
-  config.flake.modules.homeManager."hosts/sdg-robot-bl-vla.vla.yp-c.yandex.net" = {pkgs, ...}: let
-    system = pkgs.stdenv.hostPlatform.system;
+{
+  inputs,
+  config,
+  ...
+}:
+config.flake.lib.personalHomeManagerModule {
+  hostname = "sdg-robot-bl-vla.vla.yp-c.yandex.net";
+  module = {
+    system,
+    pkgs,
+    ...
+  }: let
     neovim-common-opts = {
       clangd.disable-auto-import = true;
       langChanger.enable = false;
@@ -23,6 +32,7 @@
         }
         // neovim-common-opts);
   in {
+    tmux.server-copy-command.enable = true;
     neovim-package = neovim;
     home.packages = with pkgs; [
       (writers.writeBashBin "ivim"

@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, lib, ...}: let
   modules = [
     "develop"
     "neovim"
@@ -7,14 +7,20 @@
     "arc"
   ];
 in {
+  config = lib.mkMerge [
+    (config.flake.lib.mkSystems.linuxHomeManager {
+      username = "tabuchkin";
+      hostname = "sdg-robot-bl-vla.vla.yp-c.yandex.net";
+      inherit modules;
+    })
+    {
+      ssh-keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII4GHahSCM5IoArGolMGdpSmdDG2AzhU70hhZnqyuzmi raison@raison-cachy"
+      ];
+    }
+  ];
   flake = {
-    homeConfigurations."sdg-robot-bl-vla.vla.yp-c.yandex.net" = config.flake.lib.mkSystems.linuxHMOnly "sdg-robot-bl-vla.vla.yp-c.yandex.net" {username = "tabuchkin";};
     modules.homeManager."hosts/sdg-robot-bl-vla.vla.yp-c.yandex.net" = {
-      imports = config.flake.lib.collectHomeModules config modules;
-      tmux.server-copy-command.enable = true;
-      home.file.".gdbinit".text = ''
-        set substitute-path /-S /home/tabuchkin/arcadia
-      '';
     };
   };
 }

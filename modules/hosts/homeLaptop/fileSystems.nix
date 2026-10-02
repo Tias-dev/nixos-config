@@ -1,5 +1,7 @@
-{
-  flake.modules.nixos."hosts/laptop-raison" = {
+{config, ...}:
+config.flake.lib.personalNixosModule {
+  hostname = "laptop-raison";
+  module = {
     fileSystems = {
       "/mnt/storage" = {
         device = "/dev/disk/by-uuid/72e155fe-9a80-4c63-a184-54d9510e6466";

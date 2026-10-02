@@ -1,5 +1,7 @@
-{
-  config.flake.modules.homeManager."hosts/tabuchkin-nix" = {
+{config, ...}:
+config.flake.lib.personalHomeManagerModule {
+  hostname = "tabuchkin-nix";
+  module = {
     browser.extra-bookmarks = [
       {
         name = "Messanger";
