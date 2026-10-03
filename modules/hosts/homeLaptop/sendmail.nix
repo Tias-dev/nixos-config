@@ -1,9 +1,13 @@
-{config, ...}: let
-  inherit (config.flake.lib) mkSendMailProgram personalNixosModule;
-in
-  personalNixosModule {
+{
+  config,
+  configurations-lib,
+  ...
+}: let
+  inherit (config.flake.lib) mkSendMailProgram;
+in {
+  config = configurations-lib.personalNixosModule {
     hostname = "laptop-raison";
-    module = ({config, ...}: {
+    module = {config, ...}: {
       imports = [
         (mkSendMailProgram {
           userEmail = "www.tias.dev@gmail.com";
@@ -16,5 +20,6 @@ in
         format = "yaml";
         owner = "raison";
       };
-    });
-  }
+    };
+  };
+}

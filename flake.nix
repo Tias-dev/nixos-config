@@ -1,6 +1,12 @@
 {
   description = "Tias/Raison/Tias-dev/my nixos config";
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {
+      inherit inputs;
+      specialArgs = {
+        configurations-lib = import ./modules/hosts/lib/_default.nix {inherit inputs;};
+      };
+    } (inputs.import-tree ./modules);
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
