@@ -57,7 +57,8 @@ DesktopNames=niri
 
 ## TODO
 
-- [ ] Important! Standartize nixos/homeManager/systemManager configurations and module collect way
+- [x] Important! Standartize nixos/homeManager/systemManager configurations and module collect way
+- [ ] Important! Standartize remote-servers configurations
 - [ ] Declare dashboard config for prometheus node exporter
 - [ ] Add xray server service
 - [ ] Add encrypted xray server fallback pages

@@ -39,20 +39,21 @@ in {
       config,
       home-manager-standalone,
       ...
-    }: lib.mkIf home-manager-standalone {
-      options = {
-        sops-home-path = lib.mkOption {
-          type = lib.types.str;
-          default = "/home";
+    }:
+      lib.mkIf home-manager-standalone {
+        options = {
+          sops-home-path = lib.mkOption {
+            type = lib.types.str;
+            default = "/home";
+          };
+        };
+        imports = [
+          inputs.sops-nix.homeManagerModules.default
+          (common-sops-opts username config.sops-home-path)
+        ];
+        config = {
+          home.packages = with pkgs; [sops];
         };
       };
-      imports = [
-        inputs.sops-nix.homeManagerModules.default
-        (common-sops-opts username config.sops-home-path)
-      ];
-      config = {
-        home.packages = with pkgs; [sops];
-      };
-    };
   };
 }

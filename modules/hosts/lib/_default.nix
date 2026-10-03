@@ -1,9 +1,4 @@
-{
-  lib,
-  config,
-  inputs,
-  ...
-}: let
+{inputs}: let
   mkConfiguration = {
     creationFunction,
     modules ? [],
@@ -139,76 +134,74 @@
     flake.modules.${type}.${getPersonalModuleName hostname} = module;
   };
 in {
-  flake.lib = {
-    personalNixosModule = {
-      hostname,
-      module,
-    }:
-      personalModule {
-        type = "nixos";
-        inherit module hostname;
-      };
-    personalHomeManagerModule = {
-      hostname,
-      module,
-    }:
-      personalModule {
-        type = "homeManager";
-        inherit module hostname;
-      };
-    personalSystemManagerModule = {
-      hostname,
-      module,
-    }:
-      personalModule {
-        type = "systemManager";
-        inherit module hostname;
-      };
+  personalNixosModule = {
+    hostname,
+    module,
+  }:
+    personalModule {
+      type = "nixos";
+      inherit module hostname;
+    };
+  personalHomeManagerModule = {
+    hostname,
+    module,
+  }:
+    personalModule {
+      type = "homeManager";
+      inherit module hostname;
+    };
+  personalSystemManagerModule = {
+    hostname,
+    module,
+  }:
+    personalModule {
+      type = "systemManager";
+      inherit module hostname;
+    };
 
-    mkSystems = {
-      linux = {
-        hostname,
-        username,
-        modules ? [],
-      }: let
-        personaModuleName = getPersonalModuleName hostname;
-        totalModules = modules ++ [personaModuleName];
-      in {
-        flake.nixosConfigurations.${hostname} = mkNixos {
-          inherit username hostname;
-          system = "x86_64-linux";
-          modules = totalModules;
-        };
+  mkSystems = {
+    linux = {
+      hostname,
+      username,
+      modules ? [],
+    }: let
+      personaModuleName = getPersonalModuleName hostname;
+      totalModules = modules ++ [personaModuleName];
+    in {
+      flake.nixosConfigurations.${hostname} = mkNixos {
+        inherit username hostname;
+        system = "x86_64-linux";
+        modules = totalModules;
       };
+    };
 
-      linuxHomeManager = {
-        hostname,
-        username,
-        modules ? [],
-      }: let
-        personaModuleName = getPersonalModuleName hostname;
-        totalModules = modules ++ [personaModuleName];
-      in {
-        flake.homeConfigurations.${hostname} = mkHomeManager {
-          inherit username hostname;
-          system = "x86_64-linux";
-          modules = totalModules;
-        };
+    linuxHomeManager = {
+      hostname,
+      username,
+      modules ? [],
+    }: let
+      personaModuleName = getPersonalModuleName hostname;
+      totalModules = modules ++ [personaModuleName];
+    in {
+      flake.homeConfigurations.${hostname} = mkHomeManager {
+        inherit username hostname;
+        system = "x86_64-linux";
+        modules = totalModules;
       };
+    };
 
-      linuxSystemManager = {
-        hostname,
-        username,
-        modules ? [],
-      }: let
-        personaModuleName = getPersonalModuleName hostname;
-        totalModules = modules ++ [personaModuleName];
-      in {
-        flake.systemConfigs.${hostname} = mkSystemManager {
-          inherit username hostname;
-          system = "x86_64-linux";
-          modules = totalModules;
-        };
+    linuxSystemManager = {
+      hostname,
+      username,
+      modules ? [],
+    }: let
+      personaModuleName = getPersonalModuleName hostname;
+      totalModules = modules ++ [personaModuleName];
+    in {
+      flake.systemConfigs.${hostname} = mkSystemManager {
+        inherit username hostname;
+        system = "x86_64-linux";
+        modules = totalModules;
       };
     };
   };

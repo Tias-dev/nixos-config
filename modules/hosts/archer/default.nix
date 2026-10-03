@@ -1,5 +1,5 @@
 {
-  config,
+  configurations-lib,
   lib,
   ...
 }: let
@@ -20,13 +20,13 @@
   ];
 in {
   config = lib.mkMerge [
-    (config.flake.lib.mkSystems.linuxHomeManager
+    (configurations-lib.mkSystems.linuxHomeManager
       {
         username = "raison";
         hostname = "archer";
         inherit modules;
       })
-    (config.flake.lib.mkSystems.linuxSystemManager
+    (configurations-lib.mkSystems.linuxSystemManager
       {
         username = "raison";
         hostname = "archer";

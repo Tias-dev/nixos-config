@@ -1,5 +1,5 @@
 {
-  config,
+  configurations-lib,
   lib,
   ...
 }: let
@@ -30,12 +30,12 @@
   ];
 in {
   config = lib.mkMerge [
-    (config.flake.lib.mkSystems.linux {
+    (configurations-lib.mkSystems.linux {
       hostname = "laptop-raison";
       username = "raison";
       inherit modules;
     })
-    (config.flake.lib.personalHomeManagerModule {
+    (configurations-lib.personalHomeManagerModule {
       hostname = "laptop-raison";
       module = {
         desktop = {
@@ -56,7 +56,7 @@ in {
     })
     # extra flake opts
     {
-      ssh-keys = [
+      flake.ssh-keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJC7ayh2luEr8pPQ/TZGAu52lPQimTyTJLnn2X08W0m raison@laptop-raison"
       ];
     }
