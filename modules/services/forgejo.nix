@@ -99,6 +99,7 @@ in {
         ];
         hostPackages = with pkgs; [
           busybox
+          curl
           nix
           gcc
           gnumake
