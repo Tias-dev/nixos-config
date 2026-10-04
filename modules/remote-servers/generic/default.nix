@@ -1,7 +1,7 @@
-{configurations-lib, ...}: let
+{configurations-lib, config, ...}: let
   hostname = "generic";
 in {
-  config = configurations-lib.mkSystems.remoteLinux {
+  config = ( configurations-lib.mkSystems config).remoteLinux {
     inherit hostname;
     username = "default";
   };

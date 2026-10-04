@@ -4,13 +4,12 @@
     hostname,
     lib,
     home-manager-enabled,
-    domain ? null,
     ...
   }: {
     # nixos
+    nixpkgs.config.allowUnfree = true;
     networking = {
       hostName = lib.mkDefault hostname;
-      inherit domain;
     };
     nixpkgs.hostPlatform = system;
     system.stateVersion = "25.11";

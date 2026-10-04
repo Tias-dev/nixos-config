@@ -1,9 +1,10 @@
-{
+{inputs, ...}: {
   config.flake.modules.systemManager.systemManager = {
     lib,
     system,
     ...
   }: {
+    pkgs = inputs.nixpkgs.legacyPackages.${system};
     config = {
       nixpkgs.hostPlatform = system;
     };

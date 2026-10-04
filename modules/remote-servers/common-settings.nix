@@ -9,6 +9,7 @@
     pkgs,
     username,
     system,
+    domain ? null,
     ...
   }: let
     neovim-light = inputs.tias-nixvim.packages.${system}.default;
@@ -39,7 +40,10 @@
       tmux
     ]);
 
-    networking.firewall.allowedTCPPorts = [22];
+    networking = {
+      firewall.allowedTCPPorts = [22];
+      inherit domain;
+    };
     security.sudo.wheelNeedsPassword = false;
     users.users = let
       ssh-config = {
