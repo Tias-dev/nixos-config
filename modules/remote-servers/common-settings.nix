@@ -1,20 +1,30 @@
-{config, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
   config.flake.modules.nixos.remote-servers = {
     modulesPath,
     lib,
     pkgs,
     username,
+    system,
     ...
-  }: {
+  }: let
+    neovim-light = inputs.tias-nixvim.packages.${system}.default;
+  in {
     imports = [
+      inputs.disko.nixosModules.disko
       (modulesPath + "/installer/scan/not-detected.nix")
       (modulesPath + "/profiles/qemu-guest.nix")
       ./_generic/hardware-configuration.nix
     ];
+
     boot.loader.grub = {
       efiSupport = true;
       efiInstallAsRemovable = true;
     };
+
     services.openssh = {
       enable = true;
       settings = {
@@ -25,10 +35,11 @@
     environment.systemPackages = map lib.lowPrio (with pkgs; [
       curl
       gitMinimal
-      vim
+      neovim-light
       tmux
     ]);
 
+    networking.firewall.allowedTCPPorts = [22];
     security.sudo.wheelNeedsPassword = false;
     users.users = let
       ssh-config = {

@@ -3,9 +3,7 @@
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {
       inherit inputs;
-      specialArgs = {
-        configurations-lib = import ./modules/hosts/lib/_default.nix {inherit inputs;};
-      };
+      specialArgs = {configurations-lib = import ./lib/configurations.nix {inherit inputs;};};
     } (inputs.import-tree ./modules);
 
   inputs = {

@@ -1,9 +1,10 @@
 {inputs}: let
+  lib = inputs.nixpkgs.lib;
   mkConfiguration = {
     creationFunction,
     modules ? [],
   }:
-    creationFunction {imports = modules;};
+    creationFunction {inherit modules;};
 
   collectTypedModules = {
     config,
@@ -25,12 +26,15 @@
     class ? "nixos",
     addHomeManager ? true,
     modules ? [],
-  }: let
-    extraArgs = {
-      inherit system hostname username;
-      home-manager-enabled = addHomeManager;
-      home-manager-standalone = false;
-    };
+    ...
+  } @ args: let
+    extraArgs =
+      {
+        inherit hostname username system;
+        home-manager-enabled = addHomeManager;
+        home-manager-standalone = false;
+      }
+      // args;
   in
     mkConfiguration
     {
@@ -133,7 +137,7 @@
   }: {
     flake.modules.${type}.${getPersonalModuleName hostname} = module;
   };
-in {
+in rec {
   personalNixosModule = {
     hostname,
     module,
@@ -142,6 +146,23 @@ in {
       type = "nixos";
       inherit module hostname;
     };
+
+  personalRemoteNixosModule = {
+    hostname,
+    domain ? null,
+    module,
+  }: let
+    server-name =
+      if domain != null
+      then domain
+      else hostname;
+  in
+    personalModule {
+      type = "nixos";
+      hostname = server-name;
+      inherit module;
+    };
+
   personalHomeManagerModule = {
     hostname,
     module,
@@ -174,6 +195,48 @@ in {
         modules = totalModules;
       };
     };
+
+    remoteLinux = {
+      hostname,
+      username,
+      domain ? null,
+      modules ? [],
+    }: let
+      server-name =
+        if domain != null
+        then domain
+        else hostname;
+      personaModuleName = getPersonalModuleName server-name;
+      totalModules = modules ++ [personaModuleName "remote-servers"];
+    in
+      lib.mkMerge [
+        {
+          flake.nixosConfigurations.${server-name} = mkNixos {
+            inherit username hostname domain server-name;
+            system = "x86_64-linux";
+            modules = totalModules;
+          };
+        }
+        # basic admin setup for better cli
+        (personalHomeManagerModule {
+          hostname = server-name;
+          module = {system, ...}: {
+            # light neovim without any lsp/formatter/treesitter binaries
+            neovim-package = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
+              langChanger.enable = false;
+            };
+            imports = collectTypedModules {
+              type = "homeManager";
+              addSelfModule = false;
+              modules = [
+                "neovim"
+                "zsh"
+                "tmux"
+              ];
+            };
+          };
+        })
+      ];
 
     linuxHomeManager = {
       hostname,
