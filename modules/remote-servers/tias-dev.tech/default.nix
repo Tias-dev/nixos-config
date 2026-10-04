@@ -11,7 +11,6 @@
     (config.flake.lib)
     mkStaticNetworkAddressModule
     mkForgejoModule
-    collectModules
     mkMonitoringModule
     mkGrafanaNtfyForwarder
     mkMatrixServer
@@ -28,7 +27,7 @@
   ];
 in {
   config = lib.mkMerge [
-    (configurations-lib.mkSystems.remoteLinux
+    ((configurations-lib.mkSystems config).remoteLinux
       {
         inherit hostname domain;
         username = "tias-dev";
@@ -37,7 +36,7 @@ in {
     (configurations-lib.personalRemoteNixosModule
       {
         inherit hostname domain;
-        module = {
+        module = {config, ...}: {
           disko.devices.disk.disk1.device = "/dev/sda";
           imports = [
             (mkStaticNetworkAddressModule {

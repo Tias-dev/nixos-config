@@ -1,4 +1,5 @@
 {
+  config,
   configurations-lib,
   lib,
   ...
@@ -17,7 +18,7 @@
   ];
 in {
   config = lib.mkMerge [
-    (configurations-lib.mkSystems.linuxHomeManager {
+    (( configurations-lib.mkSystems config).linuxHomeManager {
       username = "raison";
       hostname = "raison-cachy";
       inherit modules;

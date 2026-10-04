@@ -10,7 +10,8 @@
     config,
     type,
     addSelfModule ? true,
-  }: modules:
+    modules ? [],
+  }:
     (map (module: config.flake.modules.${type}.${module} or {}) modules)
     ++ (
       if addSelfModule
@@ -20,6 +21,7 @@
 
   # plain NixOS + home-manager setup
   mkNixos = {
+    flakeConfig,
     hostname,
     username,
     system ? "x86_64-linux",
@@ -44,36 +46,33 @@
           # args
           {config._module.args = extraArgs;}
           # nixos modules
-          ({config, ...}: {
-            imports =
-              collectTypedModules {
-                inherit config;
-                type = class;
-                addSelfModule = true;
-              }
-              modules;
-          })
+          {
+            imports = collectTypedModules {
+              config = flakeConfig;
+              type = class;
+              addSelfModule = true;
+              inherit modules;
+            };
+          }
         ]
         # home-manager
         ++ (
           if addHomeManager
           then [
             inputs.home-manager.nixosModules.home-manager
-            ({
-              config,
-              username,
-              ...
-            }: {
+            ({username, ...}: {
               home-manager.users.${username}.imports =
                 [
                   {config._module.args = extraArgs;}
                 ]
-                ++ (collectTypedModules {
-                    inherit config;
+                ++ (
+                  collectTypedModules {
+                    config = flakeConfig;
                     type = "homeManager";
                     addSelfModule = true;
+                    inherit modules;
                   }
-                  modules);
+                );
             })
           ]
           else []
@@ -81,6 +80,7 @@
     };
   # home-manager only
   mkHomeManager = {
+    flakeConfig,
     hostname,
     username,
     system ? "x86_64-linux",
@@ -90,25 +90,26 @@
       creationFunction = inputs.home-manager.lib.homeManagerConfiguration;
       modules = [
         {
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
           config._module.args = {
             inherit system hostname username;
             home-manager-standalone = true;
           };
         }
-        ({config, ...}: {
-          imports =
-            collectTypedModules {
-              inherit config;
-              type = "homeManager";
-              addSelfModule = true;
-            }
-            modules;
-        })
+        {
+          imports = collectTypedModules {
+            config = flakeConfig;
+            type = "homeManager";
+            addSelfModule = true;
+            inherit modules;
+          };
+        }
       ];
     };
 
   # Manage system for not NixOS distro
   mkSystemManager = {
+    flakeConfig,
     hostname,
     username,
     system ? "x86_64-linux",
@@ -118,18 +119,17 @@
       creationFunction = inputs.system-manager.lib.makeSystemConfig;
       modules = [
         {config._module.args = {inherit system hostname username;};}
-        ({config, ...}: {
-          imports =
-            collectTypedModules {
-              inherit config;
-              type = "systemManager";
-              addSelfModule = true;
-            }
-            modules;
-        })
+        {
+          imports = collectTypedModules {
+            config = flakeConfig;
+            type = "systemManager";
+            addSelfModule = true;
+            inherit modules;
+          };
+        }
       ];
     };
-  getPersonalModuleName = {hostname}: "hosts/${hostname}";
+  getPersonalModuleName = hostname: "hosts/${hostname}";
   personalModule = {
     type,
     hostname,
@@ -180,7 +180,7 @@ in rec {
       inherit module hostname;
     };
 
-  mkSystems = {
+  mkSystems = flakeConfig: {
     linux = {
       hostname,
       username,
@@ -190,7 +190,7 @@ in rec {
       totalModules = modules ++ [personaModuleName];
     in {
       flake.nixosConfigurations.${hostname} = mkNixos {
-        inherit username hostname;
+        inherit username hostname flakeConfig;
         system = "x86_64-linux";
         modules = totalModules;
       };
@@ -212,7 +212,7 @@ in rec {
       lib.mkMerge [
         {
           flake.nixosConfigurations.${server-name} = mkNixos {
-            inherit username hostname domain server-name;
+            inherit username hostname domain server-name flakeConfig;
             system = "x86_64-linux";
             modules = totalModules;
           };
@@ -226,6 +226,7 @@ in rec {
               langChanger.enable = false;
             };
             imports = collectTypedModules {
+              config = flakeConfig;
               type = "homeManager";
               addSelfModule = false;
               modules = [
@@ -247,7 +248,7 @@ in rec {
       totalModules = modules ++ [personaModuleName];
     in {
       flake.homeConfigurations.${hostname} = mkHomeManager {
-        inherit username hostname;
+        inherit username hostname flakeConfig;
         system = "x86_64-linux";
         modules = totalModules;
       };
@@ -262,7 +263,7 @@ in rec {
       totalModules = modules ++ [personaModuleName];
     in {
       flake.systemConfigs.${hostname} = mkSystemManager {
-        inherit username hostname;
+        inherit username hostname flakeConfig;
         system = "x86_64-linux";
         modules = totalModules;
       };
