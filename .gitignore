@@ -1,3 +1,5 @@
 cfg/
 *.swp
 result
+result
+*.orig
