@@ -3,8 +3,11 @@
   mkConfiguration = {
     creationFunction,
     modules ? [],
-  }:
-    creationFunction {inherit modules;};
+    ...
+  } @ args: let
+    extraArgs = removeAttrs args ["creationFunction" "modules"];
+  in
+    creationFunction ({inherit modules;} // extraArgs);
 
   collectTypedModules = {
     config,
@@ -88,9 +91,9 @@
   }:
     mkConfiguration {
       creationFunction = inputs.home-manager.lib.homeManagerConfiguration;
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
       modules = [
         {
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
           config._module.args = {
             inherit system hostname username;
             home-manager-standalone = true;
