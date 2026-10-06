@@ -210,7 +210,15 @@ in rec {
         then domain
         else hostname;
       personaModuleName = getPersonalModuleName server-name;
-      totalModules = modules ++ [personaModuleName "remote-servers"];
+      totalModules =
+        modules
+        ++ [personaModuleName "remote-servers"]
+        # basic admin setup
+        ++ [
+          "neovim"
+          "zsh"
+          "tmux"
+        ];
     in
       lib.mkMerge [
         {
@@ -227,16 +235,6 @@ in rec {
             # light neovim without any lsp/formatter/treesitter binaries
             neovim-package = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
               langChanger.enable = false;
-            };
-            imports = collectTypedModules {
-              config = flakeConfig;
-              type = "homeManager";
-              addSelfModule = false;
-              modules = [
-                "neovim"
-                "zsh"
-                "tmux"
-              ];
             };
           };
         })
