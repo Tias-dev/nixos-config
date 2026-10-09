@@ -6,6 +6,7 @@ in {
     disableRegistration ? true,
     addDefaultRunner ? true,
     email ? "root@localhost",
+    extraRunnerHostPackages ? []
   }: {
     lib,
     pkgs,
@@ -108,7 +109,7 @@ in {
           bash
           gawk
           jq
-        ];
+        ] ++ extraRunnerHostPackages;
       };
     };
   };

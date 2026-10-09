@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   configurations-lib,
@@ -36,7 +37,11 @@ in {
     (configurations-lib.personalRemoteNixosModule
       {
         inherit hostname domain;
-        module = {config, ...}: {
+        module = {
+          config,
+          system,
+          ...
+        }: {
           disko.devices.disk.disk1.device = "/dev/sda";
           imports = [
             (mkStaticNetworkAddressModule {
@@ -49,6 +54,9 @@ in {
               disableRegistration = true;
               addDefaultRunner = true;
               email = email;
+              extraRunnerHostPackages = with inputs.tias-nixpkgs.packages.${system}; [
+                ost-toolkit
+              ];
             })
             (mkMatrixServer {
               subdomain = "matrix";
