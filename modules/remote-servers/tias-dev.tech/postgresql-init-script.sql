@@ -62,7 +62,7 @@ SELECT
   t2.variants_amount
 FROM
   @schema@.works AS t1
-  INNER JOIN @schema@.work_variants_view AS t2 ON t1.id = t2.work_id;
+  INNER JOIN @schema@.work_variants AS t2 ON t1.id = t2.work_id;
 
 GRANT
 select
