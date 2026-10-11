@@ -1,12 +1,21 @@
 {inputs, ...}: {
-  flake.modules.homeManager.niri = {pkgs, ...}: {
+  flake.modules.homeManager.niri = {
+    home-manager-standalone,
+    lib,
+    system,
+    ...
+  }: {
+    systemd.user.services = lib.mkIf home-manager-standalone {
+      dms.Service.ExecStart = lib.mkForce "nixGL ${inputs.dms.packages.${system}.default}/bin/dms run --session";
+    };
     programs.dank-material-shell = {
       enable = true;
       enableSystemMonitoring = true;
       enableDynamicTheming = true;
-      # systemd.enable = true;
-      niri.enableSpawn = true;
+      systemd.enable = true;
+      niri.enableSpawn = false;
       settings = {
+        dankIslandBarId = "default";
         barConfigs = [
           {
             id = "default";
