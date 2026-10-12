@@ -1,0 +1,7 @@
+% linux
+
+# add user to group
+sudo usermod -aG <group> <user>
+
+$ group: cat /etc/group | cut -d':' -f1
+$ user: cat /etc/passwd | cut -d':' -f1
