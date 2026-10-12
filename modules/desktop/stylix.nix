@@ -57,40 +57,70 @@
         portal = true;
       };
       lightModeScripts = {
-        "update-dbus" = ''
-          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-        '';
+        "update-dbus" =
+          /*
+          bash
+          */
+          ''
+            dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+          '';
 
-        "update-home-manager-dms" = lib.mkIf home-manager-standalone ''
-          home-manager switch --flake /home/${username}/nix#$(hostname) --specialisation light
-          systemctl --user restart dms.service
-        '';
+        "update-home-manager-dms" =
+          lib.mkIf home-manager-standalone
+          /*
+          bash
+          */
+          ''
+            home-manager switch --flake ~/nix#$(hostname) --specialisation light
+            tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+            systemctl --user restart dms.service
+          '';
 
-        "update-nixos" = lib.mkIf (!home-manager-standalone) ''
-          if ! nixos-rebuild --help &>/dev/null; then
-            notify-send "Nixos not found, that strange"
-            exit 0
-          fi
-          nixos-rebuild switch --flake /home/${username}/nix#$(hostname) --specialisation light
-        '';
+        "update-nixos" =
+          lib.mkIf (!home-manager-standalone)
+          /*
+          bash
+          */
+          ''
+            if ! nixos-rebuild --help &>/dev/null; then
+              notify-send "Nixos not found, that strange"
+              exit 0
+            fi
+            nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation light
+          '';
       };
       darkModeScripts = {
-        "update-dbus" = ''
-          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-        '';
+        "update-dbus" =
+          /*
+          bash
+          */
+          ''
+            dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+          '';
 
-        "update-home-manager" = lib.mkIf home-manager-standalone ''
-          home-manager switch --flake /home/${username}/nix#$(hostname) --specialisation dark
-          systemctl --user restart dms.service
-        '';
+        "update-home-manager" =
+          lib.mkIf home-manager-standalone
+          /*
+          bash
+          */
+          ''
+            home-manager switch --flake ~/nix#$(hostname) --specialisation dark
+            tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+            systemctl --user restart dms.service
+          '';
 
-        "update-nixos" = lib.mkIf (!home-manager-standalone) ''
-          if ! nixos-rebuild --help &>/dev/null; then
-            notify-send "Nixos not found, that strange"
-            exit 0
-          fi
-          nixos-rebuild switch --flake /home/${username}/nix#$(hostname) --specialisation dark
-        '';
+        "update-nixos" =
+          lib.mkIf (!home-manager-standalone)
+          /*
+          bash
+          */
+          ''
+            if ! nixos-rebuild --help &>/dev/null; then
+              notify-send "Nixos not found, that strange"
+              exit 0
+            fi
+            nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation dark
+          '';
       };
     };
   };
