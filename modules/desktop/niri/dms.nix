@@ -13,86 +13,189 @@
       enableSystemMonitoring = true;
       enableDynamicTheming = true;
       systemd.enable = true;
-      niri.enableSpawn = false;
       settings = {
+        springBounce = 0;
+        motionEffect = 2;
+        barElevationEnabled = false;
+        workspaceDragReorder = false;
+        reverseScrolling = true;
+        workspaceNameIcons = {
+          browser = {
+            type = "icon";
+            value = "home";
+          };
+          terminal = {
+            type = "icon";
+            value = "terminal";
+          };
+          chat = {
+            type = "icon";
+            value = "chat";
+          };
+          doc-viewer = {
+            type = "icon";
+            value = "photo";
+          };
+        };
+        fontWeight = 900;
+        showDock = true;
+        dockSmartAutoHide = true;
+        dockBorderThickness = 2;
+        dockLauncherEnabled = true;
         dankIslandBarId = "default";
+        dankIslandReserveHeight = 31;
+        dankIslandCompactHeight = 28;
+        dankIslandOuterGap = 0;
+        dankIslandCornerRadius = 10;
+        dankIslandHomeLayout = [
+          {
+            id = "media";
+            enabled = true;
+          }
+          {
+            id = "clock";
+            enabled = true;
+          }
+          {
+            id = "weather";
+            enabled = false;
+          }
+          {
+            id = "status";
+            enabled = false;
+          }
+          {
+            id = "volume";
+            enabled = false;
+          }
+          {
+            id = "brightness";
+            enabled = false;
+          }
+          {
+            id = "notifications";
+            enabled = false;
+          }
+        ];
+        dankIslandSatelliteBackground = true;
+        dankIslandSatelliteSwoopRadius = 64;
         barConfigs = [
           {
-            id = "default";
-            name = "Main Bar";
-            enabled = true;
-            position = 0;
-            screenPreferences = [
-              "all"
-            ];
-            showOnLastDisplay = true;
-            leftWidgets = [
-              "launcherButton"
-              "workspaceSwitcher"
-              "focusedWindow"
-            ];
+            autoHide = false;
+            autoHideDelay = 250;
+            borderColor = "surfaceText";
+            borderEnabled = false;
+            borderOpacity = 1;
+            borderThickness = 1;
+            bottomGap = 0;
             centerWidgets = [
               "music"
               "clock"
               "weather"
             ];
-            rightWidgets = [
-              {
-                id = "systemTray";
-                enabled = true;
-              }
-              {
-                id = "clipboard";
-                enabled = true;
-              }
-              {
-                id = "cpuUsage";
-                enabled = true;
-              }
-              {
-                id = "memUsage";
-                enabled = true;
-              }
-              {
-                id = "notificationButton";
-                enabled = true;
-              }
-              {
-                id = "battery";
-                enabled = true;
-              }
-              {
-                id = "vpn";
-                enabled = true;
-              }
-              {
-                id = "controlCenterButton";
-                enabled = true;
-              }
-            ];
-            spacing = 4;
-            innerPadding = 4;
-            bottomGap = 0;
-            transparency = 1;
-            widgetTransparency = 1;
-            squareCorners = false;
-            noBackground = false;
-            gothCornersEnabled = false;
+            enabled = true;
+            fontScale = 1;
             gothCornerRadiusOverride = false;
             gothCornerRadiusValue = 12;
-            borderEnabled = false;
-            borderColor = "surfaceText";
-            borderOpacity = 1;
-            borderThickness = 1;
-            fontScale = 1;
-            autoHide = false;
-            autoHideDelay = 250;
+            gothCornersEnabled = false;
+            id = "default";
+            innerPadding = 0;
+            leftWidgets = [
+              "launcherButton"
+              "workspaceSwitcher"
+              "focusedWindow"
+            ];
+            name = "Main Bar";
+            noBackground = true;
             openOnOverview = false;
-            visible = true;
             popupGapsAuto = true;
-            popupGapsManual = 4;
+            popupGapsManual = 0;
+            position = 0;
+            rightWidgets = [
+              {
+                enabled = true;
+                id = "systemTray";
+              }
+              {
+                enabled = true;
+                id = "clipboard";
+              }
+              {
+                id = "cpuTemp";
+                enabled = true;
+                minimumWidth = true;
+              }
+              {
+                enabled = true;
+                id = "cpuUsage";
+              }
+              {
+                enabled = true;
+                id = "memUsage";
+              }
+              {
+                enabled = true;
+                id = "notificationButton";
+              }
+              {
+                enabled = true;
+                id = "battery";
+              }
+              {
+                enabled = true;
+                id = "vpn";
+              }
+              {
+                enabled = true;
+                id = "controlCenterButton";
+              }
+            ];
+            screenPreferences = [
+              "all"
+            ];
+            showOnLastDisplay = true;
+            spacing = 4;
+            squareCorners = false;
+            transparency = 1;
+            visible = true;
+            widgetTransparency = 1;
+            widgetPadding = 11;
+            barInsetPadding = 7;
+            iconScale = 1.25;
+            maximizeWidgetIcons = false;
+            maximizeWidgetText = false;
+            removeWidgetPadding = false;
+            widgetOutlineEnabled = false;
+            widgetOutlineThickness = 1;
+            widgetOutlineColor = "surfaceText";
           }
         ];
+        desktopClockCustomColor = {
+          r = 1;
+          g = 1;
+          b = 1;
+          a = 1;
+          hsvHue = -1;
+          hsvSaturation = 0;
+          hsvValue = 1;
+          hslHue = -1;
+          hslSaturation = 0;
+          hslLightness = 1;
+          valid = true;
+        };
+        systemMonitorCustomColor = {
+          r = 1;
+          g = 1;
+          b = 1;
+          a = 1;
+          hsvHue = -1;
+          hsvSaturation = 0;
+          hsvValue = 1;
+          hslHue = -1;
+          hslSaturation = 0;
+          hslLightness = 1;
+          valid = true;
+        };
       };
       plugins = {
         dankBatteryAlerts.enable = true;
