@@ -13,7 +13,7 @@
   ];
 in {
   config = lib.mkMerge [
-    (( configurations-lib.mkSystems config).linuxHomeManager {
+    ((configurations-lib.mkSystems config).linuxHomeManager {
       username = "tabuchkin";
       hostname = "sdg-robot-bl-vla.vla.yp-c.yandex.net";
       inherit modules;

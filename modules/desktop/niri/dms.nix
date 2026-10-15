@@ -5,15 +5,22 @@
     system,
     ...
   }: {
-    systemd.user.services = lib.mkIf home-manager-standalone {
-      dms.Service.ExecStart = lib.mkForce "nixGL ${inputs.dms.packages.${system}.default}/bin/dms run --session";
+    imports = [inputs.dank-calendar.homeModules.default];
+    programs.dank-calendar = {
+      enable = true;
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
     };
-    home.packages = [inputs.nixpkgs-unstable.legacyPackages.${system}.dankcalendar];
     programs.dank-material-shell = {
       enable = true;
       enableSystemMonitoring = true;
       enableDynamicTheming = true;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
       settings = {
         springBounce = 0;
         motionEffect = 2;
@@ -206,6 +213,10 @@
         dockerManager.enable = true;
         emojiLauncher.enable = true;
       };
+    };
+    # enable dms start via nixGL on not nixos systems
+    systemd.user.services = lib.mkIf home-manager-standalone {
+      dms.Service.ExecStart = lib.mkForce "nixGL ${inputs.dms.packages.${system}.default}/bin/dms run --session";
     };
   };
 }

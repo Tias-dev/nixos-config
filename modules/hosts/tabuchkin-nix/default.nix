@@ -34,12 +34,12 @@
   ];
 in {
   config = lib.mkMerge [
-    (( configurations-lib.mkSystems config).linuxHomeManager {
+    ((configurations-lib.mkSystems config).linuxHomeManager {
       username = "tabuchkin";
       hostname = "tabuchkin-nix";
       inherit modules;
     })
-    (( configurations-lib.mkSystems config).linuxSystemManager {
+    ((configurations-lib.mkSystems config).linuxSystemManager {
       username = "tabuchkin";
       hostname = "tabuchkin-nix";
       inherit modules;

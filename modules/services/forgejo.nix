@@ -6,7 +6,7 @@ in {
     disableRegistration ? true,
     addDefaultRunner ? true,
     email ? "root@localhost",
-    extraRunnerHostPackages ? []
+    extraRunnerHostPackages ? [],
   }: {
     lib,
     pkgs,
@@ -98,18 +98,20 @@ in {
           "ubuntu-latest:docker://node:18-bullseye"
           "native:host"
         ];
-        hostPackages = with pkgs; [
-          busybox
-          curl
-          nix
-          gcc
-          gnumake
-          git
-          nodejs
-          bash
-          gawk
-          jq
-        ] ++ extraRunnerHostPackages;
+        hostPackages = with pkgs;
+          [
+            busybox
+            curl
+            nix
+            gcc
+            gnumake
+            git
+            nodejs
+            bash
+            gawk
+            jq
+          ]
+          ++ extraRunnerHostPackages;
       };
     };
   };

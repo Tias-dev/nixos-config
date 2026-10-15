@@ -31,7 +31,7 @@
   ];
 in {
   config = lib.mkMerge [
-    (( configurations-lib.mkSystems config).linux {
+    ((configurations-lib.mkSystems config).linux {
       hostname = "laptop-raison";
       username = "raison";
       inherit modules;

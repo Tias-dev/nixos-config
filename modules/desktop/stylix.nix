@@ -10,10 +10,7 @@
     };
   };
 in {
-  config.flake.modules.nixos.desktop = {
-    username,
-    ...
-  }: {
+  config.flake.modules.nixos.desktop = {username, ...}: {
     imports = [
       inputs.stylix.nixosModules.stylix
     ];
@@ -33,15 +30,15 @@ in {
       ];
     };
 
-      # propagate specialisations to home-manager
-      specialisation = {
-        light.configuration = {
-          home-manager.users.${username}.current-theme = "light";
-        };
-        dark.configuration = {
-          home-manager.users.${username}.current-theme = "dark";
-        };
+    # propagate specialisations to home-manager
+    specialisation = {
+      light.configuration = {
+        home-manager.users.${username}.current-theme = "light";
       };
+      dark.configuration = {
+        home-manager.users.${username}.current-theme = "dark";
+      };
+    };
   };
 
   config.flake.modules.homeManager.homeManager = {
@@ -74,14 +71,15 @@ in {
     ];
 
     config = {
-      stylix = ({
+      stylix =
+        {
           enable = true;
 
           targets = {
             firefox.profileNames = ["tias-dev"];
           };
         }
-        // themes.${config.current-theme});
+        // themes.${config.current-theme};
 
       specialisation = lib.mkIf home-manager-standalone {
         light.configuration = {
