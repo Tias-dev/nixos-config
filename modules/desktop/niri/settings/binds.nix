@@ -53,7 +53,7 @@
             hotkey-overlay = {
               title = "Open power menu";
             };
-            action.spawn-sh = "${dms-bin} ipc call powermenu toggle";
+            action.spawn-sh = "${dms-bin} ipc call fullscreenPowerMenu toggle";
           };
 
           "XF86AudioRaiseVolume" = {

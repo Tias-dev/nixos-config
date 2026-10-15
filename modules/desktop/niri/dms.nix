@@ -114,6 +114,10 @@
               "launcherButton"
               "workspaceSwitcher"
               "focusedWindow"
+              {
+                id = "bongoCat";
+                enabled = true;
+              }
             ];
             name = "Main Bar";
             noBackground = true;
@@ -212,7 +216,6 @@
         dockerManager.enable = true;
         emojiLauncher.enable = true;
 
-        homeAssistantMonitor.enable = true;
         dcalUpcoming.enable = true;
         fullscreenPowerMenu.enable = true;
 
