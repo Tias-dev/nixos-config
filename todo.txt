@@ -1,0 +1,1 @@
+2026-10-15 Add biometric unlock module via PC Bio Unlock +Feature
