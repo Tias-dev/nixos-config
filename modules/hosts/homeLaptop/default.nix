@@ -28,6 +28,7 @@
     "documents"
     "matrix-client"
     "rutranslit"
+    "mai-wifi-login"
   ];
 in {
   config = lib.mkMerge [
