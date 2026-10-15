@@ -1,5 +1,5 @@
 {
-  config.flake.modules.homeManager.matrix-client = {pkgs, ...}: {
+  config.flake.modules.homeManager.matrix-client = {pkgs, lib, config, ...}: {
     home.packages = with pkgs; [
       element-desktop
     ];
@@ -20,5 +20,8 @@
         };
       })
     ];
+    niri-settings = lib.mkIf config.programs.niri.enable {
+      spawn-at-startup = [{argv = ["element-desktop"];}];
+    };
   };
 }

@@ -2,6 +2,7 @@
   flake.modules.nixos.desktop = {
     lib,
     config,
+    username,
     ...
   }: {
     options = {
@@ -17,6 +18,7 @@
           compositor.name = "niri";
         };
       };
+      users.users.${username}.extraGroups = lib.mkIf (!config.tui-greeter.enable) ["greeter"];
     };
   };
 }

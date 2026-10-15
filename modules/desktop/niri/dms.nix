@@ -153,7 +153,7 @@
               }
               {
                 enabled = true;
-                id = "vpn";
+                id = "docker";
               }
               {
                 enabled = true;
@@ -209,9 +209,16 @@
       };
       plugins = {
         dankBatteryAlerts.enable = true;
-        dankPomodoroTimer.enable = true;
         dockerManager.enable = true;
         emojiLauncher.enable = true;
+
+        homeAssistantMonitor.enable = true;
+        dcalUpcoming.enable = true;
+        fullscreenPowerMenu.enable = true;
+
+        # memes
+        activateLinux.enable = true;
+        bongoCat.enable = true;
       };
     };
     # enable dms start via nixGL on not nixos systems
