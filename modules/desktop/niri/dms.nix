@@ -8,6 +8,7 @@
     systemd.user.services = lib.mkIf home-manager-standalone {
       dms.Service.ExecStart = lib.mkForce "nixGL ${inputs.dms.packages.${system}.default}/bin/dms run --session";
     };
+    home.packages = [inputs.nixpkgs-unstable.legacyPackages.${system}.dankcalendar];
     programs.dank-material-shell = {
       enable = true;
       enableSystemMonitoring = true;
@@ -43,6 +44,8 @@
         dockBorderThickness = 2;
         dockLauncherEnabled = true;
         dankIslandBarId = "default";
+        dankIslandPalette = "dim";
+        dankIslandSatellitePosition = "island";
         dankIslandReserveHeight = 31;
         dankIslandCompactHeight = 28;
         dankIslandOuterGap = 0;
