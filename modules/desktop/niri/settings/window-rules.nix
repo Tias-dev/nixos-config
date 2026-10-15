@@ -15,6 +15,16 @@
       }
       {
         matches = [
+          {app-id = "org.kde.kdeconnect.daemon";}
+        ];
+        open-floating = true;
+        open-fullscreen = false;
+        open-maximized = true;
+        focus-ring.enable = false;
+        border.enable = false;
+      }
+      {
+        matches = [
           {app-id = "${config.browser.package-name}";}
         ];
         open-on-workspace = "browser";

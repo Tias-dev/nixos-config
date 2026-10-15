@@ -14,6 +14,7 @@
           "org.freedesktop.impl.portal.ScreenCast" = [
             "gnome"
           ];
+          "org.freedesktop.portal.RemoteDesktop" = [ "gnome" ];
         };
       };
     };

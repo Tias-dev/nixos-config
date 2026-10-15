@@ -1,1 +1,2 @@
 2026-10-15 Add biometric unlock module via PC Bio Unlock +Feature
+2026-10-15 Complete kde-connect integration +FIX
