@@ -27,7 +27,13 @@
         matches = [
           {app-id = "${config.browser.package-name}";}
         ];
-        open-on-workspace = "browser";
+        open-on-workspace = "home";
+      }
+      {
+        matches = [
+          {app-id = "com.danklinux.dankcalendar";}
+        ];
+        open-on-workspace = "home";
       }
       {
         matches = [

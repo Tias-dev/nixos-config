@@ -10,7 +10,7 @@ in {
 
     # open on second monitor if plugged, fallback to primary monitor
     common-workspaces = {
-      "01-browser" = {name = "browser";};
+      "01-home" = {name = "home";};
       "02-terminal" = {name = "terminal";};
       "03-chat" = {name = "chat";};
       "04-doc-viewer" = {name = "doc-viewer";};

@@ -62,4 +62,3 @@ DesktopNames=niri
 - [ ] Declare dashboard config for prometheus node exporter
 - [ ] Add xray server service
 - [ ] Add encrypted xray server fallback pages
-- [ ] Update mai-wifi-auto-login service to check wifi connections

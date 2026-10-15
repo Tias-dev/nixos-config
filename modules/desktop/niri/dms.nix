@@ -28,7 +28,7 @@
         workspaceDragReorder = false;
         reverseScrolling = true;
         workspaceNameIcons = {
-          browser = {
+          home = {
             type = "icon";
             value = "home";
           };
