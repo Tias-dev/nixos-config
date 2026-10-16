@@ -1113,11 +1113,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1791717210,
-        "narHash": "sha256-7ow+wbQj4abI9063pP2NLugrfEWK7VOEyMXLF4MD8ZQ=",
+        "lastModified": 1792136555,
+        "narHash": "sha256-FPywmuzxhX2x9+LLUhfiiz6CzpaV320m8K20enieJ90=",
         "owner": "Tias-dev",
         "repo": "ost-compiler",
-        "rev": "7bc237e900200bff28a615d91b1c89eb926297d3",
+        "rev": "0f100491ad12423c0a70f83866e4ce8564b19dbc",
         "type": "github"
       },
       "original": {
@@ -1384,11 +1384,11 @@
         "ost-toolkit": "ost-toolkit"
       },
       "locked": {
-        "lastModified": 1791717339,
-        "narHash": "sha256-oiVgV1ke/tKKtLZ3YkjzkLXlm4zM6eEK3zGsoptJf+Q=",
+        "lastModified": 1792136606,
+        "narHash": "sha256-yQSLNb8WOM/igFhbqwrfpfl8j1XQWCxQUVb2eqqGTMA=",
         "owner": "Tias-dev",
         "repo": "tias-nixpkgs",
-        "rev": "8479d6d93ae23e9f45d00bfa2d8a2ca0c5ab1ad8",
+        "rev": "c6e6f024bdbd00a63f4b1d16aae6783c1eae4e45",
         "type": "github"
       },
       "original": {
@@ -1431,11 +1431,11 @@
         "tias-nixpkgs": "tias-nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1791555745,
-        "narHash": "sha256-gMEtORV9CBudpQoQorpSHmtaX/Be9KOMnbAnML/z0H8=",
+        "lastModified": 1792177600,
+        "narHash": "sha256-BRQXXNlCEKfVEqMrgrOGZhALcyVhr8j2Zv7djqqRZEA=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "9ac461a3fef7cb4ab11c468f9afc80b87133222d",
+        "rev": "363fef51f6eafa662c322240162ba476c9610cae",
         "type": "github"
       },
       "original": {
