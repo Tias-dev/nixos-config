@@ -6,7 +6,7 @@
   inherit (config.flake.lib) mkSendMailProgram;
 in {
   config = configurations-lib.personalNixosModule {
-    hostname = "laptop-raison";
+    hostname = "laptop-tias";
     module = {config, ...}: {
       imports = [
         (mkSendMailProgram {
@@ -18,7 +18,7 @@ in {
         sopsFile = ../../../secrets/forgejo/secrets.yaml;
         key = "mail-password";
         format = "yaml";
-        owner = "raison";
+        owner = "tias";
       };
     };
   };

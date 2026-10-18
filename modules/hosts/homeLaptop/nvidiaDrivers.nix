@@ -1,9 +1,8 @@
 {configurations-lib, ...}: {
   config = configurations-lib.personalNixosModule {
-    hostname = "laptop-raison";
+    hostname = "laptop-tias";
     module = {
       # nvidia prime graphics
-      hardware.nvidia-container-toolkit.enable = true;
       hardware.graphics.enable = true;
 
       nixpkgs.config.allowUnfree = true;

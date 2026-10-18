@@ -33,12 +33,12 @@
 in {
   config = lib.mkMerge [
     ((configurations-lib.mkSystems config).linux {
-      hostname = "laptop-raison";
-      username = "raison";
+      hostname = "laptop-tias";
+      username = "tias";
       inherit modules;
     })
     (configurations-lib.personalHomeManagerModule {
-      hostname = "laptop-raison";
+      hostname = "laptop-tias";
       module = {
         desktop = {
           primary-monitor = {
@@ -59,7 +59,7 @@ in {
     # extra flake opts
     {
       flake.ssh-keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJC7ayh2luEr8pPQ/TZGAu52lPQimTyTJLnn2X08W0m raison@laptop-raison"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICx5NtGFqXj14jHKzORv2h7ugdDocSwOc7QaznKSDnn9 tias@laptop-tias"
       ];
     }
   ];
