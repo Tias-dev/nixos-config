@@ -17,6 +17,7 @@
     mkMatrixServer
     mkNtfyService
     mkPostgRESTModule
+    mkRadicaleService
     ;
 
   nixosModules = [
@@ -74,6 +75,7 @@ in {
               port = 3007;
               extraSqlInitScriptPath = ./postgresql-init-script.sql;
             })
+            (mkRadicaleService {})
           ];
           security.acme.acceptTerms = true;
           security.acme.defaults.email = email;
