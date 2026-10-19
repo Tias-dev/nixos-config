@@ -8,6 +8,7 @@
     module = {system, ...}: {
       neovim-package = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
         all-langs.enable = true;
+        langChanger.enable = false;
       };
     };
   };
