@@ -9,7 +9,8 @@
     "sops"
     "xray-client"
     "desktop"
-    "niri"
+    # "niri"
+    "umbriel"
     "bluetooth"
 
     "develop"

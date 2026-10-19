@@ -7,13 +7,16 @@
   }: {
     options = {
       tui-greeter.enable = lib.mkEnableOption "tui greeter(no graphics)";
+      active-display-manager = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     config = {
       services.displayManager = {
-        ly = lib.mkIf config.tui-greeter.enable {
+        ly = lib.mkIf (!config.programs.niri.enable) {
           enable = true;
         };
-        dms-greeter = lib.mkIf (!config.tui-greeter.enable) {
+        dms-greeter = lib.mkIf (config.programs.niri.enable) {
           enable = true;
           compositor.name = "niri";
         };

@@ -1,5 +1,5 @@
 {
-  config.flake.modules.homeManager.niri = {lib, ...}: {
+  config.flake.modules.homeManager.desktop = {lib, ...}: {
     options = {
       desktop.custom-lock-cmd = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
@@ -9,3 +9,4 @@
     };
   };
 }
+

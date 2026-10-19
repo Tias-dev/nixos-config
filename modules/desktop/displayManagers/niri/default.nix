@@ -56,6 +56,7 @@
   };
 
   config.flake.modules.nixos.niri = {
+    active-display-manager = "niri";
     programs.niri = {
       enable = true;
     };

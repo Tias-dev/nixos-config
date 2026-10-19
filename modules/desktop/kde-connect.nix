@@ -1,10 +1,7 @@
 {
   config.flake.modules = {
-    homeManager.desktop = {lib, config, ...}: {
+    homeManager.desktop = {
       services.kdeconnect.enable = true;
-      programs.dank-material-shell.plugins = lib.mkIf config.programs.dank-material-shell.enable {
-        dankKDEConnect.enable = true;
-      };
     };
 
     nixos.desktop = {config, username, ...}: {
