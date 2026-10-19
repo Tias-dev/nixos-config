@@ -12,6 +12,8 @@
     # "niri"
     "umbriel"
     "bluetooth"
+    "smb"
+    "ftp-server"
 
     "develop"
     "neovim"
