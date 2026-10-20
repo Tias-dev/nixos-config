@@ -49,7 +49,7 @@ in {
         };
       };
       home-manager.users.${username} = lib.mkIf (config.disable-stylix) {
-          disable-stylix = true;
+        disable-stylix = true;
       };
     };
   };
@@ -118,28 +118,30 @@ in {
             /*
             bash
             */
-            ''
-              home-manager switch --flake ~/nix#$(hostname) --specialisation light
-              tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
-              systemctl --user restart dms.service
-            '';
+            (''
+                home-manager switch --flake ~/nix#$(hostname) --specialisation light
+                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+              ''
+              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+                systemctl --user restart dms.service
+              ''));
 
           "update-nixos" =
             lib.mkIf (!home-manager-standalone)
             /*
             bash
             */
-            ''
-              if ! nixos-rebuild --help &>/dev/null; then
-                notify-send "Nixos not found, that strange"
-                exit 1
-              fi
-              sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation light
-              tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
-              systemctl --user restart dms.service
-            '';
+            (''
+                if ! nixos-rebuild --help &>/dev/null; then
+                  notify-send "Nixos not found, that strange"
+                  exit 1
+                fi
+                sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation light
+                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+              ''
+              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+                systemctl --user restart dms.service
+              ''));
         };
         darkModeScripts = {
           "update-dbus" =
@@ -155,28 +157,30 @@ in {
             /*
             bash
             */
-            ''
-              home-manager switch --flake ~/nix#$(hostname) --specialisation dark
-              tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
-              systemctl --user restart dms.service
-            '';
+            (''
+                home-manager switch --flake ~/nix#$(hostname) --specialisation dark
+                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+              ''
+              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+                systemctl --user restart dms.service
+              ''));
 
           "update-nixos" =
             lib.mkIf (!home-manager-standalone)
             /*
             bash
             */
-            ''
-              if ! nixos-rebuild --help &>/dev/null; then
-                notify-send "Nixos not found, that strange"
-                exit 1
-              fi
-              sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation dark
-              tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
-              systemctl --user restart dms.service
-            '';
+            (''
+                if ! nixos-rebuild --help &>/dev/null; then
+                  notify-send "Nixos not found, that strange"
+                  exit 1
+                fi
+                sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation dark
+                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+              ''
+              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+                systemctl --user restart dms.service
+              ''));
         };
       };
     };

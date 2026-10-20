@@ -1,2 +1,3 @@
 2026-10-15 Add biometric unlock module via PC Bio Unlock +Feature
 2026-10-15 Complete kde-connect integration +FIX
+2026-10-20 fix stylix module integrity(dms/noctalia/mac-tahoe)
