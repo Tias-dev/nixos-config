@@ -10,33 +10,46 @@
     };
   };
 in {
-  config.flake.modules.nixos.desktop = {username, ...}: {
+  config.flake.modules.nixos.desktop = {
+    username,
+    lib,
+    config,
+    ...
+  }: {
     imports = [
       inputs.stylix.nixosModules.stylix
     ];
-    # allow users on desktop do nixos-rebuild without sudo in order to
-    # allow home-manager based themes change in darkman service
-    security.sudo = {
-      extraRules = [
-        {
-          users = [username];
-          commands = [
-            {
-              command = "/run/current-system/sw/bin/nixos-rebuild";
-              options = ["NOPASSWD"];
-            }
-          ];
-        }
-      ];
+    options = {
+      disable-stylix = lib.mkEnableOption "disable stylix integration";
     };
-
-    # propagate specialisations to home-manager
-    specialisation = {
-      light.configuration = {
-        home-manager.users.${username}.current-theme = "light";
+    config = {
+      # allow users on desktop do nixos-rebuild without sudo in order to
+      # allow home-manager based themes change in darkman service
+      security.sudo = lib.mkIf (!config.disable-stylix) {
+        extraRules = [
+          {
+            users = [username];
+            commands = [
+              {
+                command = "/run/current-system/sw/bin/nixos-rebuild";
+                options = ["NOPASSWD"];
+              }
+            ];
+          }
+        ];
       };
-      dark.configuration = {
-        home-manager.users.${username}.current-theme = "dark";
+
+      # propagate specialisations to home-manager
+      specialisation = lib.mkIf (!config.disable-stylix) {
+        light.configuration = {
+          home-manager.users.${username}.current-theme = "light";
+        };
+        dark.configuration = {
+          home-manager.users.${username}.current-theme = "dark";
+        };
+      };
+      home-manager.users.${username} = lib.mkIf (config.disable-stylix) {
+          disable-stylix = true;
       };
     };
   };
@@ -55,22 +68,14 @@ in {
         type = lib.types.enum ["dark" "light"];
         default = "dark";
       };
+      disable-stylix = lib.mkEnableOption "disable stylix ingtegration";
     };
 
     imports = [
       inputs.stylix.homeModules.stylix
-      # {
-      #     stylix = lib.mkIf ( config.current-theme == "dark" ) {
-      #       base16Scheme = themes.dark.base16Scheme;
-      #       polarity = themes.dark.base16Scheme;
-      #     };
-      # }
-      # {
-      #     stylix
-      #   }
     ];
 
-    config = {
+    config = lib.mkIf (!config.disable-stylix) {
       stylix =
         {
           enable = true;
@@ -116,6 +121,7 @@ in {
             ''
               home-manager switch --flake ~/nix#$(hostname) --specialisation light
               tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
               systemctl --user restart dms.service
             '';
 
@@ -131,6 +137,7 @@ in {
               fi
               sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation light
               tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
               systemctl --user restart dms.service
             '';
         };
@@ -151,6 +158,7 @@ in {
             ''
               home-manager switch --flake ~/nix#$(hostname) --specialisation dark
               tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
               systemctl --user restart dms.service
             '';
 
@@ -166,6 +174,7 @@ in {
               fi
               sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation dark
               tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+            '' + lib.optionalString (( config.programs.dank-material-shell or false ) && config.programs.dank-material-shell.enable) ''
               systemctl --user restart dms.service
             '';
         };
