@@ -763,6 +763,30 @@
         "type": "github"
       }
     },
+    "mac-tahoe": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792435347,
+        "narHash": "sha256-TDa8X4ZEC5v+08mb6MNsQ2F7plyP/cL0JVJUXvgCKxQ=",
+        "owner": "lestercorderomurillo",
+        "repo": "macos-tahoe-liquid-kde",
+        "rev": "4287909bb893889269742376162ec615bde2268a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lestercorderomurillo",
+        "ref": "v0.55.1",
+        "repo": "macos-tahoe-liquid-kde",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -1159,6 +1183,29 @@
         "type": "github"
       }
     },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785762349,
+        "narHash": "sha256-jZhZkzAwc7f3exzcTDJWP2WCAchCv0iNC3UF/QsahdQ=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "a19a2a029fa180911bd89c554dca1616e10f4c1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -1198,10 +1245,12 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "mac-tahoe": "mac-tahoe",
         "niri": "niri",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
+        "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "system-manager": "system-manager",

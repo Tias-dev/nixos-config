@@ -11,7 +11,7 @@
     "desktop"
     # "niri"
     "umbriel"
-    "mac-tahoe"
+    # "mac-tahoe"
     "bluetooth"
     "smb"
     "ftp-server"

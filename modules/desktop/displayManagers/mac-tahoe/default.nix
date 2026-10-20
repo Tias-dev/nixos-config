@@ -1,17 +1,26 @@
 {inputs, ...}: {
   config.flake.modules = {
     nixos.mac-tahoe = {
-      imports = [inputs.mac-tahoe.nixosModules.defaults];
+      imports = [inputs.mac-tahoe.nixosModules.default];
 
-      services.displayManager.plasma6.enable = true;
-      services.mac-tahoe.enable = true;
-      services.mac-tahoe.plymouth.enable = true;
+      boot.plymouth.enable = true;
+      services = {
+        desktopManager.plasma6.enable = true;
+        displayManager.plasma-login-manager.enable = true;
+        mac-tahoe.enable = true;
+        mac-tahoe.plymouth.enable = true;
+      };
+      disable-stylix = true;
     };
+
     homeManager.mac-tahoe = {lib, ...}: {
       imports = [
+        inputs.plasma-manager.homeModules.plasma-manager
         inputs.mac-tahoe.homeManagerModules.default
         inputs.mac-tahoe.homeManagerModules.plasma-manager
       ];
+      disable-stylix = true;
+
       programs.mac-tahoe = {
         enable = true;
         mode = "auto";
