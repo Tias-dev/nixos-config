@@ -49,6 +49,10 @@ in {
               blur = true;
               blur_optimized = true;
             }
+            {
+                match.app_id = "org.kde.kdeconnect.daemon";
+                default_floating = true;
+            }
             # {
             #   default_floating = true;
             #   "match.app_id" = "^dev.noctalia.Noctalia$";

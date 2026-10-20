@@ -28,10 +28,13 @@
 
     services.openssh = {
       enable = true;
+      ports = [10100];
       settings = {
-        PermitRootLogin = "prohibit-password";
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
       };
     };
+    services.fail2ban.enable = true;
 
     environment.systemPackages = map lib.lowPrio (with pkgs; [
       curl
@@ -41,26 +44,21 @@
     ]);
 
     networking = {
-      firewall.allowedTCPPorts = [22];
       inherit domain;
     };
     security.sudo.wheelNeedsPassword = false;
-    users.users = let
-      ssh-config = {
+    nix.settings.trusted-users = [ "root" "${username}" ];
+    users.users = {
+      ${username} = {
+        isNormalUser = true;
+        extraGroups = ["wheel" "networkmanager" "docker"];
         openssh.authorizedKeys.keys =
           config.flake.ssh-keys;
         initialHashedPassword = "$6$QnO.qxlgQ6te0gd2$yMVE8G83vQ7m5fv9roswV3Z7i2x5eHz3SFXjX1QItgLHqrlMvURKHe89jiKCZ.pArdZXq77LRCEyIsZ0QhC0l.";
       };
-    in {
-      root = ssh-config;
-      ${username} = lib.mkIf (username != "root") ({
-          isNormalUser = true;
-          extraGroups = ["wheel" "networkmanager" "docker"];
-        }
-        // ssh-config);
     };
 
-    # for home-manager under root
+    # for home-manager
     programs.dconf.enable = true;
   };
 }

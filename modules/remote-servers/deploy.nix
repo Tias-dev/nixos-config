@@ -16,7 +16,8 @@ in {
           profiles = {
             system = {
               user = "root";
-              sshUser = "root";
+              sshUser = "tias-dev";
+              sshOpts = ["-p 10100"];
               path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
             };
           };

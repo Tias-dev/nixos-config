@@ -58,6 +58,7 @@ in {
               extraRunnerHostPackages = with inputs.tias-nixpkgs.packages.${system}; [
                 ost-toolkit
               ];
+              opensshPort = 10100;
             })
             (mkMatrixServer {
               subdomain = "matrix";
