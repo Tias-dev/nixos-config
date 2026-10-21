@@ -26,6 +26,7 @@ in {
       lock-cmd = config.desktop.custom-lock-cmd;
     in {
       imports = [inputs.umbriel.homeModules.default];
+      primary-wm = "umbriel";
       programs.umbriel = {
         enable = true;
         settings = {
@@ -50,18 +51,15 @@ in {
               blur_optimized = true;
             }
             {
-                match.app_id = "org.kde.kdeconnect.daemon";
-                default_floating = true;
+              match.app_id = "org.kde.kdeconnect.daemon";
+              default_floating = true;
+              default_fullscreen = false;
+              opacity = 0.5;
             }
-            # {
-            #   default_floating = true;
-            #   "match.app_id" = "^dev.noctalia.Noctalia$";
-            #   default_size = [1020 900];
-            # }
           ];
           layer_rule = [
             {
-              # "match.namespace" = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$";
+              match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$";
               blur = true;
               blur_ignore_alpha = 0.5;
               blur_optimized = false;
@@ -83,9 +81,9 @@ in {
               natural_scroll = true;
             };
             cursor = {
-                follows_focus = true;
-                hide_when_typing = true;
-              };
+              follows_focus = true;
+              hide_when_typing = true;
+            };
           };
           keybinds = {
             "Mod+T" = "spawn:${terminal.path}";

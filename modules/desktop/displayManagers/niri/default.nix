@@ -40,6 +40,7 @@
     };
 
     config = {
+      primary-wm = "niri";
       programs.niri = {
         enable = true;
         package = pkgs.niri;

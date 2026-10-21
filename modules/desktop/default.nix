@@ -1,10 +1,10 @@
 {inputs, ...}: {
-  config.flake.modules.systemManager.desktop = {
-    system,
+  config.flake.modules.homeManager.desktop = {
     lib,
     ...
   }: {
-    config = {
-    };
+      options.primary-wm = lib.mkOption {
+        type = lib.types.str;
+      };
   };
 }

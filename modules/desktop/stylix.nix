@@ -96,93 +96,93 @@ in {
       };
 
       # # automatically switch themes
-      services.darkman = {
-        enable = true;
-        settings = {
-          lat = 55;
-          lng = 37;
-          dbusserver = true;
-          portal = true;
-        };
-        lightModeScripts = {
-          "update-dbus" =
-            /*
-            bash
-            */
-            ''
-              dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-            '';
-
-          "update-home-manager-dms" =
-            lib.mkIf home-manager-standalone
-            /*
-            bash
-            */
-            (''
-                home-manager switch --flake ~/nix#$(hostname) --specialisation light
-                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-              ''
-              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
-                systemctl --user restart dms.service
-              ''));
-
-          "update-nixos" =
-            lib.mkIf (!home-manager-standalone)
-            /*
-            bash
-            */
-            (''
-                if ! nixos-rebuild --help &>/dev/null; then
-                  notify-send "Nixos not found, that strange"
-                  exit 1
-                fi
-                sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation light
-                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-              ''
-              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
-                systemctl --user restart dms.service
-              ''));
-        };
-        darkModeScripts = {
-          "update-dbus" =
-            /*
-            bash
-            */
-            ''
-              dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-            '';
-
-          "update-home-manager" =
-            lib.mkIf home-manager-standalone
-            /*
-            bash
-            */
-            (''
-                home-manager switch --flake ~/nix#$(hostname) --specialisation dark
-                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-              ''
-              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
-                systemctl --user restart dms.service
-              ''));
-
-          "update-nixos" =
-            lib.mkIf (!home-manager-standalone)
-            /*
-            bash
-            */
-            (''
-                if ! nixos-rebuild --help &>/dev/null; then
-                  notify-send "Nixos not found, that strange"
-                  exit 1
-                fi
-                sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation dark
-                tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
-              ''
-              + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
-                systemctl --user restart dms.service
-              ''));
-        };
-      };
+      # services.darkman = {
+      #   enable = true;
+      #   settings = {
+      #     lat = 55;
+      #     lng = 37;
+      #     dbusserver = true;
+      #     portal = true;
+      #   };
+      #   lightModeScripts = {
+      #     "update-dbus" =
+      #       /*
+      #       bash
+      #       */
+      #       ''
+      #         dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+      #       '';
+      #
+      #     "update-home-manager-dms" =
+      #       lib.mkIf home-manager-standalone
+      #       /*
+      #       bash
+      #       */
+      #       (''
+      #           home-manager switch --flake ~/nix#$(hostname) --specialisation light
+      #           tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+      #         ''
+      #         + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+      #           systemctl --user restart dms.service
+      #         ''));
+      #
+      #     "update-nixos" =
+      #       lib.mkIf (!home-manager-standalone)
+      #       /*
+      #       bash
+      #       */
+      #       (''
+      #           if ! nixos-rebuild --help &>/dev/null; then
+      #             notify-send "Nixos not found, that strange"
+      #             exit 1
+      #           fi
+      #           sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation light
+      #           tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+      #         ''
+      #         + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+      #           systemctl --user restart dms.service
+      #         ''));
+      #   };
+      #   darkModeScripts = {
+      #     "update-dbus" =
+      #       /*
+      #       bash
+      #       */
+      #       ''
+      #         dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+      #       '';
+      #
+      #     "update-home-manager" =
+      #       lib.mkIf home-manager-standalone
+      #       /*
+      #       bash
+      #       */
+      #       (''
+      #           home-manager switch --flake ~/nix#$(hostname) --specialisation dark
+      #           tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+      #         ''
+      #         + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+      #           systemctl --user restart dms.service
+      #         ''));
+      #
+      #     "update-nixos" =
+      #       lib.mkIf (!home-manager-standalone)
+      #       /*
+      #       bash
+      #       */
+      #       (''
+      #           if ! nixos-rebuild --help &>/dev/null; then
+      #             notify-send "Nixos not found, that strange"
+      #             exit 1
+      #           fi
+      #           sudo nixos-rebuild switch --flake ~/nix#$(hostname) --specialisation dark
+      #           tmux ls && tmux source-file ~/.config/tmux/tmux.conf || true
+      #         ''
+      #         + (lib.optionalString ((config.programs.dank-material-shell or false) && config.programs.dank-material-shell.enable) ''
+      #           systemctl --user restart dms.service
+      #         ''));
+      #   };
+      # };
     };
   };
 }
