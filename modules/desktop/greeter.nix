@@ -6,22 +6,18 @@
     ...
   }: {
     options = {
-      tui-greeter.enable = lib.mkEnableOption "tui greeter(no graphics)";
+      custom-greeter = lib.mkEnableOption "Custom greeter to use(use ly gretter if false)";
       active-display-manager = lib.mkOption {
         type = lib.types.str;
       };
     };
     config = {
       services.displayManager = {
-        ly = lib.mkIf (!config.programs.niri.enable) {
+        ly = lib.mkIf (!config.custom-greeter) {
           enable = true;
-        };
-        dms-greeter = lib.mkIf (config.programs.niri.enable) {
-          enable = true;
-          compositor.name = "niri";
         };
       };
-      users.users.${username}.extraGroups = lib.mkIf (!config.tui-greeter.enable) ["greeter"];
+      users.users.${username}.extraGroups = lib.mkIf (config.custom-greeter) ["greeter"];
     };
   };
 }

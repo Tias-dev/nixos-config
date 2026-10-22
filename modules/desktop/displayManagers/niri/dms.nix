@@ -1,4 +1,11 @@
 {inputs, ...}: {
+  flake.modules.nixos.niri = {
+    custom-greeter = true;
+    dms-greeter =  {
+      enable = true;
+      compositor.name = "niri";
+    };
+  };
   flake.modules.homeManager.niri = {
     home-manager-standalone,
     lib,

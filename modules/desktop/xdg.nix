@@ -6,15 +6,16 @@
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         xdg-desktop-portal-gnome
+        kdePackages.xdg-desktop-portal-kde
         gnome-keyring
       ];
-      configPackages = [pkgs.niri];
+      # configPackages = [pkgs.niri];
       config = {
         default = {
           "org.freedesktop.impl.portal.ScreenCast" = [
-            "gnome"
+            "kde"
           ];
-          "org.freedesktop.portal.RemoteDesktop" = [ "gnome" ];
+          "org.freedesktop.portal.RemoteDesktop" = [ "kde" ];
         };
       };
     };
