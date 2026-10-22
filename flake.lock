@@ -773,18 +773,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1792435347,
-        "narHash": "sha256-TDa8X4ZEC5v+08mb6MNsQ2F7plyP/cL0JVJUXvgCKxQ=",
-        "owner": "lestercorderomurillo",
-        "repo": "macos-tahoe-liquid-kde",
-        "rev": "4287909bb893889269742376162ec615bde2268a",
-        "type": "github"
+        "lastModified": 1792667376,
+        "narHash": "sha256-gbrLT1vusytcApsyvyL5+eDcB2qiRZeXQXNWYAh5WqM=",
+        "ref": "refs/heads/dev",
+        "rev": "19eb51f29d5f19bd7ecf8765ad80a640f33ef0b1",
+        "revCount": 672,
+        "type": "git",
+        "url": "file:///home/tias/git/macos-tahoe-liquid-kde"
       },
       "original": {
-        "owner": "lestercorderomurillo",
-        "ref": "v0.55.1",
-        "repo": "macos-tahoe-liquid-kde",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/tias/git/macos-tahoe-liquid-kde"
       }
     },
     "niri": {

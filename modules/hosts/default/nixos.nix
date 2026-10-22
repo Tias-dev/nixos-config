@@ -17,6 +17,12 @@
     # home-manager
     home-manager = lib.mkIf home-manager-enabled {
       backupFileExtension = ".bak";
+      verbose = true;
+    };
+    systemd.services."home-manager-tias" = {
+      serviceConfig = {
+        TimeoutStartSec = lib.mkForce "15m";
+      };
     };
   };
 }

@@ -1,7 +1,8 @@
 {inputs, ...}: {
   config.flake.modules = {
-    nixos.mac-tahoe = {
-      imports = [inputs.mac-tahoe.nixosModules.default];
+    nixos.mac-tahoe-plasma = {
+      custom-greeter = true;
+      imports = [inputs.mac-tahoe-plasma.nixosModules.default];
 
       boot.plymouth.enable = true;
       services = {
@@ -13,13 +14,14 @@
       disable-stylix = true;
     };
 
-    homeManager.mac-tahoe = {lib, ...}: {
+    homeManager.mac-tahoe-plasma = {lib, ...}: {
       imports = [
         inputs.plasma-manager.homeModules.plasma-manager
-        inputs.mac-tahoe.homeManagerModules.default
-        inputs.mac-tahoe.homeManagerModules.plasma-manager
+        inputs.mac-tahoe-plasma.homeManagerModules.default
+        inputs.mac-tahoe-plasma.homeManagerModules.plasma-manager
       ];
       disable-stylix = true;
+      programs.plasma.immutableByDefault = false;
 
       programs.mac-tahoe = {
         enable = true;

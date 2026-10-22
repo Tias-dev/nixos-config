@@ -50,10 +50,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    mac-tahoe = {
-      url = "github:lestercorderomurillo/macos-tahoe-liquid-kde/v0.55.1";
+    mac-tahoe-plasma = {
+      url = "git+file:///home/tias/git/macos-tahoe-liquid-kde";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+    };
+    mac-tahoe-gnome = {
+      url = "git+file:///home/tias/git/MacTahoe-gtk-theme";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:mic92/sops-nix";
