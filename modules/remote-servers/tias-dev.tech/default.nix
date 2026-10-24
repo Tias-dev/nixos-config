@@ -18,6 +18,8 @@
     mkNtfyService
     mkPostgRESTModule
     mkRadicaleService
+    mkSambaService
+    mkTailscaleService
     ;
 
   nixosModules = [
@@ -27,6 +29,15 @@
     "nginx"
     "postgresql"
   ];
+  mkSimpleSiteFromPkg = package: {config, ...}: {
+    services.nginx.virtualHosts = {
+      "${package.name}.${config.networking.domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "${package}";
+      };
+    };
+  };
 in {
   config = lib.mkMerge [
     ((configurations-lib.mkSystems config).remoteLinux
@@ -77,6 +88,9 @@ in {
               extraSqlInitScriptPath = ./postgresql-init-script.sql;
             })
             (mkRadicaleService {})
+            (mkSambaService {})
+            (mkTailscaleService {})
+            (mkSimpleSiteFromPkg inputs.tias-nixpkgs.packages.${system}.frontend-labs_simple-site)
           ];
           security.acme.acceptTerms = true;
           security.acme.defaults.email = email;

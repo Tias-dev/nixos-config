@@ -19,13 +19,10 @@ in {
     imports = [
       inputs.stylix.nixosModules.stylix
     ];
-    options = {
-      disable-stylix = lib.mkEnableOption "disable stylix integration";
-    };
     config = {
       # allow users on desktop do nixos-rebuild without sudo in order to
       # allow home-manager based themes change in darkman service
-      security.sudo = lib.mkIf (!config.disable-stylix) {
+      security.sudo = {
         extraRules = [
           {
             users = [username];
@@ -40,16 +37,13 @@ in {
       };
 
       # propagate specialisations to home-manager
-      specialisation = lib.mkIf (!config.disable-stylix) {
+      specialisation = {
         light.configuration = {
           home-manager.users.${username}.current-theme = "light";
         };
         dark.configuration = {
           home-manager.users.${username}.current-theme = "dark";
         };
-      };
-      home-manager.users.${username} = lib.mkIf (config.disable-stylix) {
-        disable-stylix = true;
       };
     };
   };
@@ -68,14 +62,13 @@ in {
         type = lib.types.enum ["dark" "light"];
         default = "dark";
       };
-      disable-stylix = lib.mkEnableOption "disable stylix ingtegration";
     };
 
     imports = [
       inputs.stylix.homeModules.stylix
     ];
 
-    config = lib.mkIf (!config.disable-stylix) {
+    config = {
       stylix =
         {
           enable = true;

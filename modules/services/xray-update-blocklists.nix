@@ -44,7 +44,6 @@ in {
           Restart = "on-failure";
           RestartSec = "5m"; # 5 minute delay if no internet connection
           RemainAfterExit = "no";
-          StartLimitIntervalSec = "1h";
           StartLimitBurst = 3;
         };
         environment = lib.mkIf config.xray-update-blocklists.proxy.enable {
