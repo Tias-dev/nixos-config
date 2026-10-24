@@ -1,8 +1,51 @@
 {configurations-lib, ...}: {
   config = configurations-lib.personalNixosModule {
     hostname = "laptop-tias";
-    module = {
+    module = {pkgs, ...}: {
       boot.supportedFilesystems = ["ntfs"]; # TODO: Move to proper module file
+
+      # TODO: Move client davfs2 mount to distinct module
+      sops.secrets.webdav-auth-creds = {
+        sopsFile = ../../../secrets/webdav/connection-creds;
+        key = "data";
+        mode = "0600";
+        path = "/etc/davfs2/secrets";
+      };
+
+      environment.systemPackages = with pkgs; [
+        cifs-utils
+        davfs2
+      ];
+      systemd.mounts = [
+        {
+          description = "Webdav mount";
+          after = ["network-online.target"];
+          wants = ["network-online.target"];
+          what = "https://webdav.tias-dev.tech";
+          where = "/mnt/webdav";
+          options = "x-systemd.automount,uid=1000,gid=100";
+          type = "davfs";
+        }
+      ];
+      systemd.automounts = [
+        {
+          description = "Webdav automount";
+          where = "/mnt/webdav";
+          wantedBy = ["multi-user.target"];
+          automountConfig = {
+            TimeoutIdleSec = "2m";
+          };
+        }
+      ];
+
+      services.davfs2 = {
+        enable = true;
+        settings = {
+          globalSection = {
+            ask_auth = 0;
+          };
+        };
+      };
       fileSystems = {
         # cachy os
         "/mnt/cachy" = {

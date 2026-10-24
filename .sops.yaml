@@ -47,3 +47,8 @@ creation_rules:
       - age:
           - *laptop-raison
           - *tias-dev-tech
+  - path_regex: secrets/webdav/[^/]+$
+    key_groups:
+      - age:
+          - *laptop-raison
+          - *tias-dev-tech

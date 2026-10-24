@@ -18,8 +18,7 @@
     mkNtfyService
     mkPostgRESTModule
     mkRadicaleService
-    mkSambaService
-    mkTailscaleService
+    mkWebDavService
     ;
 
   nixosModules = [
@@ -88,8 +87,7 @@ in {
               extraSqlInitScriptPath = ./postgresql-init-script.sql;
             })
             (mkRadicaleService {})
-            (mkSambaService {})
-            (mkTailscaleService {})
+            (mkWebDavService {})
             (mkSimpleSiteFromPkg inputs.tias-nixpkgs.packages.${system}.frontend-labs_simple-site)
           ];
           security.acme.acceptTerms = true;
