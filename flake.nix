@@ -45,6 +45,10 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xdg-desktop-portal-umbriel = {
+      url = "github:noctalia-dev/xdg-desktop-portal-umbriel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";

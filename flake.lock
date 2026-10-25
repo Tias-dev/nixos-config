@@ -1866,6 +1866,7 @@
         "tias-nixpkgs": "tias-nixpkgs",
         "tias-nixvim": "tias-nixvim",
         "umbriel": "umbriel",
+        "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel_2",
         "zen-browser": "zen-browser"
       }
     },
@@ -2586,6 +2587,26 @@
         "owner": "noctalia-dev",
         "repo": "xdg-desktop-portal-umbriel",
         "rev": "5d16415264fa5ae86a110db5d172ca05edb43cf6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "xdg-desktop-portal-umbriel",
+        "type": "github"
+      }
+    },
+    "xdg-desktop-portal-umbriel_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792871979,
+        "narHash": "sha256-g9ch7J7Jrki8qvoxqxSI9K1o4lpY3m3xMl35fYkQHs4=",
+        "owner": "noctalia-dev",
+        "repo": "xdg-desktop-portal-umbriel",
+        "rev": "e69d6f72122a99aa3668e182a4df8755ada81c17",
         "type": "github"
       },
       "original": {
