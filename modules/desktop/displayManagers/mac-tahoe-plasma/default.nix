@@ -11,7 +11,6 @@
         mac-tahoe.enable = true;
         mac-tahoe.plymouth.enable = true;
       };
-      disable-stylix = true;
     };
 
     homeManager.mac-tahoe-plasma = {lib, ...}: {
@@ -20,7 +19,7 @@
         inputs.mac-tahoe-plasma.homeManagerModules.default
         inputs.mac-tahoe-plasma.homeManagerModules.plasma-manager
       ];
-      disable-stylix = true;
+      stylix.enable = lib.mkForce false;
       programs.plasma.immutableByDefault = false;
 
       programs.mac-tahoe = {

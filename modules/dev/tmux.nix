@@ -125,7 +125,7 @@ in {
                   set -g @tmux-dotbar-maximized-icon "󰊓"
 
                 ''
-                + lib.optionalString (!config.disable-stylix) ''
+                + lib.optionalString config.stylix.enable ''
                   set -g @tmux-dotbar-bg "${config.lib.stylix.colors.withHashtag.base00}"
                   set -g @tmux-dotbar-fg "${config.lib.stylix.colors.withHashtag.base02}"
                   set -g @tmux-dotbar-fg-current "${config.lib.stylix.colors.withHashtag.base0C}"
