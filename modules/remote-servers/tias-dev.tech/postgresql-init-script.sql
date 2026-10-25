@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS @schema@.works (
 GRANT all ON @schema@.works TO @role@;
 
 CREATE TABLE IF NOT EXISTS @schema@.work_start (
+  id SERIAL PRIMARY KEY,
   work_id INTEGER NOT NULL REFERENCES @schema@.works (id) ON DELETE CASCADE,
   group_number INTEGER NOT NULL,
   start_time TIMESTAMPTZ NOT NULL
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS @schema@.work_start (
 GRANT all ON @schema@.work_start TO @role@;
 
 CREATE TABLE IF NOT EXISTS @schema@.marks (
+  id SERIAL PRIMARY KEY,
   student_id INTEGER NOT NULL REFERENCES @schema@.students (id) ON DELETE CASCADE,
   work_id INTEGER NOT NULL REFERENCES @schema@.works (id) ON DELETE CASCADE,
   mark INTEGER DEFAULT NULL,
@@ -36,6 +38,7 @@ CREATE TABLE IF NOT EXISTS @schema@.marks (
 GRANT all ON @schema@.marks TO @role@;
 
 CREATE TABLE IF NOT EXISTS @schema@.work_variants (
+  id SERIAL PRIMARY KEY,
   work_id INTEGER NOT NULL REFERENCES @schema@.works (id) ON DELETE CASCADE,
   variants_amount INTEGER NOT NULL
 );
