@@ -2221,11 +2221,11 @@
         "tias-nixpkgs": "tias-nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1792967734,
-        "narHash": "sha256-ieFqkJiDZ38jtT8ldPhBK/512YyRJ3yGYRG35aFxzwk=",
+        "lastModified": 1793009085,
+        "narHash": "sha256-KIDcV/ct85tt+g2BFQ6CwhGHQR7jBf/gZAKv3PCQ6eE=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "fc6eb0329f4723687eaf024da1512f56f728f840",
+        "rev": "bb98eade4e28615adebacd5220505572b02423bc",
         "type": "github"
       },
       "original": {

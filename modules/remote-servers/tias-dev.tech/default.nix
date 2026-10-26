@@ -19,6 +19,7 @@
     mkPostgRESTModule
     mkRadicaleService
     mkWebDavService
+    mkTailscaleService
     ;
 
   nixosModules = [
@@ -88,6 +89,11 @@ in {
             })
             (mkRadicaleService {})
             (mkWebDavService {})
+            (mkTailscaleService {})
+            {
+              services.postgresql.enableTCPIP = true; # for connect over tailscale
+              services.postgresql.authentication = "host postgres authenticator 100.123.204.121/32 password";
+            }
             (mkSimpleSiteFromPkg inputs.tias-nixpkgs.packages.${system}.frontend-labs_simple-site)
           ];
           security.acme.acceptTerms = true;
