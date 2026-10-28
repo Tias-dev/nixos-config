@@ -8,7 +8,6 @@
       programs.msmtp = {
         enable = true;
         extraConfig = ''
-          defaults
           auth           on
           tls            on
           tls_trust_file /etc/ssl/certs/ca-certificates.crt
