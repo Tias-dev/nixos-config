@@ -14,11 +14,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1793538736,
-        "narHash": "sha256-Xly6ec79prLTj1ccJjtHZdUxqzR2NAbAof/U4vkK/J0=",
+        "lastModified": 1793542463,
+        "narHash": "sha256-/yREdXjzru5vjNE/l2rVf2asAhkvts2Sn6mjczcfICs=",
         "owner": "Tias-dev",
         "repo": "VTM",
-        "rev": "dca138a18a1d1da16f6b2afa6063f2a500ff26d9",
+        "rev": "b5618246b1782d3f835d907e476030cc96a7f45e",
         "type": "github"
       },
       "original": {
@@ -2941,11 +2941,11 @@
         "ost-toolkit": "ost-toolkit"
       },
       "locked": {
-        "lastModified": 1793538809,
-        "narHash": "sha256-EcoDqCnrTfEMrIVeQZFL1nz9EYKREqK/A+98lktaMHE=",
+        "lastModified": 1793542494,
+        "narHash": "sha256-q/UazM7qHa7e1zk9qbWvT5N25HH/b8z6Bwr2NIGtbb8=",
         "owner": "Tias-dev",
         "repo": "tias-nixpkgs",
-        "rev": "f8444a6d0d57b801f3d44a42fd3969a107c9a0bc",
+        "rev": "619017bb8666888eb04ed5c9640c8bfaab39f80c",
         "type": "github"
       },
       "original": {
