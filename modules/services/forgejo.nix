@@ -23,6 +23,10 @@ in {
         enableACME = true;
         extraConfig = ''
           client_max_body_size 512M;
+          proxy_connect_timeout 600;
+          proxy_send_timeout    600;
+          proxy_read_timeout    600;
+          send_timeout          600;
         '';
         locations."/" = {
           proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
@@ -49,6 +53,13 @@ in {
           ROOT_URL = "https://${srv.DOMAIN}/";
           HTTP_PORT = 3000;
           SSH_PORT = lib.mkIf (opensshPort != 22) opensshPort;
+          WRITE_TIMEOUT = 600;
+          HTTP_GIT_TIMEOUT = 600;
+        };
+
+        git = {
+            TIMEOUT_DEFAULT = 600;
+            TIMEOUT_RECIEVE = 600;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = disableRegistration;

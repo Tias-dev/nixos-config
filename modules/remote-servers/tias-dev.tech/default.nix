@@ -68,6 +68,8 @@ in {
               email = email;
               extraRunnerHostPackages = with inputs.tias-nixpkgs.packages.${system}; [
                 ost-toolkit
+                VTM
+                YAD-Studio
               ];
               opensshPort = 10100;
             })

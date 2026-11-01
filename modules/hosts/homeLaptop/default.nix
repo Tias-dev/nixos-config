@@ -22,6 +22,7 @@
     "alacritty"
     "tmux"
     "docker"
+    "virtualbox"
     "forgejo-client"
     "deploy"
 
