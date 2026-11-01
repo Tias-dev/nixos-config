@@ -53,15 +53,14 @@ in {
                 match.app_id = "org.kde.kdeconnect.daemon";
                 default_floating = true;
             }
-            # {
-            #   default_floating = true;
-            #   "match.app_id" = "^dev.noctalia.Noctalia$";
-            #   default_size = [1020 900];
-            # }
+            {
+              default_floating = true;
+              match.app_id = "^dev.noctalia.Noctalia$";
+            }
           ];
           layer_rule = [
             {
-              # "match.namespace" = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$";
+              match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$";
               blur = true;
               blur_ignore_alpha = 0.5;
               blur_optimized = false;
@@ -88,28 +87,28 @@ in {
               };
           };
           keybinds = {
-            "Mod+T" = "spawn:${terminal.path}";
-            "Mod+B" = "spawn:${lib.getExe config.browser.package}";
+            "Mod+T" = "spawn ${terminal.path}";
+            "Mod+B" = "spawn ${lib.getExe config.browser.package}";
             "Mod+Shift+Slash" = "cheatsheet-toggle";
             "Mod+Shift+L" =
               if lock-cmd == null
-              then "spawn:noctalia msg session lock"
-              else "spawn:${lock-cmd}";
-            "Mod+Shift+P" = "spawn:noctalia msg panel-toggle session";
+              then "spawn noctalia msg session lock"
+              else "spawn ${lock-cmd}";
+            "Mod+Shift+P" = "spawn noctalia msg panel-toggle session";
             # alt + tab to switch between monitors?
-            "Mod+D" = "spawn:noctalia msg panel-toggle launcher";
+            "Mod+D" = "spawn noctalia msg panel-toggle launcher";
             "Mod+Q" = "window-close";
 
-            "XF86AudioRaiseVolume" = "spawn:noctalia msg volume-up";
-            "XF86AudioLowerVolume" = "spawn:noctalia msg volume-down";
-            "XF86AudioMute" = "spawn:noctalia msg volume-mute";
-            "XF86AudioMicMute" = "spawn:noctalia msg mic-mute";
-            "XF86AudioPlay" = "spawn:noctalia msg audio toggle";
-            "XF86AudioStop" = "spawn:noctalia msg audio stop";
-            "XF86AudioPrev" = "spawn:noctalia msg audio previous";
-            "XF86AudioNext" = "spawn:noctalia msg audio next";
-            "XF86MonBrightnessUp" = "spawn:noctalia msg brightness-up";
-            "XF86MonBrightnessDown" = "spawn:noctalia msg brightness-down";
+            "XF86AudioRaiseVolume" = "spawn noctalia msg volume-up";
+            "XF86AudioLowerVolume" = "spawn noctalia msg volume-down";
+            "XF86AudioMute" = "spawn noctalia msg volume-mute";
+            "XF86AudioMicMute" = "spawn noctalia msg mic-mute";
+            "XF86AudioPlay" = "spawn noctalia msg audio toggle";
+            "XF86AudioStop" = "spawn noctalia msg audio stop";
+            "XF86AudioPrev" = "spawn noctalia msg audio previous";
+            "XF86AudioNext" = "spawn noctalia msg audio next";
+            "XF86MonBrightnessUp" = "spawn noctalia msg brightness-up";
+            "XF86MonBrightnessDown" = "spawn noctalia msg brightness-down";
 
             "Mod+O" = "overview-toggle";
 
@@ -131,26 +130,36 @@ in {
             "Mod+Alt+Right" = "column-move-right";
             "Mod+Alt+L" = "column-move-right";
 
-            "Mod+1" = "workspace-switch:1";
-            "Mod+2" = "workspace-switch:2";
-            "Mod+3" = "workspace-switch:3";
-            "Mod+4" = "workspace-switch:4";
-            "Mod+5" = "workspace-switch:5";
-            "Mod+6" = "workspace-switch:6";
-            "Mod+7" = "workspace-switch:7";
-            "Mod+8" = "workspace-switch:8";
-            "Mod+9" = "workspace-switch:9";
-            "Mod+0" = "workspace-switch:10";
-            "Mod+Alt+1" = "column-move-to-workspace:1";
-            "Mod+Alt+2" = "column-move-to-workspace:2";
-            "Mod+Alt+3" = "column-move-to-workspace:3";
-            "Mod+Alt+4" = "column-move-to-workspace:4";
-            "Mod+Alt+5" = "column-move-to-workspace:5";
-            "Mod+Alt+6" = "column-move-to-workspace:6";
-            "Mod+Alt+7" = "column-move-to-workspace:7";
-            "Mod+Alt+8" = "column-move-to-workspace:8";
-            "Mod+Alt+9" = "column-move-to-workspace:9";
-            "Mod+Alt+0" = "column-move-to-workspace:10";
+            "Mod+Ctrl+Alt+Left" = "column-move-to-output-left";
+            "Mod+Ctrl+Alt+H" = "column-move-to-output-left";
+            "Mod+Ctrl+Alt+Down" = "column-move-to-output-down";
+            "Mod+Ctrl+Alt+J" = "column-move-to-output-down";
+            "Mod+Ctrl+Alt+Up" = "column-move-to-output-up";
+            "Mod+Ctrl+Alt+K" = "column-move-to-output-up";
+            "Mod+Ctrl+Alt+Right" = "column-move-to-output-right";
+            "Mod+Ctrl+Alt+L" = "column-move-to-output-right";
+
+            "Mod+1" = "workspace-switch 1";
+            "Mod+2" = "workspace-switch 2";
+            "Mod+3" = "workspace-switch 3";
+            "Mod+4" = "workspace-switch 4";
+            "Mod+5" = "workspace-switch 5";
+            "Mod+6" = "workspace-switch 6";
+            "Mod+7" = "workspace-switch 7";
+            "Mod+8" = "workspace-switch 8";
+            "Mod+9" = "workspace-switch 9";
+            "Mod+0" = "workspace-switch 10";
+            "Mod+Alt+1" = "column-move-to-workspace 1";
+            "Mod+Alt+2" = "column-move-to-workspace 2";
+            "Mod+Alt+3" = "column-move-to-workspace 3";
+            "Mod+Alt+4" = "column-move-to-workspace 4";
+            "Mod+Alt+5" = "column-move-to-workspace 5";
+            "Mod+Alt+6" = "column-move-to-workspace 6";
+            "Mod+Alt+7" = "column-move-to-workspace 7";
+            "Mod+Alt+8" = "column-move-to-workspace 8";
+            "Mod+Alt+9" = "column-move-to-workspace 9";
+            "Mod+Alt+0" = "column-move-to-workspace 10";
+            "Alt+Tab" = "output-focus-next";
 
             "Mod+Comma" = "window-consume-from-right";
             "Mod+Period" = "window-consume-or-expel-left";
@@ -166,12 +175,13 @@ in {
             "Mod+R" = "window-cycle-primary-extent";
             "Mod+Shift+R" = "window-cycle-secondary-extent";
 
-            "Mod+Ctrl+L" = "workspace-set-layout:toggle:scrolling,dwindle";
+            "Mod+Ctrl+L" = "workspace-set-layout toggle scrolling dwindle";
+            "Mod+S" = "screencast-follow-stop";
+            "Mod+Ctrl+S" = "screencast-follow-window";
+            "Mod+Shift+S" = "screencast-clear";
 
-            "Mod+S" = "spawn:noctalia msg panel-toggle control-center";
-            "Alt+Tab" = "spawn:noctalia msg window-switcher hold";
-            "Mod+Shift+A" = "spawn:noctalia msg screenshot-annotate";
-            "Mod+Ctrl+A" = "spawn:noctalia msg annotate";
+            "Mod+Shift+A" = "spawn noctalia msg screenshot-annotate";
+            "Mod+Ctrl+A" = "spawn noctalia msg annotate";
 
             "Mod+Space" = "keyboard-layout-next";
           };

@@ -1,7 +1,6 @@
 {inputs, ...}: {
   config.flake.modules.homeManager.umbriel = {
     config,
-    username,
     ...
   }: {
     imports = [
