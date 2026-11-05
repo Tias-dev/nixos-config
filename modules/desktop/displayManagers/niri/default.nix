@@ -5,9 +5,9 @@
     pkgs,
     ...
   }: let
-      lazyAttrs-type = lib.types.lazyAttrsOf lib.types.raw;
-      listOfRaw-type = lib.types.listOf lib.types.raw;
-    in {
+    lazyAttrs-type = lib.types.lazyAttrsOf lib.types.raw;
+    listOfRaw-type = lib.types.listOf lib.types.raw;
+  in {
     options = {
       niri-settings = lib.mkOption {
         type = lib.types.submodule {

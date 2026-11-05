@@ -4,7 +4,11 @@
       services.kdeconnect.enable = true;
     };
 
-    nixos.desktop = {config, username, ...}: {
+    nixos.desktop = {
+      config,
+      username,
+      ...
+    }: {
       programs.ydotool.enable = true;
       users.users.${username}.extraGroups = [config.programs.ydotool.group];
       networking.firewall = rec {

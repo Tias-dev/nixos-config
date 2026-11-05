@@ -1,8 +1,5 @@
 {
-  config.flake.modules.nixos.virtualbox = {
-    username,
-    ...
-  }: {
+  config.flake.modules.nixos.virtualbox = {username, ...}: {
     config = {
       virtualisation = {
         virtualbox.host.enable = true;

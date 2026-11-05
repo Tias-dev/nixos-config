@@ -1,5 +1,9 @@
 {
-  config.flake.modules.homeManager.niri = {config, pkgs, ...}: {
+  config.flake.modules.homeManager.niri = {
+    config,
+    pkgs,
+    ...
+  }: {
     config = {
       xdg.portal = {
         configPackages = [config.program.niri.package];

@@ -50,8 +50,8 @@ in {
               blur_optimized = true;
             }
             {
-                match.app_id = "org.kde.kdeconnect.daemon";
-                default_floating = true;
+              match.app_id = "org.kde.kdeconnect.daemon";
+              default_floating = true;
             }
             {
               default_floating = true;
@@ -82,9 +82,9 @@ in {
               natural_scroll = true;
             };
             cursor = {
-                follows_focus = true;
-                hide_when_typing = true;
-              };
+              follows_focus = true;
+              hide_when_typing = true;
+            };
           };
           keybinds = {
             "Mod+T" = "spawn ${terminal.path}";

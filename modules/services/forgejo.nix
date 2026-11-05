@@ -58,8 +58,8 @@ in {
         };
 
         git = {
-            TIMEOUT_DEFAULT = 600;
-            TIMEOUT_RECIEVE = 600;
+          TIMEOUT_DEFAULT = 600;
+          TIMEOUT_RECIEVE = 600;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = disableRegistration;

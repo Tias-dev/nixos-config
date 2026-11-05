@@ -7,7 +7,7 @@
     config = {
       xdg.portal = {
         extraPortals = [inputs.xdg-desktop-portal-umbriel.packages.${system}.default];
-        configPackages = [ config.programs.umbriel.package ];
+        configPackages = [config.programs.umbriel.package];
       };
     };
   };

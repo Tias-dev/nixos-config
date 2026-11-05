@@ -47,7 +47,7 @@
       inherit domain;
     };
     security.sudo.wheelNeedsPassword = false;
-    nix.settings.trusted-users = [ "root" "${username}" ];
+    nix.settings.trusted-users = ["root" "${username}"];
     users.users = {
       ${username} = {
         isNormalUser = true;

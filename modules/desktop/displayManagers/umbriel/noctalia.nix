@@ -1,8 +1,5 @@
 {inputs, ...}: {
-  config.flake.modules.homeManager.umbriel = {
-    config,
-    ...
-  }: {
+  config.flake.modules.homeManager.umbriel = {config, ...}: {
     imports = [
       inputs.noctalia.homeModules.default
       inputs.dank-calendar.homeModules.default

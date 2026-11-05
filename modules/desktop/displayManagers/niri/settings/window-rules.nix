@@ -1,5 +1,9 @@
 {
-  config.flake.modules.homeManager.niri = {config, lib, ...}: {
+  config.flake.modules.homeManager.niri = {
+    config,
+    lib,
+    ...
+  }: {
     config = {
       niri-settings.window-rules = [
         {
