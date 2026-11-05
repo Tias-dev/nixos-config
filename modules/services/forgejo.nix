@@ -119,6 +119,7 @@ in {
             gcc
             gnumake
             git
+            git-lfs
             nodejs
             bash
             gawk
