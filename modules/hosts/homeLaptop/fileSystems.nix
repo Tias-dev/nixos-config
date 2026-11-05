@@ -43,6 +43,7 @@
         settings = {
           globalSection = {
             ask_auth = 0;
+            use_locks = false;
           };
         };
       };

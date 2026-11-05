@@ -37,6 +37,12 @@
             permissions = "CRUD";
           }
           {
+            username = "book-reader";
+            password = "{env}BOOK_READER_PASSWORD";
+            directory = "${dataRoot}/Books";
+            permissions = "R";
+          }
+          {
             username = "guest";
             password = "{env}GUEST_PASSWORD";
             directory = "${dataRoot}/public";
@@ -76,8 +82,8 @@
     };
 
     systemd.tmpfiles.rules = [
-      "d ${dataRoot}/public 0777 nobody nogroup -"
       "d ${dataRoot} 0700 ${config.services.webdav.user} nogroup -"
+      "d ${dataRoot}/public 0777 nobody nogroup -"
     ];
     systemd.services.ensure-webdav-data-owner = {
       enable = true;
