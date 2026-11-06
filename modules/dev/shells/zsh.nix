@@ -44,10 +44,11 @@
         vi = "nvim";
         v = "nvim";
 
-        ls = "lsd";
-        ll = "lsd -l";
-        la = "lsd -a";
-        lla = "lsd -la";
+        ls = "eza";
+        l = "eza -l --time-style=relative";
+        lt = "eza -l";
+        la = "eza --time-style=relative -a";
+        lat = "eza -la";
 
         spf = "superfile";
 

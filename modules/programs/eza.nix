@@ -1,5 +1,5 @@
 {
   flake.modules.homeManager.homeManager = {pkgs, ...}: {
-    home.packages = [pkgs.lsd];
+    home.packages = [pkgs.eza];
   };
 }
