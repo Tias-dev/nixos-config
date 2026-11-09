@@ -33,11 +33,12 @@ in {
             set -eu
             mkdir -p ${xray-assets-path}
             echo "Start donwnloading geoip.dat..."
-            ${pkgs.curl}/bin/curl https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip.dat -o ${xray-assets-path}/geoip.dat
+            curl $(curl -s https://api.github.com/repos/runetfreedom/russia-blocked-geoip/releases/latest | jq -r '.assets.[] | select(.name == "geoip.dat") | .url') -o ${xray-assets-path}/geoip.dat
             echo "geoip.dat downloaded. donwnloading geosite.dat..."
-            ${pkgs.curl}/bin/curl https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat -o ${xray-assets-path}/geosite.dat
+            curl $(curl -s https://api.github.com/repos/v2fly/domain-list-community/releases/latest | jq -r '.assets.[] | select(.name == "dlc.dat") | .url') -o ${xray-assets-path}/geosite.dat
             echo "All resources downloaded!"
           '';
+        path = with pkgs; [curl jq];
         serviceConfig = {
           Type = "oneshot";
           User = "root";
