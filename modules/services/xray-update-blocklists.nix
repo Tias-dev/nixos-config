@@ -33,9 +33,9 @@ in {
             set -eu
             mkdir -p ${xray-assets-path}
             echo "Start donwnloading geoip.dat..."
-            curl $(curl -s https://api.github.com/repos/runetfreedom/russia-blocked-geoip/releases/latest | jq -r '.assets.[] | select(.name == "geoip.dat") | .url') -o ${xray-assets-path}/geoip.dat
+            curl -L "$(curl -s https://api.github.com/repos/runetfreedom/russia-blocked-geoip/releases/latest | jq -r '.assets.[] | select(.name == "geoip.dat") | .browser_download_url')" -o ${xray-assets-path}/geoip.dat
             echo "geoip.dat downloaded. donwnloading geosite.dat..."
-            curl $(curl -s https://api.github.com/repos/v2fly/domain-list-community/releases/latest | jq -r '.assets.[] | select(.name == "dlc.dat") | .url') -o ${xray-assets-path}/geosite.dat
+            curl -L "$(curl -s https://api.github.com/repos/v2fly/domain-list-community/releases/latest | jq -r '.assets.[] | select(.name == "dlc.dat") | .browser_download_url')" -o ${xray-assets-path}/geosite.dat
             echo "All resources downloaded!"
           '';
         path = with pkgs; [curl jq];
