@@ -30,6 +30,7 @@
     system ? "x86_64-linux",
     class ? "nixos",
     addHomeManager ? true,
+    addSelfHomeManagerModule ? true,
     modules ? [],
     ...
   } @ args: let
@@ -49,14 +50,14 @@
           # args
           {config._module.args = extraArgs;}
           # nixos modules
-          {
+          ({lib, ...}: {
             imports = collectTypedModules {
               config = flakeConfig;
               type = class;
               addSelfModule = true;
-              inherit modules;
+              modules = lib.lists.uniqueStrings modules;
             };
-          }
+          })
         ]
         # home-manager
         ++ (
@@ -72,8 +73,8 @@
                   collectTypedModules {
                     config = flakeConfig;
                     type = "homeManager";
-                    addSelfModule = true;
-                    inherit modules;
+                    addSelfModule = addSelfHomeManagerModule;
+                    modules = lib.lists.uniqueStrings modules;
                   }
                 );
             })
@@ -204,6 +205,7 @@ in rec {
       username,
       domain ? null,
       modules ? [],
+      defaultAdminTools ? true,
     }: let
       server-name =
         if domain != null
@@ -214,11 +216,16 @@ in rec {
         modules
         ++ [personaModuleName "remote-servers"]
         # basic admin setup
-        ++ [
-          "neovim"
-          "zsh"
-          "tmux"
-        ];
+        ++ (
+          if defaultAdminTools
+          then [
+            "homeManager"
+            "neovim"
+            "zsh"
+            "tmux"
+          ]
+          else []
+        );
     in
       lib.mkMerge [
         {
@@ -226,18 +233,25 @@ in rec {
             inherit username hostname domain server-name flakeConfig;
             system = "x86_64-linux";
             modules = totalModules;
+            addHomeManager = defaultAdminTools;
+            addSelfHomeManagerModule = !defaultAdminTools;
           };
         }
         # basic admin setup for better cli
-        (personalHomeManagerModule {
-          hostname = server-name;
-          module = {system, ...}: {
-            # light neovim without any lsp/formatter/treesitter binaries
-            neovim-package = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
-              langChanger.enable = false;
-            };
-          };
-        })
+        (
+          if defaultAdminTools
+          then
+            (personalHomeManagerModule {
+              hostname = server-name;
+              module = {system, ...}: {
+                # light neovim without any lsp/formatter/treesitter binaries
+                neovim-package = inputs.tias-nixvim.lib.neovimWithChangedOptions system {
+                  langChanger.enable = false;
+                };
+              };
+            })
+          else {}
+        )
       ];
 
     linuxHomeManager = {

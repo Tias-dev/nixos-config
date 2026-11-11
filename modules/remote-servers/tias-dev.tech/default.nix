@@ -96,7 +96,8 @@ in {
               services.postgresql.enableTCPIP = true; # for connect over tailscale
               services.postgresql.authentication = "host postgres authenticator 100.123.204.121/32 password";
             }
-            (mkSimpleSiteFromPkg inputs.tias-nixpkgs.packages.${system}.frontend-labs_simple-site)
+            # (mkSimpleSiteFromPkg inputs.tias-nixpkgs.packages.${system}.frontend-labs_simple-site)
+            (mkSimpleSiteFromPkg inputs.tias-nixpkgs.packages.${system}.frontend-labs_dashboard-site)
           ];
           security.acme.acceptTerms = true;
           security.acme.defaults.email = email;

@@ -8,5 +8,6 @@ in {
   config = (configurations-lib.mkSystems config).remoteLinux {
     inherit hostname;
     username = "default";
+    defaultAdminTools = false;
   };
 }

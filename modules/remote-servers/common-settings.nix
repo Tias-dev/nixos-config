@@ -39,8 +39,6 @@
     environment.systemPackages = map lib.lowPrio (with pkgs; [
       curl
       gitMinimal
-      neovim-light
-      tmux
     ]);
 
     networking = {

@@ -13,7 +13,6 @@
     "mai-wifi-auto-login"
 
     "develop"
-    "arc"
     "ai"
     "zsh"
     "neovim"
@@ -21,7 +20,6 @@
     "alacritty"
     "tmux"
     "docker"
-    "arc"
     "geojson"
     "coords"
     "deploy"

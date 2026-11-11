@@ -12,8 +12,6 @@
 in {
   config.flake.modules.nixos.desktop = {
     username,
-    lib,
-    config,
     ...
   }: {
     imports = [

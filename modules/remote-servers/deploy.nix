@@ -22,6 +22,18 @@ in {
             };
           };
         };
+        "repo.tias-dev.tech" = rec {
+          confirmTimeout = 60;
+          hostname = "repo.tias-dev.tech";
+          profiles = {
+            system = {
+              user = "root";
+              sshUser = "tias-dev";
+              sshOpts = ["-p 10100"];
+              path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
+            };
+          };
+        };
       };
     };
 

@@ -1176,12 +1176,12 @@
         "treefmt-nix": "treefmt-nix_9"
       },
       "locked": {
-        "lastModified": 1792704631,
+        "lastModified": 1794326106,
         "lfs": true,
-        "narHash": "sha256-7o1+5WNmMtlMatzOv+lFSbpV+MIrKw2aDBCjBm3jg9o=",
+        "narHash": "sha256-hhOdbnGTv3DEdzAvQ39Q2WL7doiXEGBEcCiYJw90FZQ=",
         "ref": "refs/heads/trunk",
-        "rev": "08eb7ce59aafeb433e76f0743955a2d3192579b8",
-        "revCount": 4,
+        "rev": "436f03f39e2025dda5005e7f74e450de77854bb3",
+        "revCount": 21,
         "type": "git",
         "url": "https://github.com/Tias-dev/frontend-labs.git"
       },
@@ -2941,11 +2941,11 @@
         "ost-toolkit": "ost-toolkit"
       },
       "locked": {
-        "lastModified": 1794054049,
-        "narHash": "sha256-VE18zz6ushrYmE6mRbbfUuM64PkYDaP/Yxou669qOB4=",
+        "lastModified": 1794326133,
+        "narHash": "sha256-h3zxh8dwZfNjkfQzaT9xx4eCKoCgLyfm5SFhiQa5jY4=",
         "owner": "Tias-dev",
         "repo": "tias-nixpkgs",
-        "rev": "35c3c766f582e363deab2ed20889534c76ea5a30",
+        "rev": "b64b0b88be60ab1231c3d046e4305b3724c54c65",
         "type": "github"
       },
       "original": {

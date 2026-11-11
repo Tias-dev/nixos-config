@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.homeManager = {pkgs, ...}: {
-    home.packages = [pkgs.fzf];
+  flake.modules.homeManager.homeManager = {
+    programs.fzf.enable = true;
   };
 }
