@@ -64,7 +64,14 @@
       # aka add to the end of .zshrc
       initContent = lib.mkAfter ''
         source ${zsh-fzf-search}/zsh-fzf-history-search.plugin.zsh
+
+
+        ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+        ZVM_VI_SURROUND_BINDKEY=s-prefix
+        export KEYTIMEOUT=1
+
         source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
       '';
     };
     home.shell.enableZshIntegration = true;
