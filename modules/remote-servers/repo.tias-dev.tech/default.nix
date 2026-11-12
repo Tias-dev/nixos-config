@@ -41,12 +41,12 @@ in {
               gateway = "130.49.172.1";
               interface = "enp1s0";
             })
-            # (mkForgejoModule {
-            #   domain = "git.tias-dev.tech";
-            #   disableRegistration = true;
-            #   addDefaultRunner = true;
-            #   opensshPort = 10100;
-            # })
+            (mkForgejoModule {
+              domain = "repo.tias-dev.tech";
+              disableRegistration = true;
+              addDefaultRunner = false;
+              opensshPort = 10100;
+            })
           ];
           security.acme.acceptTerms = true;
           security.acme.defaults.email = email;
