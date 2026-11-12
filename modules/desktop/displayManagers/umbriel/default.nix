@@ -44,6 +44,11 @@ in {
               saturation = 1.1;
             };
           };
+          output = {
+            eDP-1 = {
+              min_workspaces = 3;
+            };
+          };
           window_rule = [
             {
               blur = true;
@@ -56,6 +61,22 @@ in {
             {
               default_floating = true;
               match.app_id = "^dev.noctalia.Noctalia$";
+            }
+            {
+              match.app_id = "^zen$";
+              default_workspace = 1;
+            }
+            {
+              match.app_id = "^element-desktop$";
+              default_workspace = 1;
+            }
+            {
+              match.app_id = "^kitty$";
+              default_workspace = 2;
+            }
+            {
+              match.app_id = "^Alacritty$";
+              default_workspace = 2;
             }
           ];
           layer_rule = [

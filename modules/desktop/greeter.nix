@@ -12,13 +12,10 @@
       };
     };
     config = {
+      tui-greeter.enable = lib.mkDefault true;
       services.displayManager = {
-        ly = lib.mkIf (!config.programs.niri.enable) {
+        ly = lib.mkIf config.tui-greeter.enable {
           enable = true;
-        };
-        dms-greeter = lib.mkIf (config.programs.niri.enable) {
-          enable = true;
-          compositor.name = "niri";
         };
       };
       users.users.${username}.extraGroups = lib.mkIf (!config.tui-greeter.enable) ["greeter"];

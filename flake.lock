@@ -2481,6 +2481,26 @@
         "type": "github"
       }
     },
+    "noctalia-greeter": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794402928,
+        "narHash": "sha256-DSALS6KCU9HRcKHzG8WWg5wOlmKlbgfCRJKlmpyMipE=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-greeter",
+        "rev": "199fb7fe64a34bec44bf059de323f78a4ed122a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-greeter",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -2574,6 +2594,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
+        "noctalia-greeter": "noctalia-greeter",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "system-manager": "system-manager",
@@ -3014,11 +3035,11 @@
         "tias-nixpkgs": "tias-nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1793009085,
-        "narHash": "sha256-KIDcV/ct85tt+g2BFQ6CwhGHQR7jBf/gZAKv3PCQ6eE=",
+        "lastModified": 1794488565,
+        "narHash": "sha256-dPfQ1w8BEiafKvA31NuG0RD9l774GclUTIDXPjeTDBo=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "bb98eade4e28615adebacd5220505572b02423bc",
+        "rev": "c23f5af3f8fba472b99057d260a2aaf17e6db01a",
         "type": "github"
       },
       "original": {
