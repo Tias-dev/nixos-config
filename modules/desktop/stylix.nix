@@ -10,10 +10,7 @@
     };
   };
 in {
-  config.flake.modules.nixos.desktop = {
-    username,
-    ...
-  }: {
+  config.flake.modules.nixos.desktop = {username, ...}: {
     imports = [
       inputs.stylix.nixosModules.stylix
     ];

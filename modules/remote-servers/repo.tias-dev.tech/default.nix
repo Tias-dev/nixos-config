@@ -10,7 +10,8 @@
   inherit
     (config.flake.lib)
     mkStaticNetworkAddressModule
-    mkForgejoModule;
+    mkForgejoModule
+    ;
 
   nixosModules = [
     "user"
