@@ -111,6 +111,13 @@ in {
           "ubuntu-latest:docker://node:18-bullseye"
           "native:host"
         ];
+        settings = {
+          container = {
+            valid_volumes = [
+              "/nix/store:ro"
+            ];
+          };
+        };
         hostPackages = with pkgs;
           [
             busybox
