@@ -45,6 +45,10 @@
             all_day_digest_time = "09:00"; # one notification listing today's all-day events; "" disables it
           };
         };
+        wallpaper = {
+          enable = true;
+          default = ../../../../docs/wallpaper.jpg;
+        };
       };
     };
     sops.secrets.calendar-pass = {

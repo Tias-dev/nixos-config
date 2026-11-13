@@ -71,6 +71,7 @@ in {
           targets = {
             firefox.profileNames = ["tias-dev"];
           };
+          image = ../../docs/wallpaper.jpg;
         }
         // themes.${config.current-theme};
 

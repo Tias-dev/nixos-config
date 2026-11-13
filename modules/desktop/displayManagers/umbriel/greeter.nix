@@ -1,11 +1,20 @@
 {inputs, ...}: {
-  config.flake.modules.nixos.umbriel = {pkgs, ...}: {
+  config.flake.modules.nixos.umbriel = {pkgs, username, ...}: {
     tui-greeter.enable = false;
 
     imports = [inputs.noctalia-greeter.nixosModules.default];
     services.displayManager.noctalia-greeter = {
       enable = true;
       settings = {
+        user = {
+          default = username;
+        };
+        appearance = {
+          wallpaper = {
+            path = "${../../../../docs/wallpaper.jpg}";
+            fill_mode = "crop";
+          };
+        };
         cursor = {
           theme = "Bibata-Modern-Ice";
           size = 24;
