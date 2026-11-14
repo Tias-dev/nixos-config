@@ -114,7 +114,7 @@ in {
         settings = {
           container = {
             valid_volumes = [
-              "/nix/store:ro"
+              "/nix/store"
             ];
           };
         };
