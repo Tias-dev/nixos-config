@@ -29,9 +29,6 @@ in {
       programs.umbriel = {
         enable = true;
         settings = {
-          general = {
-            xwayland = false;
-          };
           appearance = {
             prefer_no_csd = true;
             border_width = 2;
