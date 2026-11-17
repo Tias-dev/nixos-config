@@ -1,9 +1,15 @@
 {
   flake.modules.homeManager.zsh = {
+    config,
     pkgs,
     lib,
     ...
-  }: {
+  }: let
+    sesh-completions = pkgs.runCommand "sesh-zsh-completion" {} ''
+      mkdir -p $out/share/zsh/site-functions
+      ${config.programs.sesh.package}/bin/sesh completion zsh > $out/share/zsh/site-functions/_sesh
+    '';
+  in {
     programs.zsh = let
       zsh-fzf-search = pkgs.fetchFromGitHub {
         owner = "joshskidmore";
@@ -74,6 +80,7 @@
 
       '';
     };
+    home.packages = lib.mkIf config.programs.sesh.enable [sesh-completions];
     home.shell.enableZshIntegration = true;
   };
 
