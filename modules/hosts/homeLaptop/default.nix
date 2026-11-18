@@ -12,8 +12,6 @@
     # "niri"
     "umbriel"
     "bluetooth"
-    "smb"
-    "ftp-server"
 
     "develop"
     "neovim"
@@ -23,8 +21,8 @@
     "tmux"
     "docker"
     "virtualbox"
-    "forgejo-client"
     "deploy"
+    "config-merge"
 
     "browser"
     "recording"
@@ -32,7 +30,6 @@
     "documents"
     "matrix-client"
     "rutranslit"
-    "mai-wifi-login"
   ];
 in {
   config = lib.mkMerge [

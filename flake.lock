@@ -3034,11 +3034,11 @@
         "tias-nixpkgs": "tias-nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1794594247,
-        "narHash": "sha256-s2ozHGAgrLKEgmR4yZYzppjtYhMjWOuL9tVUSrWAc6w=",
+        "lastModified": 1794990909,
+        "narHash": "sha256-hT57b5hRVXMQqIM3sCTsRNColl+96WAKkUJ010PMw2M=",
         "owner": "Tias-dev",
         "repo": "nixvim-config",
-        "rev": "080881ea179ecd32ab2e2a47d8dc9d9a45a9f216",
+        "rev": "70e21ee264d55a0aa325d421ad897063af182bd9",
         "type": "github"
       },
       "original": {
