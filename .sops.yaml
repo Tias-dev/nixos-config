@@ -29,7 +29,7 @@ creation_rules:
       - age:
           - *laptop-raison
           - *tias-dev-tech
-  - path_regex: secrets/xray/per-server/peer.yaml
+  - path_regex: secrets/xray/per-server/repo.tias-dev.tech/[^/]+\.yaml
     key_groups:
       - age:
           - *laptop-raison

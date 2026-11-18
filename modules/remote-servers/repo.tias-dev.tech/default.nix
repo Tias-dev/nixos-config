@@ -11,6 +11,7 @@
     (config.flake.lib)
     mkStaticNetworkAddressModule
     mkForgejoModule
+    mkXrayService
     ;
 
   nixosModules = [
@@ -31,10 +32,6 @@ in {
       {
         inherit hostname domain;
         module = {
-          config,
-          system,
-          ...
-        }: {
           disko.devices.disk.disk1.device = "/dev/sda";
           imports = [
             (mkStaticNetworkAddressModule {
@@ -53,6 +50,39 @@ in {
           security.acme.defaults.email = email;
           networking.firewall.allowedTCPPorts = [80 443];
         };
+      })
+    (configurations-lib.personalRemoteNixosModule
+      {
+        inherit hostname domain;
+        module = ({config, ...}: {
+          # setup xray secrets and service
+          sops.secrets = {
+            base-xray-config = {
+              sopsFile = ../../../secrets/xray/per-server/repo.tias-dev.tech/peer.yaml;
+              key = "";
+              format = "yaml";
+            };
+            clients-config = {
+              sopsFile = ../../../secrets/xray/per-server/repo.tias-dev.tech/clients.yaml;
+              key = "";
+              format = "yaml";
+            };
+            next-peer-config = {
+              sopsFile = ../../../secrets/xray/per-server/repo.tias-dev.tech/next-peer.yaml;
+              key = "";
+              format = "yaml";
+            };
+          };
+          imports = [
+            (mkXrayService {
+              inherit domain;
+              mode = "peer";
+              baseConfig = config.sops.secrets.base-xray-config.path;
+              clientsConfig = config.sops.secrets.clients-config.path;
+              nextPeerConfig = config.sops.secrets.next-peer-config.path;
+            })
+          ];
+        });
       })
   ];
 }
