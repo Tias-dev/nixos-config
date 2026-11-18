@@ -29,9 +29,11 @@
             historyLimit = 5000;
             clock24 = true;
             keyMode = "vi";
-            terminal = "screen-256color";
+            terminal = "tmux-256color";
             extraConfig =
               ''
+                set -ag terminal-overrides ",xterm-256color:RGB"
+
                 bind -n M-1 select-window -t 1
                 bind -n M-2 select-window -t 2
                 bind -n M-3 select-window -t 3
