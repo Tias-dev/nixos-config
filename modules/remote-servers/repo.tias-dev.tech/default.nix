@@ -61,16 +61,19 @@ in {
               sopsFile = ../../../secrets/xray/per-server/repo.tias-dev.tech/peer.yaml;
               key = "";
               format = "yaml";
+              restartUnits = ["xray.service" "xray-config-gen.service"];
             };
             clients-config = {
               sopsFile = ../../../secrets/xray/per-server/repo.tias-dev.tech/clients.yaml;
               key = "";
               format = "yaml";
+              restartUnits = ["xray.service" "xray-config-gen.service"];
             };
             next-peer-config = {
               sopsFile = ../../../secrets/xray/per-server/repo.tias-dev.tech/next-peer.yaml;
               key = "";
               format = "yaml";
+              restartUnits = ["xray.service" "xray-config-gen.service"];
             };
           };
           imports = [

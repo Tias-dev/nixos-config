@@ -58,36 +58,36 @@ in {
                 listen: str | None = None
                 port: int | None = None
                 protocol: str
-                settings: Any = {}
-                streamSettings: Any = {}
-                sniffing: Any = {}
+                settings: Any | None = None
+                streamSettings: Any | None = None
+                sniffing: Any | None = None
 
 
             class Outbound(BaseModel):
                 tag: str
                 sendThrough: str | None = None
                 protocol: str
-                settings: Any = {}
-                streamSettings: Any = {}
+                settings: Any | None = None
+                streamSettings: Any | None = None
                 mux: Any | None = None
                 targetStrategy: str | None = None
 
 
             class Config(BaseModel):
-                env: Any = {}
-                log: Any = {}
-                api: Any = {}
-                dns: Any = {}
-                routing: Any = {}
+                env: Any | None = None
+                log: Any | None = None
+                api: Any | None = None
+                dns: Any | None = None
+                routing: Any | None = None
                 inbounds: List[Inbound] = []
                 outbounds: List[Outbound] = []
-                stats: Any = {}
-                fakedns: Any = {}
-                metrics: Any = {}
-                observatory: Any = {}
-                burstObservatory: Any = {}
-                geodata: Any = {}
-                version: Any = {}
+                stats: Any | None = None
+                fakedns: Any | None = None
+                metrics: Any | None = None
+                observatory: Any | None = None
+                burstObservatory: Any | None = None
+                geodata: Any | None = None
+                version: Any | None = None
 
 
             def apply_next_peer(outbounds: List[Outbound], next_peer: NextPeer):
@@ -147,10 +147,6 @@ in {
             ):
                 apply_clients(base_config.inbounds, clients, cert_file, key_file)
 
-            def cleanup_config(config: Any):
-                for k, v in config.items():
-                    if v == {}:
-                        del config[k]
 
             def main():
                 parser = argparse.ArgumentParser(
@@ -232,7 +228,7 @@ in {
                         raise RuntimeError("clients_config is not passed!")
                     gen_endpoint(config, clients_config, args.cert_file, args.key_file)
 
-                print(json.dumps(cleanup_config(config.model_dump())))
+                print(json.dumps(config.model_dump(exclude_none=True)))
 
                 return 0
 
@@ -248,6 +244,7 @@ in {
           clientsConfig ? "",
           nextPeerConfig ? "",
           fallbackNginxPort ? 8080,
+          dummyNginxSslPort ? 8443,
         }: {
           config,
           pkgs,
@@ -275,6 +272,23 @@ in {
             services.xray = {
               enable = true;
               settingsFile = merged-config;
+            };
+
+            # ensure xray user in nginx group in order to be able to use nginx owned certificates
+            users.users.xray = {
+              isSystemUser = true;
+              group = "xray";
+              extraGroups = ["nginx"];
+            };
+            users.groups.xray = {};
+
+            systemd.services.xray = {
+              environment = {XRAY_LOCATION_ASSSET = xray-assets-path;};
+              # ensure folder xray logs exists
+              serviceConfig = {
+                LogsDirectory = "xray";
+                LogsDirectoryMode = "0750";
+              };
             };
 
             # generate xray config before xray start
@@ -317,11 +331,47 @@ in {
                 '';
             };
 
-            systemd.services.xray = {
-              environment = {XRAY_LOCATION_ASSSET = xray-assets-path;};
-            };
             # override ssl port due to xray uses 443 port and fallbacks unauthorized users to nginx at fallbackNginxPort
-            services.nginx.defaultSSLListenPort = lib.mkForce fallbackNginxPort;
+            services.nginx = {
+              defaultSSLListenPort = lib.mkForce dummyNginxSslPort;
+              virtualHosts = {
+                "${domain}" = {
+                  listen = [
+                    {
+                      addr = "0.0.0.0";
+                      port = 80;
+                      ssl = false;
+                    }
+                    {
+                      addr = "[::0]";
+                      port = 80;
+                      ssl = false;
+                    }
+                    {
+                      addr = "127.0.0.1";
+                      port = dummyNginxSslPort;
+                      ssl = true;
+                    } # dummy ssl port for acme certs renew
+                  ];
+                };
+                "://${domain}" = {
+                  serverName = domain;
+                  locations = config.services.nginx.virtualHosts.${domain}.locations;
+                  listen = [
+                    {
+                      addr = "127.0.0.1"; # fallback ipv4 port
+                      port = fallbackNginxPort;
+                      ssl = false;
+                    } 
+                    {
+                      addr = "[::1]"; # fallback ipv6 port
+                      port = fallbackNginxPort;
+                      ssl = false;
+                    } 
+                  ];
+                };
+              };
+            };
 
             xray-update-blocklists = {
               enable = lib.mkDefault true;
@@ -334,11 +384,10 @@ in {
           ];
         };
       };
-
     };
     perSystem = {pkgs, ...}: {
       devShells.xray-config-generator = pkgs.mkShellNoCC {
-        buildInputs = [(config.flake.lib.mkXrayConfigGenerator { pkgs=pkgs; })];
+        buildInputs = [(config.flake.lib.mkXrayConfigGenerator {pkgs = pkgs;})];
       };
     };
   };
