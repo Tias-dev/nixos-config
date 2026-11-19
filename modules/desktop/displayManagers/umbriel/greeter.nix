@@ -1,5 +1,9 @@
 {inputs, ...}: {
-  config.flake.modules.nixos.umbriel = {pkgs, username, ...}: {
+  config.flake.modules.nixos.umbriel = {
+    pkgs,
+    username,
+    ...
+  }: {
     tui-greeter.enable = false;
 
     imports = [inputs.noctalia-greeter.nixosModules.default];

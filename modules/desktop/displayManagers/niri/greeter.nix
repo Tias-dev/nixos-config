@@ -1,5 +1,9 @@
 {
-  config.flake.modules.nixos.niri = {lib, config, ...}: {
+  config.flake.modules.nixos.niri = {
+    lib,
+    config,
+    ...
+  }: {
     tui-greeter.enable = false;
 
     services.displayManager = {

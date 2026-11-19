@@ -362,12 +362,12 @@ in {
                       addr = "127.0.0.1"; # fallback ipv4 port
                       port = fallbackNginxPort;
                       ssl = false;
-                    } 
+                    }
                     {
                       addr = "[::1]"; # fallback ipv6 port
                       port = fallbackNginxPort;
                       ssl = false;
-                    } 
+                    }
                   ];
                 };
               };

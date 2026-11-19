@@ -54,7 +54,7 @@ in {
     (configurations-lib.personalRemoteNixosModule
       {
         inherit hostname domain;
-        module = ({config, ...}: {
+        module = {config, ...}: {
           # setup xray secrets and service
           sops.secrets = {
             base-xray-config = {
@@ -85,7 +85,7 @@ in {
               nextPeerConfig = config.sops.secrets.next-peer-config.path;
             })
           ];
-        });
+        };
       })
   ];
 }
