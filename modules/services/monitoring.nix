@@ -96,6 +96,7 @@
         };
       };
 
+      nginx-vhosts = lib.mkIf useNginx [domain];
       # nginx
       services.nginx = lib.mkIf useNginx {
         virtualHosts.${domain} = {

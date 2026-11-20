@@ -17,6 +17,7 @@ in {
     cfg = config.services.forgejo;
     srv = cfg.settings.server;
   in {
+    nginx-vhosts = [cfg.settings.server.DOMAIN];
     services.nginx = {
       virtualHosts.${cfg.settings.server.DOMAIN} = {
         forceSSL = true;

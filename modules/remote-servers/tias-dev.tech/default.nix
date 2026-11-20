@@ -30,6 +30,7 @@
     "postgresql"
   ];
   mkSimpleSiteFromPkg = package: {config, ...}: {
+    nginx-vhosts = ["${package.name}.${config.networking.domain}"];
     services.nginx.virtualHosts = {
       "${package.name}.${config.networking.domain}" = {
         forceSSL = true;
@@ -84,7 +85,9 @@ in {
               ntfyFqdn = "ntfy.${config.networking.domain}";
               ntfyTopic = "notify-grafana";
             })
-            (mkNtfyService {})
+            (mkNtfyService {
+              enableUnifiedPush = true;
+            })
             (mkPostgRESTModule {
               port = 3007;
               extraSqlInitScriptPath = ./postgresql-init-script.sql;

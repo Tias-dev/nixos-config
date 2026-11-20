@@ -13,7 +13,6 @@ in {
           clientsConfig ? "",
           nextPeerConfig ? "",
           fallbackNginxPort ? 8080,
-          dummyNginxSslPort ? 8443,
         }: {
           config,
           pkgs,
@@ -36,6 +35,10 @@ in {
                 assertion = (mode == "endpoint" && clientsConfig != "") || (mode != "endpoint");
                 message = "For mode 'endpoint' clientsConfig must be set";
               }
+              {
+                assertion = lib.hasAttr domain config.services.nginx.virtualHosts;
+                message = "${domain} nginx virtual host must be set as xray fallback";
+              }
             ];
 
             services.xray = {
@@ -44,10 +47,11 @@ in {
             };
 
             # ensure xray user in nginx group in order to be able to use nginx owned certificates
+            # ensure xray user in acme group in order to be able to use acme issued certs
             users.users.xray = {
               isSystemUser = true;
               group = "xray";
-              extraGroups = ["nginx"];
+              extraGroups = ["nginx" "acme"];
             };
             users.groups.xray = {};
 
@@ -71,6 +75,8 @@ in {
               description = "Generate Xray configuration";
               wantedBy = ["xray.service"];
               before = ["xray.service"];
+              after = ["acme-${domain}.service"];
+              wants = ["acme-${domain}.service"];
               serviceConfig = {
                 Type = "oneshot";
                 RemainAfterExit = true;
@@ -100,11 +106,31 @@ in {
                 '';
             };
 
-            # override ssl port due to xray uses 443 port and fallbacks unauthorized users to nginx at fallbackNginxPort
-            services.nginx = {
-              defaultSSLListenPort = lib.mkForce dummyNginxSslPort;
-              virtualHosts = {
-                "${domain}" = {
+            # Setup nginx
+            # 1. Ensure cert for 'domain' exists
+            # 2. Force to use only 1 cert from given 'domain' to verify all placed sites
+            # 3. Setup all vhosts to listen at 'fallbackNginxPort' port as tls fallback from xray
+            # 4. For all vhosts add paired vhost at 80  port for acme-challenges + redirecting to https
+
+            # ensure cert
+            security.acme.certs.${domain} = {
+              extraDomainNames = lib.mkForce (lib.filter (vhostDomain: vhostDomain != domain && !(lib.hasPrefix "://" vhostDomain)) (lib.attrNames config.services.nginx.virtualHosts));
+              webroot = "/var/lib/acme/acme-challenge";
+              reloadServices = ["xray.service"];
+            };
+
+            services.nginx = let
+              originalVHostsNames = config.nginx-vhosts;
+            in {
+              # For all vhosts add paired vhost which will listen at 80 port, verifies acme certs and redirects to https xray port(443)
+              # xray will fallback to original service after tls connection is set
+              virtualHosts =
+                lib.genAttrs
+                (map (name: "://${name}") originalVHostsNames)
+                (pairedName: let
+                  origName = lib.removePrefix "://" pairedName;
+                in {
+                  serverName = origName;
                   listen = [
                     {
                       addr = "0.0.0.0";
@@ -116,30 +142,16 @@ in {
                       port = 80;
                       ssl = false;
                     }
-                    {
-                      addr = "127.0.0.1";
-                      port = dummyNginxSslPort;
-                      ssl = true;
-                    } # dummy ssl port for acme certs renew
                   ];
-                };
-                "://${domain}" = {
-                  serverName = domain;
-                  locations = config.services.nginx.virtualHosts.${domain}.locations;
-                  listen = [
-                    {
-                      addr = "127.0.0.1"; # fallback ipv4 port
-                      port = fallbackNginxPort;
-                      ssl = false;
-                    }
-                    {
-                      addr = "[::1]"; # fallback ipv6 port
-                      port = fallbackNginxPort;
-                      ssl = false;
-                    }
-                  ];
-                };
-              };
+                  locations = {
+                    "/.well-known/acme-challenge" = {
+                      root = config.security.acme.certs.${domain}.webroot;
+                    };
+                    "/" = {
+                      return = "301 https://$host$request_uri";
+                    };
+                  };
+                });
             };
 
             xray-update-blocklists = {
@@ -151,6 +163,39 @@ in {
           imports = [
             xray-update-blocklists
           ];
+
+          options = {
+            # Setup all vhosts to listen at 80 port for acme-challenges + redirecting to https
+            services.nginx.virtualHosts = lib.mkOption {
+              type = lib.types.attrsOf (lib.types.submodule ({
+                config,
+                name,
+                ...
+              }: {
+                config = lib.mkIf (!lib.hasPrefix "://" name) {
+                  # override only plain vhosts not extended pairs
+                  # remove auto SSL and set listen ports to xray fallbacks
+                  forceSSL = lib.mkForce false;
+                  addSSL = lib.mkForce false;
+                  enableACME = lib.mkForce false;
+
+                  listen = lib.mkForce [
+                    {
+                      addr = "127.0.0.1"; # ipv4
+                      port = fallbackNginxPort;
+                      ssl = false;
+                    } # used for acme challenge
+                    {
+                      addr = "[::1]"; # ipv6
+                      port = fallbackNginxPort;
+                      ssl = false;
+                    }
+                  ];
+                  # don't touch proxyPass locations
+                };
+              }));
+            };
+          };
         };
       };
     };

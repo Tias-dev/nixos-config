@@ -64,6 +64,7 @@
       };
 
       # nginx extra config
+      nginx-vhosts = ["${config.networking.domain}" fqdn "chat.${fqdn}"];
       services.nginx.virtualHosts = {
         "${config.networking.domain}" = {
           locations = {
@@ -305,6 +306,7 @@
             email = "www.tias.dev@gmail.com";
             postRun = "systemctl restart coturn.service";
           };
+          nginx-vhosts = [config.services.coturn.realm];
           services.nginx.virtualHosts.${config.services.coturn.realm} = {
             enableACME = true;
             acmeRoot = "/var/lib/acme/acme-challenge/";

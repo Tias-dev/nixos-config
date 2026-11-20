@@ -11,6 +11,9 @@
     (config.flake.lib)
     mkStaticNetworkAddressModule
     mkForgejoModule
+    mkMonitoringModule
+    mkJellyfinService
+    mkTailscaleService
     mkXrayService
     ;
 
@@ -44,6 +47,14 @@ in {
               disableRegistration = true;
               addDefaultRunner = false;
               opensshPort = 10100;
+            })
+            (mkMonitoringModule {
+              domain = "monitoring.repo.tias-dev.tech";
+              adminEmail = email;
+            })
+            (mkTailscaleService {})
+            (mkJellyfinService {
+              domain = "jellyfin.tias-dev.tech";
             })
           ];
           security.acme.acceptTerms = true;

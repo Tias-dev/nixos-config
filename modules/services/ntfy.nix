@@ -1,6 +1,13 @@
 {
   config.flake.lib = {
-    mkNtfyService = {port ? 2586}: {config, ...}: {
+    mkNtfyService = {
+      port ? 2586,
+      enableUnifiedPush ? true,
+    }: {
+      config,
+      lib,
+      ...
+    }: {
       assertions = [
         {
           assertion = config.networking.domain != null;
@@ -20,13 +27,13 @@
           auth-file = "/var/lib/ntfy-sh/user.db";
           auth-default-access = "deny-all";
           enable-signup = false;
-          # auth-access = [
-          #   "admin:*:rw"
-          #   "notifier:notify-*:w"
-          #   "notify-forwarder:notify-*:r"
-          # ];
+
+          auth-access = lib.mkIf enableUnifiedPush [
+            "*:up*:write-only"
+          ];
         };
       };
+      nginx-vhosts = ["ntfy.${config.networking.domain}"];
       services.nginx.virtualHosts = {
         "ntfy.${config.networking.domain}" = {
           forceSSL = true;
@@ -54,10 +61,10 @@
           NTFY_PASSWORD="$(cat ${config.sops.secrets.ntfy-notifier-pass.path})" ${ntfy-bin} user change-pass notifier || true
           NTFY_PASSWORD="$(cat ${config.sops.secrets.ntfy-notify-forwarder-pass.path})" ${ntfy-bin} user change-pass notify-forwarder || true
 
-          ${ntfy-bin} user change-role admin admin
+          ${ntfy-bin} user change-role admin admin || true
 
-          ${ntfy-bin} access notifier 'notify-*' write-only
-          ${ntfy-bin} access notify-forwarder 'notify-*' read-only
+          ${ntfy-bin} access notifier 'notify-*' write-only || true
+          ${ntfy-bin} access notify-forwarder 'notify-*' read-only || true
         '';
 
       # secret specs

@@ -55,6 +55,7 @@
       format = "dotenv";
       key = "";
     };
+    nginx-vhosts = ["${subdomain}.${config.networking.domain}"];
     services.nginx.virtualHosts."${subdomain}.${config.networking.domain}" = {
       forceSSL = true;
       enableACME = true;

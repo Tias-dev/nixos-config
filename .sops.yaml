@@ -24,6 +24,7 @@ creation_rules:
       - age:
           - *laptop-raison
           - *tias-dev-tech
+          - *repo-tias-dev-tech
   - path_regex: secrets/xray/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
