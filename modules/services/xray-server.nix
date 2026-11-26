@@ -13,6 +13,7 @@ in {
           clientsConfig ? "",
           nextPeerConfig ? "",
           fallbackNginxPort ? 8080,
+          socks5LocalPort ? null, # port for xray inbound socks5 port for local connections
         }: {
           config,
           pkgs,
@@ -40,6 +41,12 @@ in {
                 message = "${domain} nginx virtual host must be set as xray fallback";
               }
             ];
+
+            # set local proxy inbound
+            networking = lib.mkIf (socks5LocalPort != null) {
+              proxy.default = "socks5://localhost:${socks5LocalPort}";
+              proxy.noProxy = "127.0.0.1,localhost";
+            };
 
             services.xray = {
               enable = true;

@@ -68,6 +68,11 @@
           proxy_set_header REMOTE-HOST $remote_addr;
           proxy_http_version 1.1;
 
+          client_max_body_size 512M;
+          proxy_connect_timeout 600;
+          proxy_send_timeout    600;
+          proxy_read_timeout    600;
+          send_timeout          600;
 
           # Ensure COPY and MOVE commands work by rewriting the Destination header to
           # contain only the path, e.g. /test.txt. Note that the captured group already
