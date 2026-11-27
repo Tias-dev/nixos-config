@@ -2,9 +2,11 @@
   config.flake.lib.mkWebDavService = {
     port ? 6065,
     subdomain ? "webdav",
+    lanOnly ? false,
   }: {
     config,
     pkgs,
+    lib,
     ...
   }: let
     dataRoot = "/srv/webdav";
@@ -12,11 +14,11 @@
   in {
     assertions = [
       {
-        assertion = config.services.nginx.enable;
+        assertion = (subdomain != null && config.services.nginx.enable) || subdomain == null;
         message = "Expected nginx to be enabled";
       }
       {
-        assertion = config.networking.domain != null;
+        assertion = (config.networking.domain != null && config.services.nginx.enable) || !config.services.nginx.enable;
         message = "Expected domain to be set in order to set nginx virtual host";
       }
     ];
@@ -24,9 +26,12 @@
       enable = true;
       environmentFile = config.sops.secrets.webdav-users-passwords.path;
       settings = {
-        address = "127.0.0.1";
+        address =
+          if lanOnly
+          then "0.0.0.0"
+          else "127.0.0.1";
         port = port;
-        behindProxy = true;
+        behindProxy = subdomain != null;
         directory = "${dataRoot}/public";
         permissions = "R";
         users = [
@@ -55,35 +60,37 @@
       format = "dotenv";
       key = "";
     };
-    nginx-vhosts = ["${subdomain}.${config.networking.domain}"];
-    services.nginx.virtualHosts."${subdomain}.${config.networking.domain}" = {
-      forceSSL = true;
-      enableACME = true;
-      http2 = false;
-      locations."/" = {
-        proxyPass = "http://localhost:${toString port}";
-        recommendedProxySettings = true;
-        extraConfig = ''
-          proxy_redirect off;
-          proxy_set_header REMOTE-HOST $remote_addr;
-          proxy_http_version 1.1;
+    nginx-vhosts = lib.mkIf (!lanOnly) ["${subdomain}.${config.networking.domain}"];
+    services.nginx.virtualHosts = lib.mkIf (!lanOnly) {
+      "${subdomain}.${config.networking.domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        http2 = false;
+        locations."/" = {
+          proxyPass = "http://localhost:${toString port}";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_redirect off;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_http_version 1.1;
 
-          client_max_body_size 512M;
-          proxy_connect_timeout 600;
-          proxy_send_timeout    600;
-          proxy_read_timeout    600;
-          send_timeout          600;
+            client_max_body_size 512M;
+            proxy_connect_timeout 600;
+            proxy_send_timeout    600;
+            proxy_read_timeout    600;
+            send_timeout          600;
 
-          # Ensure COPY and MOVE commands work by rewriting the Destination header to
-          # contain only the path, e.g. /test.txt. Note that the captured group already
-          # includes the leading slash: adding another one would produce a Destination
-          # such as //test.txt, which is parsed as a host name and rejected.
-          set $dest $http_destination;
-          if ($http_destination ~ "^https?://[^/]+(?<path>/.*)$") {
-            set $dest $path;
-          }
-          proxy_set_header Destination $dest;
-        '';
+            # Ensure COPY and MOVE commands work by rewriting the Destination header to
+            # contain only the path, e.g. /test.txt. Note that the captured group already
+            # includes the leading slash: adding another one would produce a Destination
+            # such as //test.txt, which is parsed as a host name and rejected.
+            set $dest $http_destination;
+            if ($http_destination ~ "^https?://[^/]+(?<path>/.*)$") {
+              set $dest $path;
+            }
+            proxy_set_header Destination $dest;
+          '';
+        };
       };
     };
 
